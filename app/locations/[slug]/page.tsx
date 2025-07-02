@@ -14,6 +14,7 @@ import {
   Navigation,
   Star,
 } from "lucide-react";
+import Link from "next/link";
 import { RotatingTextCircle } from "@/components/rotating-text-circle";
 
 export default async function LocationsPage({
@@ -81,14 +82,21 @@ export default async function LocationsPage({
 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button size="lg" className="bg-primary hover:bg-primary/90">
-                  <Calendar className="w-5 h-5 mr-2" />
-                  Book Now
-                </Button>
-                <Button variant="outline" size="lg">
-                  <Navigation className="w-5 h-5 mr-2" />
-                  Get Directions
-                </Button>
+                <Link
+                  href={`https://booking.fiveirongolf.com/select-experience?location=${slug}`}
+                >
+                  <Button size="lg" className="bg-primary hover:bg-primary/90">
+                    <Calendar className="w-5 h-5 mr-2" />
+                    Book Now
+                  </Button>
+                </Link>
+
+                <Link href={`https://www.google.com/maps/place/${slug}`}>
+                  <Button variant="outline" size="lg">
+                    <Navigation className="w-5 h-5 mr-2" />
+                    Get Directions
+                  </Button>
+                </Link>
               </div>
             </div>
 
