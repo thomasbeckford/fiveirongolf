@@ -45,18 +45,6 @@
 - **Individual location** pages with detailed information
 - **Newsletter signup** with responsive form validation
 
-## 🏗️ Architecture
-
-src/
-├── app/ # Next.js App Router
-├── components/
-│ ├── ui/ # shadcn base components
-│ ├── layout/ # Header, Footer
-│ └── custom/ # Five Iron specific components
-├── hooks/ # Custom React hooks
-├── lib/ # Utilities and helpers
-└── types/ # TypeScript definitions
-
 ## 🎪 Key Innovations
 
 - **Scroll-driven animations** with rotating text circles
