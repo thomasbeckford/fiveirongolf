@@ -1,13 +1,9 @@
 // src/app/layout.tsx
-import { Work_Sans } from "next/font/google";
+
 import type { Metadata } from "next";
 import "./globals.css";
-
-const WorkSans = Work_Sans({
-  subsets: ["latin"],
-  variable: "--font-work-sans",
-  display: "swap",
-});
+import { rawson } from "@/fonts";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Five Iron Golf",
@@ -20,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${WorkSans.variable} `}>
+    <html lang="en" className={cn(rawson.variable)}>
       <body>{children}</body>
     </html>
   );

@@ -4,8 +4,16 @@ import { regions, getBestLocale, getAllLocaleRoutes } from "./data/regions";
 
 export function middleware(request: NextRequest) {
   try {
-    const { country } = geolocation(request);
+    const defaultCountry = "GB";
+    const data = geolocation(request);
+    const country = data.country || defaultCountry;
+
     const { pathname } = request.nextUrl;
+
+    // if /admin
+    if (pathname.startsWith("/admin")) {
+      return NextResponse.next();
+    }
 
     // Debug en desarrollo
     if (process.env.NODE_ENV === "development") {
