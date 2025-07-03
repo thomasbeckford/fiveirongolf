@@ -176,10 +176,10 @@ export function FooterSection({ data }: { data: IFooterSection }) {
                     variant="outline"
                     className="w-full justify-start border-border text-foreground hover:bg-primary hover:text-primary-foreground"
                   >
-                    <a href={`mailto:${data.contact.email}`}>
+                    <Link href={`mailto:${data.contact.email}`}>
                       <Mail className="w-4 h-4 mr-2" />
                       EMAIL
-                    </a>
+                    </Link>
                   </Button>
 
                   <Button
@@ -187,10 +187,10 @@ export function FooterSection({ data }: { data: IFooterSection }) {
                     variant="outline"
                     className="w-full justify-start border-border text-foreground hover:bg-primary hover:text-primary-foreground"
                   >
-                    <a href={`tel:${data.contact.phone}`}>
+                    <Link href={`tel:${data.contact.phone}`}>
                       <Phone className="w-4 h-4 mr-2" />
                       CALL
-                    </a>
+                    </Link>
                   </Button>
                 </div>
               </div>

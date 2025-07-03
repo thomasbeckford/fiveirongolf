@@ -1,19 +1,9 @@
 // hooks/useLocations.ts
 import { useState, useEffect } from "react";
+import { ILocationContent } from "@/types/location";
 
-export interface Location {
-  id: string;
-  name: string;
-  slug: string;
-  status: string;
-  seo?: Record<string, string>;
-  sections: Record<string, string>;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export function useLocations() {
-  const [locations, setLocations] = useState<Location[]>([]);
+export function useLocationsContent() {
+  const [locations, setLocations] = useState<ILocationContent[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -32,7 +22,7 @@ export function useLocations() {
   };
 
   const createLocation = async (
-    locationData: Omit<Location, "id" | "createdAt" | "updatedAt">
+    locationData: Omit<ILocationContent, "id" | "createdAt" | "updatedAt">
   ) => {
     try {
       const response = await fetch("/api/locations", {
@@ -51,7 +41,7 @@ export function useLocations() {
 
   const updateLocation = async (
     id: string,
-    locationData: Partial<Location>
+    locationData: Partial<ILocationContent>
   ) => {
     try {
       const response = await fetch(`/api/locations/${id}`, {

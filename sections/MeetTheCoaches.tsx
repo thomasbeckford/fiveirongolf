@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export function CoachesSection({ data }: { data: ICoachesSection }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -125,7 +126,7 @@ export function CoachesSection({ data }: { data: ICoachesSection }) {
               asChild
               className="bg-orange-500 hover:bg-orange-600 text-background font-bold px-8 py-4 text-lg h-auto"
             >
-              <a href={data.bookLessonUrl}>BOOK A LESSON</a>
+              <Link href={data.bookLessonUrl}>BOOK A LESSON</Link>
             </Button>
 
             <Button
@@ -133,7 +134,7 @@ export function CoachesSection({ data }: { data: ICoachesSection }) {
               variant="outline"
               className="border-2 border-foreground text-foreground hover:bg-foreground hover:text-background font-bold px-8 py-4 text-lg h-auto"
             >
-              <a href={data.learnMoreUrl}>LEARN MORE</a>
+              <Link href={data.learnMoreUrl}>LEARN MORE</Link>
             </Button>
           </div>
         </div>

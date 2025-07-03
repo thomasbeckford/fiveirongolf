@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import Image from "next/image";
+import Link from "next/link";
 
 export function DuckpinSection({ data }: { data: IDuckpinSection }) {
   return (
@@ -66,7 +67,7 @@ export function DuckpinSection({ data }: { data: IDuckpinSection }) {
                 asChild
                 className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-4 text-lg h-auto"
               >
-                <a href={data.bookingUrl}>{data.buttonText}</a>
+                <Link href={data.bookingUrl}>{data.buttonText}</Link>
               </Button>
             </div>
 

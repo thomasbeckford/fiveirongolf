@@ -2,6 +2,7 @@ import { IReviewsSection } from "@/types/location";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
+import Link from "next/link";
 
 export function ReviewsSection({ data }: { data: IReviewsSection }) {
   const renderStars = (rating: number) => {
@@ -63,7 +64,7 @@ export function ReviewsSection({ data }: { data: IReviewsSection }) {
               asChild
               className="bg-foreground hover:bg-muted text-background font-bold px-12 py-4 text-lg h-auto rounded-lg"
             >
-              <a href={data.ctaUrl}>{data.ctaText}</a>
+              <Link href={data.ctaUrl}>{data.ctaText}</Link>
             </Button>
           </div>
         </div>

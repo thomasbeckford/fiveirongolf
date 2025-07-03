@@ -1,9 +1,9 @@
-import { LocationData } from "@/types/location";
+import { ILocationContent } from "@/types/location";
 import { Calendar, FileText, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-export function HeroSection({ data }: { data: LocationData }) {
+export function HeroSection({ data }: { data: ILocationContent }) {
   const hero = data.sections.hero;
 
   return (

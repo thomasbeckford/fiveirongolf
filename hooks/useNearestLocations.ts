@@ -2,9 +2,9 @@
 
 import { useMemo } from "react";
 import { useGeolocation } from "./useGeolocation";
-import { useGolfLocations } from "./useGolfLocations";
+import { useLocationsMaster } from "./useLocationsMaster";
 import { calculateDistance } from "@/lib/distance";
-import { Location } from "@/types/location";
+import { ILocationMaster } from "@/types/location";
 
 // Formatear distancia para mostrar
 function formatDistance(distance: number): string {
@@ -17,7 +17,7 @@ function formatDistance(distance: number): string {
   }
 }
 
-export interface LocationWithDistance extends Location {
+export interface LocationWithDistance extends ILocationMaster {
   distance: number;
   formattedDistance: string;
 }
@@ -28,18 +28,21 @@ export function useNearestLocations(limit: number = 5) {
     loading: locationLoading,
     error: locationError,
   } = useGeolocation();
-  const { golfLocations, isPendingGolfLocations, errorGolfLocations } =
-    useGolfLocations();
+  const {
+    locationsByCity,
+    loading,
+    error: locationsError,
+  } = useLocationsMaster();
 
   // Esta funcion se recalcula unicamente cuando cambien los datos, sino no se vuelve a calcular
   const nearestLocations = useMemo(() => {
     // Si no tenemos ubicación del usuario o ubicaciones de golf, retornar vacío
-    if (!userLocation || isPendingGolfLocations || !golfLocations) {
+    if (!userLocation) {
       return [];
     }
 
     // Convertir el objeto agrupado en array plano usando tu lógica existente
-    const flatLocations = Object.values(golfLocations).flat();
+    const flatLocations = Object.values(locationsByCity).flat();
 
     // Calcular distancia para cada ubicación usando tu función
     const locationsWithDistance: LocationWithDistance[] = flatLocations.map(
@@ -63,10 +66,10 @@ export function useNearestLocations(limit: number = 5) {
     return locationsWithDistance
       .sort((a, b) => a.distance - b.distance)
       .slice(0, limit);
-  }, [userLocation, golfLocations, isPendingGolfLocations, limit]);
+  }, [userLocation, locationsByCity, limit]);
 
-  const isLoading = locationLoading || isPendingGolfLocations;
-  const error = locationError || errorGolfLocations;
+  const isLoading = locationLoading || loading;
+  const error = locationError || locationsError;
 
   return {
     nearestLocations,

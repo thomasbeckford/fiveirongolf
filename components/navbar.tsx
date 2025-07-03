@@ -91,13 +91,13 @@ function FullScreenMenu() {
                 <ul className="space-y-3">
                   {items.map((item) => (
                     <li key={item.name}>
-                      <a
+                      <Link
                         href={item.href}
                         onClick={() => setIsOpen(false)}
                         className="text-white hover:text-primary transition-colors text-sm font-medium block"
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -130,43 +130,43 @@ function FullScreenMenu() {
                   FOLLOW US
                 </h4>
                 <div className="flex space-x-4">
-                  <a
+                  <Link
                     href="#"
                     className="text-primary hover:text-white transition-colors"
                     aria-label="Instagram"
                   >
                     <Instagram className="w-5 h-5" />
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="#"
                     className="text-primary hover:text-white transition-colors"
                     aria-label="Twitter"
                   >
                     <Twitter className="w-5 h-5" />
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="#"
                     className="text-primary hover:text-white transition-colors"
                     aria-label="YouTube"
                   >
                     <Youtube className="w-5 h-5" />
-                  </a>
+                  </Link>
                 </div>
               </div>
 
               <div className="text-xs text-gray-400 space-y-1">
-                <a
+                <Link
                   href="/privacy"
                   className="block hover:text-white transition-colors"
                 >
                   Privacy policy
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/terms"
                   className="block hover:text-white transition-colors"
                 >
                   Terms and conditions
-                </a>
+                </Link>
               </div>
             </div>
           </div>

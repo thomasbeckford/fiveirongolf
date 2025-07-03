@@ -105,7 +105,7 @@ export function NearestLocations({
 
                   {/* Experiencias disponibles */}
                   <div className="flex gap-1 mt-2">
-                    {location.experiences.map((exp) => (
+                    {location.experiences?.map((exp) => (
                       <Badge key={exp} variant="outline" className="text-xs">
                         {exp}
                       </Badge>

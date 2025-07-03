@@ -1,7 +1,7 @@
 // app/admin/page.tsx
 "use client";
 import { useState } from "react";
-import { useLocations } from "@/hooks/useLocations";
+import { useLocationsContent } from "@/hooks/useLocationsContent";
 import { JsonEditor } from "@/components/json-editor";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,7 +18,7 @@ import { LOCATIONS_CONTENT } from "@/data/locations-content";
 
 export default function AdminPage() {
   const { locations, loading, createLocation, updateLocation, deleteLocation } =
-    useLocations();
+    useLocationsContent();
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [editData, setEditData] = useState<any>({});
@@ -70,6 +70,7 @@ export default function AdminPage() {
         slug: location.slug,
         status: location.status || "active",
         seo: location.seo || {},
+        // @ts-expect-error
         sections: location.sections,
       });
     }

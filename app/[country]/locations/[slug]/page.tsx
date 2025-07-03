@@ -1,4 +1,4 @@
-import { getLocationSection } from "@/server/getLocationInfo";
+import { getLocationsContent } from "@/server/getLocationsContent";
 import { PlayAndPracticeSection } from "@/sections/PlayAndPractice";
 import { GallerySection } from "@/sections/GallerySection";
 
@@ -20,7 +20,7 @@ export const generateMetadata = async ({
   params: Promise<{ slug: string }>;
 }) => {
   const { slug } = await params;
-  const data = await getLocationSection({ slug });
+  const data = await getLocationsContent({ slug });
 
   if (!data) {
     return {
@@ -40,7 +40,7 @@ export default async function LocationsPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const data = await getLocationSection({ slug });
+  const data = await getLocationsContent({ slug });
 
   if (!data) {
     return <div>Five Iron Golf - Location not found</div>;

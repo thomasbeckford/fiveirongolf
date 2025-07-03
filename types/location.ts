@@ -1,5 +1,39 @@
 // types/location.ts
-export interface LocationData {
+
+export interface ILocationMaster {
+  id: string;
+  name: string;
+  slug: string;
+  status: string;
+  seo: {
+    title: string;
+    description: string;
+  };
+  mboId: number;
+  siteId: number;
+  telephone: string;
+  latitude: string;
+  longitude: string;
+  experiences: string[];
+  promotions: string[];
+  urlSlug: string;
+  waiverUrl: string;
+  calendarUrl: string;
+  enableAppointmentReminders: boolean;
+  enableS2SBooking: boolean;
+  s2sReservationFee: number | null;
+  squareId: string;
+  squareCredentialsId: string;
+  foodOrderAvailability: string;
+  membershipConfig: {
+    freeMembershipMinutes: number;
+  };
+  timezone: string;
+  distance?: number;
+  source?: "gps" | "ip";
+}
+
+export interface ILocationContent {
   id: string;
   name: string;
   slug: string;
@@ -16,6 +50,8 @@ export interface LocationData {
     membership: IMembershipSection;
     reviews: IReviewsSection;
   };
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface IFeaturesSection {
@@ -226,4 +262,26 @@ export interface IFooterSection {
     phone: string;
   };
   copyright: string;
+}
+
+export interface UserLocation {
+  lat: number;
+  lng: number;
+  source: "gps" | "ip";
+}
+
+export interface GeolocationState {
+  location: UserLocation | null;
+  error: string | null;
+  loading: boolean;
+}
+
+export interface LocationWithDistance extends ILocationMaster {
+  distance: number;
+  formattedDistance: string;
+}
+
+export interface Coordinates {
+  lat: number;
+  lng: number;
 }

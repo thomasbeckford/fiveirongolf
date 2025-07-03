@@ -1,9 +1,9 @@
 // lib/distance.ts
 import {
   Coordinates,
-  Location,
-  LocationData,
+  ILocationMaster,
   UserLocation,
+  LocationWithDistance,
 } from "@/types/location";
 
 export function calculateDistance(
@@ -31,8 +31,8 @@ function toRad(value: number): number {
 
 export function findNearestLocation(
   userLocation: UserLocation,
-  allLocations: LocationData
-): Location | null {
+  allLocations: ILocationMaster
+): LocationWithDistance | null {
   const flatLocations = Object.values(allLocations).flat();
 
   if (flatLocations.length === 0) return null;

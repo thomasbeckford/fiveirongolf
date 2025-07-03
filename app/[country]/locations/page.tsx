@@ -9,13 +9,12 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Loader2, Phone } from "lucide-react";
-import { useGolfLocations } from "@/hooks/useGolfLocations";
+import { useLocationsMaster } from "@/hooks/useLocationsMaster";
 
 export default function AllLocationsPage() {
-  const { golfLocations, isPendingGolfLocations, errorGolfLocations } =
-    useGolfLocations();
+  const { locationsByCity, loading, error } = useLocationsMaster();
 
-  if (isPendingGolfLocations) {
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -26,7 +25,7 @@ export default function AllLocationsPage() {
     );
   }
 
-  if (errorGolfLocations) {
+  if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -37,7 +36,7 @@ export default function AllLocationsPage() {
   }
 
   // Convertir a array plano
-  const allLocations = Object.values(golfLocations || {}).flat();
+  const allLocations = Object.values(locationsByCity || {}).flat();
 
   return (
     <div className="min-h-screen bg-background py-16">
@@ -60,7 +59,7 @@ export default function AllLocationsPage() {
             return (
               <Link
                 key={location.id}
-                href={isClosed ? "#" : `/locations/${location.urlSlug}`}
+                href={isClosed ? "#" : `/locations/${location.slug}`}
                 aria-disabled={isClosed}
                 className={`h-full hover:shadow-lg transition-all cursor-pointer group `}
               >
@@ -94,26 +93,28 @@ export default function AllLocationsPage() {
                       {/* Timezone como ubicación */}
                       <CardDescription className="flex items-center gap-1">
                         <MapPin className="w-4 h-4" />
-                        {location.timezone
-                          .replace("America/", "")
-                          .replace("_", " ")}
+                        HARDCODED
                       </CardDescription>
 
                       {/* Teléfono */}
                       <div className="flex items-center gap-1 text-sm text-muted-foreground">
                         <Phone className="w-3 h-3" />
-                        {location.telephone}
+                        HARDCODED
                       </div>
 
                       {/* Experiencias */}
                       <div className="flex gap-1 flex-wrap">
-                        {location.experiences.map((experience) => (
+                        {[
+                          "Play and Practice",
+                          "Play and Practice",
+                          "Play and Practice",
+                        ].map((service) => (
                           <Badge
-                            key={experience}
+                            key={service}
                             variant="outline"
                             className="text-xs"
                           >
-                            {experience}
+                            {service}
                           </Badge>
                         ))}
                       </div>

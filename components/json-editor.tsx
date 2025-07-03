@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Trash2, Plus, Edit } from "lucide-react";
+import { Trash2, Plus } from "lucide-react";
 
 interface JsonEditorProps {
   data: any;
@@ -15,7 +15,6 @@ interface JsonEditorProps {
 }
 
 export function JsonEditor({ data, onChange, path = [] }: JsonEditorProps) {
-  const [editingKey, setEditingKey] = useState<string | null>(null);
   const [newKey, setNewKey] = useState("");
   const [newValue, setNewValue] = useState("");
 

@@ -1,14 +1,14 @@
 // app/api/locations/[id]/route.ts
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const location = await prisma.location.findUnique({
-      where: { id: params.id },
+      where: { id: (await params).id },
     });
 
     if (!location) {
@@ -29,13 +29,13 @@ export async function GET(
 }
 
 export async function PUT(
-  request: NextRequest,
-  { params }: { params: { id: string } }
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const body = await request.json();
     const location = await prisma.location.update({
-      where: { id: params.id },
+      where: { id: (await params).id },
       data: {
         name: body.name,
         slug: body.slug,
@@ -56,12 +56,12 @@ export async function PUT(
 }
 
 export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { id: string } }
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await prisma.location.delete({
-      where: { id: params.id },
+      where: { id: (await params).id },
     });
     return NextResponse.json({ message: "Location deleted successfully" });
   } catch (error) {

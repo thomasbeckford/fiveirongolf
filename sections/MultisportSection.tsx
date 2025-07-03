@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export function MultisportSection({ data }: { data: IMultisportSection }) {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -106,9 +107,9 @@ export function MultisportSection({ data }: { data: IMultisportSection }) {
                   asChild
                   className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg h-auto"
                 >
-                  <a href={currentSlideData.ctaUrl}>
+                  <Link href={currentSlideData.ctaUrl}>
                     {currentSlideData.ctaText}
-                  </a>
+                  </Link>
                 </Button>
               </div>
             </div>
