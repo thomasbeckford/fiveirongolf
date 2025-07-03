@@ -4,10 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:ignore-errors": "NEXT_LINT=false next build"
+    "build:ignore-errors": "NEXT_LINT=false next build",
+    "build": "prisma generate && next build",
+    "postinstall": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate deploy"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
