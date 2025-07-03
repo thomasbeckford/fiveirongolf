@@ -7,10 +7,10 @@
     "start": "next start",
     "lint": "next lint",
     "build:ignore-errors": "NEXT_LINT=false next build",
-    "build": "prisma generate && next build",
-    "postinstall": "prisma generate",
-    "db:push": "prisma db push",
-    "db:migrate": "prisma migrate deploy"
+    "build": "npx prisma generate && next build",
+    "postinstall": "npx prisma generate",
+    "db:push": "npx prisma db push",
+    "db:migrate": "npx prisma migrate deploy"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
