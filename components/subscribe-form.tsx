@@ -54,118 +54,130 @@ export function SubscribeForm() {
 
   return (
     <div className="w-full bg-primary text-primary-foreground flex items-center justify-center py-12">
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-3 max-w-5xl mx-auto">
-            <FormField
-              control={form.control}
-              name="firstName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input placeholder="First Name" {...field} />
-                  </FormControl>
-                  <FormMessage className="text-primary-foreground/80" />
-                </FormItem>
-              )}
-            />
+      <div className="flex flex-col items-center gap-8">
+        <div className="w-full max-w-5xl mx-auto">
+          <h2 className="text-2xl font-semibold text-center text-fiveiron-blue uppercase ">
+            Subscribe to stay in the 5i loop
+          </h2>
+        </div>
 
-            <FormField
-              control={form.control}
-              name="lastName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input placeholder="Last Name" {...field} />
-                  </FormControl>
-                  <FormMessage className="text-primary-foreground/80" />
-                </FormItem>
-              )}
-            />
+        <div>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-3 max-w-5xl mx-auto">
+                <FormField
+                  control={form.control}
+                  name="firstName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input placeholder="First Name" {...field} />
+                      </FormControl>
+                      <FormMessage className="text-primary-foreground/80" />
+                    </FormItem>
+                  )}
+                />
 
-            <FormField
-              control={form.control}
-              name="location"
-              render={({ field }) => (
-                <FormItem>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select Location" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {LOCATIONS_CONTENT.map((location) => (
-                        <SelectItem key={location.id} value={location.name}>
-                          {location.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                <FormField
+                  control={form.control}
+                  name="lastName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input placeholder="Last Name" {...field} />
+                      </FormControl>
+                      <FormMessage className="text-primary-foreground/80" />
+                    </FormItem>
+                  )}
+                />
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                <FormField
+                  control={form.control}
+                  name="location"
+                  render={({ field }) => (
+                    <FormItem>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select Location" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {LOCATIONS_CONTENT.map((location) => (
+                            <SelectItem key={location.id} value={location.name}>
+                              {location.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
 
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input type="email" placeholder="Email" {...field} />
-                  </FormControl>
-                  <FormMessage className="text-primary-foreground/80" />
-                </FormItem>
-              )}
-            />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-            <FormField
-              control={form.control}
-              name="phone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input type="tel" placeholder="Phone" {...field} />
-                  </FormControl>
-                  <FormMessage className="text-primary-foreground/80" />
-                </FormItem>
-              )}
-            />
-            {/* Submit Button */}
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input type="email" placeholder="Email" {...field} />
+                      </FormControl>
+                      <FormMessage className="text-primary-foreground/80" />
+                    </FormItem>
+                  )}
+                />
 
-            <Button
-              type="submit"
-              size="lg"
-              className="bg-fiveiron-blue hover:bg-fiveiron-blue/80 text-white px-8 py-3 text-lg font-bold uppercase tracking-wider"
-              disabled={form.formState.isSubmitting}
-            >
-              {form.formState.isSubmitting ? "SUBMITTING..." : "SUBMIT"}
-            </Button>
-          </div>
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input type="tel" placeholder="Phone" {...field} />
+                      </FormControl>
+                      <FormMessage className="text-primary-foreground/80" />
+                    </FormItem>
+                  )}
+                />
+                {/* Submit Button */}
 
-          {/* Legal Text */}
-          <div className="text-xs text-primary-foreground/80 leading-relaxed max-w-4xl mx-auto">
-            <p className="text-xs text-fiveiron-blue">
-              * I consent to receive email communication from Five Iron Golf and
-              agree to the terms of their{" "}
-              <span className="underline cursor-pointer">privacy policy</span>.
-              You can opt out at any time by clicking the unsubscribe link in
-              the email footer. By signing up via text, you agree to receive
-              recurring automated promotional and personalized marketing text
-              messages from Five Iron Golf. Consent is not a condition of any
-              purchase. Reply HELP for help and STOP to cancel. Msg frequency
-              varies. Msg & data rates may apply.{" "}
-              <span className="underline cursor-pointer">SMS Terms</span> and{" "}
-              <span className="underline cursor-pointer">Privacy</span>.
-            </p>
-          </div>
-        </form>
-      </Form>
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="bg-fiveiron-blue hover:bg-fiveiron-blue/80 text-white px-8 py-3 text-lg font-bold uppercase tracking-wider"
+                  disabled={form.formState.isSubmitting}
+                >
+                  {form.formState.isSubmitting ? "SUBMITTING..." : "SUBMIT"}
+                </Button>
+              </div>
+
+              {/* Legal Text */}
+              <div className="text-xs text-primary-foreground/80 leading-relaxed max-w-4xl mx-auto">
+                <p className="text-xs text-fiveiron-blue">
+                  * I consent to receive email communication from Five Iron Golf
+                  and agree to the terms of their{" "}
+                  <span className="underline cursor-pointer">
+                    privacy policy
+                  </span>
+                  . You can opt out at any time by clicking the unsubscribe link
+                  in the email footer. By signing up via text, you agree to
+                  receive recurring automated promotional and personalized
+                  marketing text messages from Five Iron Golf. Consent is not a
+                  condition of any purchase. Reply HELP for help and STOP to
+                  cancel. Msg frequency varies. Msg & data rates may apply.{" "}
+                  <span className="underline cursor-pointer">SMS Terms</span>{" "}
+                  and <span className="underline cursor-pointer">Privacy</span>.
+                </p>
+              </div>
+            </form>
+          </Form>
+        </div>
+      </div>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { HighImpactHero } from "@/components/heros/HighImpact";
 import Image from "next/image";
 import { NeonButton } from "@/components/ui/neon-button";
 import { SubscribeForm } from "@/components/subscribe-form";
+import AutoMarquee from "@/components/AutoMarquee";
 
 export default async function Home() {
   const homepage = {
@@ -10,7 +11,7 @@ export default async function Home() {
   };
 
   return (
-    <div className="flex flex-col gap-20">
+    <div className="flex flex-col gap-16">
       <div className="bg-fiveiron-tangerine p-12">
         <HighImpactHero
           backgroundType="video"
@@ -52,6 +53,10 @@ export default async function Home() {
           Iron is fostering a dynamic, engaging, and fun atmosphere for golf
           enthusiasts and party-goers alike.
         </p>
+      </section>
+
+      <section className="w-full flex justify-center">
+        <AutoMarquee />
       </section>
 
       <SubscribeForm />
