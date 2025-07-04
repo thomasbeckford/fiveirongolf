@@ -27,7 +27,7 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
             loop
             muted
             playsInline
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover "
           >
             <source src={backgroundSrc} type="video/mp4" />
             Your browser does not support the video tag.
@@ -46,7 +46,7 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
       default:
         return (
           <div
-            className="absolute inset-0 w-full h-full"
+            className="absolute inset-0 w-full h-full rounded-[100px]"
             style={{ backgroundColor }}
           />
         );
@@ -54,14 +54,14 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden">
+    <div className="relative w-full h-screen overflow-hidden border-6 border-fiveiron-lime rounded-[100px]">
       {/* Background */}
       {renderBackground()}
 
       {/* Overlay for better text readability */}
       {(backgroundType === "video" || backgroundType === "image") && (
         <div
-          className="absolute inset-0 bg-black "
+          className="absolute inset-0 bg-black rounded-[100px]"
           style={{ opacity: overlayOpacity }}
         />
       )}

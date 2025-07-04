@@ -19,8 +19,8 @@ export function LocationSelect() {
 
   return (
     <Select onValueChange={handleLocationChange}>
-      <SelectTrigger>
-        <SelectValue placeholder="Select location" />
+      <SelectTrigger size="lg" className="bg-primary text-black uppercase ">
+        <SelectValue placeholder="Select your location" />
       </SelectTrigger>
       <SelectContent>
         {LOCATIONS_CONTENT.map((location) => (

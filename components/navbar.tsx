@@ -184,30 +184,11 @@ export default function Navbar() {
           {/* Logo */}
           <Image src="/5i.svg" alt="FiveIron Golf" width={42} height={40} />
 
-          <div className="hidden lg:flex items-center space-x-8">
-            <Link
-              href="/locations"
-              className="text-white hover:text-primary transition-colors font-medium"
-            >
-              Locations
-            </Link>
-            <Link
-              href="/play"
-              className="text-white hover:text-primary transition-colors font-medium"
-            >
-              Play
-            </Link>
-            <Link
-              href="/party"
-              className="text-white hover:text-primary transition-colors font-medium"
-            >
-              Party
-            </Link>
-          </div>
-
           <div className="flex items-center space-x-4">
             <Link href="/book">
-              <Button>Book Now</Button>
+              <Button className="text-xl uppercase font-bold" variant="ghost">
+                Book Now
+              </Button>
             </Link>
 
             <FullScreenMenu />

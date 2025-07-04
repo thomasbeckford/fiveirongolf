@@ -7,11 +7,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Edit, Trash2, Eye } from "lucide-react";
 import { LOCATIONS_CONTENT } from "@/data/locations-content";
@@ -154,13 +154,13 @@ export default function AdminPage() {
       </div>
 
       {/* Dialog de Edición */}
-      <Dialog open={isEditing} onOpenChange={setIsEditing}>
-        <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle>
+      <Sheet open={isEditing} onOpenChange={setIsEditing}>
+        <SheetContent className="w-full p-4 bg-accent text-accent-foreground  sm:max-w-5xl overflow-y-auto">
+          <SheetHeader>
+            <SheetTitle>
               {selectedLocation ? "Editar Locación" : "Nueva Locación"}
-            </DialogTitle>
-          </DialogHeader>
+            </SheetTitle>
+          </SheetHeader>
 
           <div className="space-y-6">
             <div className="grid grid-cols-2 gap-4">
@@ -219,8 +219,8 @@ export default function AdminPage() {
               <Button onClick={handleSave}>Guardar</Button>
             </div>
           </div>
-        </DialogContent>
-      </Dialog>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }
