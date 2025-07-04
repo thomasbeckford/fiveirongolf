@@ -13,6 +13,7 @@ import { MultisportSection } from "@/sections/MultisportSection";
 import { DuckpinSection } from "@/sections/DuckpinSection";
 import { FeaturesSection } from "@/sections/FeaturesSection";
 import { FooterSection } from "@/sections/FooterSection";
+import { prisma } from "@/lib/prisma";
 
 export const generateMetadata = async ({
   params,
@@ -32,6 +33,11 @@ export const generateMetadata = async ({
     title: data.seo.title,
     description: data.seo.description,
   };
+};
+
+export const generateStaticParams = async () => {
+  const locations = await prisma.location.findMany();
+  return locations.map((location) => ({ slug: location.slug }));
 };
 
 export default async function LocationsPage({
