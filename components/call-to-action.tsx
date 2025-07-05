@@ -5,7 +5,6 @@ import { LocationSelect } from "./location-select";
 import Image from "next/image";
 
 interface CallToActionProps {
-  logo?: React.ReactNode;
   title?: string;
   description?: string;
   buttonText?: string;
@@ -17,7 +16,6 @@ interface CallToActionProps {
 }
 
 export const CallToAction: React.FC<CallToActionProps> = ({
-  logo,
   title = "Book Your Visit",
   description = "Reserve a simulator or schedule your next lesson today.",
   secondaryText = "SEE ALL LOCATIONS",

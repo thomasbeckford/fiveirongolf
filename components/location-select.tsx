@@ -14,6 +14,7 @@ export function LocationSelect() {
   const router = useRouter();
 
   const handleLocationChange = (slug: string) => {
+    console.log("Change route", slug);
     router.push(`/locations/${slug}`);
   };
 
