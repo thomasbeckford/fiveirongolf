@@ -27,6 +27,9 @@ function SelectValue({
 
 const triggerVariants = cva("", {
   variants: {
+    primary: {
+      true: "bg-primary data-[placeholder]:text-black uppercase md:max-w-[380px] ",
+    },
     size: {
       default: "h-9 px-3 py-2 text-sm",
       md: "h-10 px-3 py-2 text-sm",
@@ -35,6 +38,7 @@ const triggerVariants = cva("", {
   },
   defaultVariants: {
     size: "default",
+    primary: false,
   },
 });
 
@@ -42,9 +46,11 @@ function SelectTrigger({
   className,
   children,
   size,
+  primary,
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Trigger> & {
   size?: VariantProps<typeof triggerVariants>["size"];
+  primary?: VariantProps<typeof triggerVariants>["primary"];
 }) {
   return (
     <SelectPrimitive.Trigger
@@ -52,7 +58,7 @@ function SelectTrigger({
       className={cn(
         "border-input text-foreground data-[placeholder]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive flex h-9 w-full items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&>span]:line-clamp-1",
         "bg-white border-none text-slate-600",
-        triggerVariants({ size }),
+        triggerVariants({ size, primary }),
         className
       )}
       {...props}

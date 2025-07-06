@@ -3,61 +3,49 @@ import React from "react";
 
 import { LocationSelect } from "./location-select";
 import Image from "next/image";
+import { Button } from "./ui/button";
 
 interface CallToActionProps {
   title?: string;
-  description?: string;
-  buttonText?: string;
-  buttonAction?: () => void;
-  secondaryText?: string;
   secondaryAction?: () => void;
-  variant?: "default" | "card" | "accent";
-  showTopLine?: boolean;
 }
 
 export const CallToAction: React.FC<CallToActionProps> = ({
   title = "Book Your Visit",
-  description = "Reserve a simulator or schedule your next lesson today.",
-  secondaryText = "SEE ALL LOCATIONS",
+
   secondaryAction,
 }) => {
   return (
-    <div className="relative w-full">
-      {/* Top decorative line */}
+    <div className="px-4 flex flex-col gap-4 max-w-7xl mx-auto">
+      <div className="flex flex-col md:flex-row md:items-center gap-4 items-start w-full">
+        <Image
+          src="/5i.svg"
+          alt="Logo"
+          width={142}
+          height={140}
+          className="w-[83px] h-[80px] md:w-[142px] md:h-[140px]"
+        />
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-8 sm:py-12">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-          <div className="flex gap-4 items-center">
-            {/* Logo Section */}
-            <Image src="/5i.svg" alt="Logo" width={142} height={140} />
+        <div className="text-left font-rawson">
+          <h2 className="text-[40px] font-bold text-primary">{title}</h2>
+          <p className="text-white">
+            We fill up <span className="underline">quickly</span> during this
+            season, book up to 2 weeks in advance! Reserve a simulator or
+            schedule your next lesson today.
+          </p>
+        </div>
 
-            {/* Content Section */}
-            <div className="flex-1 text-center lg:text-left max-w-2xl">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-primary">
-                {title}
-              </h2>
-              <p className="text-lg sm:text-xl text-muted-foreground">
-                {description}
-              </p>
-            </div>
-          </div>
+        <div className="flex flex-col justify-start items-start gap-2 w-full md:items-end">
+          <Button
+            variant="ghost"
+            className="p-0 underline text-white underline-offset-4 decoration-primary text-lg flex justify-end"
+            onClick={secondaryAction}
+          >
+            See all locations
+          </Button>
 
-          {/* Action Section */}
-          <div className="flex-shrink-0 flex flex-col items-center lg:items-end gap-4 ">
-            {/* Secondary link */}
-            {secondaryText && (
-              <button
-                onClick={secondaryAction}
-                className="text-sm font-semibold tracking-wide uppercase hover:opacity-80 transition-opacity border-b-2 border-foreground pb-1 text-foreground"
-              >
-                {secondaryText}
-              </button>
-            )}
-
-            {/* Primary button */}
-            <div className="*:not-first:mt-2 w-[200px]">
-              <LocationSelect />
-            </div>
+          <div className="w-full md:flex md:justify-end">
+            <LocationSelect />
           </div>
         </div>
       </div>

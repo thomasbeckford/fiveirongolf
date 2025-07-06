@@ -20,8 +20,8 @@ export function LocationSelect() {
 
   return (
     <Select onValueChange={handleLocationChange}>
-      <SelectTrigger size="lg" className="bg-primary text-black uppercase ">
-        <SelectValue placeholder="Select your location" />
+      <SelectTrigger size="lg" primary>
+        <SelectValue placeholder="Choose location" />
       </SelectTrigger>
       <SelectContent>
         {LOCATIONS_CONTENT.map((location) => (

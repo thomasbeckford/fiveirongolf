@@ -10,6 +10,15 @@ export default async function Home() {
     title: "Five Iron Golf",
   };
 
+  const neonButtons = [
+    { variant: "pink", label: "Book a Sim" },
+    { variant: "blue", label: "Take a Lesson" },
+    { variant: "primary", label: "Plan a Party" },
+    { variant: "blue", label: "Join a League" },
+    { variant: "primary", label: "Membership" },
+    { variant: "pink", label: "Promotions" },
+  ] as const;
+
   return (
     <div className="flex flex-col gap-16">
       <div className="bg-fiveiron-tangerine p-12">
@@ -32,19 +41,17 @@ export default async function Home() {
         <CallToAction />
       </section>
 
-      {/* Neon buttons Section */}
-      <section className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          <NeonButton variant="pink">Book a Sim</NeonButton>
-          <NeonButton variant="blue">Take a Lesson</NeonButton>
-          <NeonButton variant="green">Plan a Party</NeonButton>
-          <NeonButton variant="purple">Join a League</NeonButton>
-          <NeonButton variant="blue">Membership</NeonButton>
-          <NeonButton variant="green">Promotions</NeonButton>
+      <section className="w-full px-4 md:px-12 ">
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          {neonButtons.map((button) => (
+            <NeonButton key={button.label} variant={button.variant}>
+              {button.label}
+            </NeonButton>
+          ))}
         </div>
       </section>
 
-      <section className="w-full flex justify-between max-w-7xl mx-auto items-center">
+      <section className="w-full flex flex-col md:flex-row gap-4 md:gap-0 px-4 md:px-12 text-center md:text-left justify-between max-w-7xl mx-auto items-center">
         <Image src="/itsallgood.svg" alt="Logo" width={480} height={220} />
         <p className="text-lg max-w-xl">
           We’re blurring the lines between indoor golf and entertainment.

@@ -1,6 +1,4 @@
-import { LOCATIONS_CONTENT } from "@/data/locations-content";
-import { LOCATIONS_MASTER } from "@/data/locations-master";
-import { LOCATIONS_DEFAULT } from "@/data/locations-default";
+import { LOCATIONS_DEFAULT } from "@/data/locations-content-default";
 import { merge } from "lodash";
 import { prisma } from "@/lib/prisma";
 

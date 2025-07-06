@@ -216,10 +216,10 @@ export default async function Home() {
                   <div className="flex flex-wrap gap-4">
                     <NeonButton variant="pink">Book a Sim</NeonButton>
                     <NeonButton variant="blue">Take a Lesson</NeonButton>
-                    <NeonButton variant="green">Plan a Party</NeonButton>
+                    <NeonButton variant="primary">Plan a Party</NeonButton>
                     <NeonButton variant="purple">Join a League</NeonButton>
                     <NeonButton variant="blue">Membership</NeonButton>
-                    <NeonButton variant="green">Promotions</NeonButton>
+                    <NeonButton variant="primary">Promotions</NeonButton>
                   </div>
                 </CardContent>
               </Card>
