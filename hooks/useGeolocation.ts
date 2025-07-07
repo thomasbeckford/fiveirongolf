@@ -1,7 +1,17 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { GeolocationState, UserLocation } from "@/types/location";
+import { useState, useEffect } from 'react';
+
+type GeolocationState = {
+  location: UserLocation | null;
+  error: string | null;
+  loading: boolean;
+};
+type UserLocation = {
+  lat: number;
+  lng: number;
+  source: 'ip' | 'gps';
+};
 
 export function useGeolocation(): GeolocationState & {
   requestPermission: () => void;
@@ -9,22 +19,22 @@ export function useGeolocation(): GeolocationState & {
   const [state, setState] = useState<GeolocationState>({
     location: null,
     error: null,
-    loading: true,
+    loading: true
   });
 
   const getLocationByVercel = async (): Promise<UserLocation | null> => {
     try {
-      const response = await fetch("/api/user-location");
-      if (!response.ok) throw new Error("Failed to get Vercel location");
+      const response = await fetch('/api/user-location');
+      if (!response.ok) throw new Error('Failed to get Vercel location');
 
       const data = await response.json();
       return {
         lat: data.latitude,
         lng: data.longitude,
-        source: "ip",
+        source: 'ip'
       };
     } catch (error) {
-      console.error("Error getting location by Vercel:", error);
+      console.error('Error getting location by Vercel:', error);
       return null;
     }
   };
@@ -32,14 +42,14 @@ export function useGeolocation(): GeolocationState & {
   const getCurrentPosition = (): Promise<UserLocation> => {
     return new Promise((resolve, reject) => {
       if (!navigator.geolocation) {
-        reject(new Error("Geolocalización no soportada"));
+        reject(new Error('Geolocalización no soportada'));
         return;
       }
 
       const options: PositionOptions = {
         enableHighAccuracy: true,
         timeout: 5000,
-        maximumAge: 300000, // 5 minutos
+        maximumAge: 300000 // 5 minutos
       };
 
       navigator.geolocation.getCurrentPosition(
@@ -47,7 +57,7 @@ export function useGeolocation(): GeolocationState & {
           resolve({
             lat: position.coords.latitude,
             lng: position.coords.longitude,
-            source: "gps",
+            source: 'gps'
           });
         },
         reject,
@@ -66,7 +76,7 @@ export function useGeolocation(): GeolocationState & {
         setState({
           location: vercelLocation,
           error: null,
-          loading: false,
+          loading: false
         });
         return;
       }
@@ -76,15 +86,15 @@ export function useGeolocation(): GeolocationState & {
       setState({
         location: gpsLocation,
         error: null,
-        loading: false,
+        loading: false
       });
     } catch (gpsError) {
-      console.error("Error getting location by GPS:", gpsError);
+      console.error('Error getting location by GPS:', gpsError);
       // 3. Si todo falla, mostrar error pero ofrecer selección manual
       setState({
         location: null,
-        error: "No se pudo determinar la ubicación automáticamente",
-        loading: false,
+        error: 'No se pudo determinar la ubicación automáticamente',
+        loading: false
       });
     }
   };
@@ -97,14 +107,14 @@ export function useGeolocation(): GeolocationState & {
       setState({
         location: gpsLocation,
         error: null,
-        loading: false,
+        loading: false
       });
     } catch (error) {
-      console.error("Error getting location by GPS:", error);
+      console.error('Error getting location by GPS:', error);
       setState((prev) => ({
         ...prev,
-        error: "No se pudo acceder al GPS. Usando ubicación aproximada.",
-        loading: false,
+        error: 'No se pudo acceder al GPS. Usando ubicación aproximada.',
+        loading: false
       }));
     }
   };
@@ -115,6 +125,6 @@ export function useGeolocation(): GeolocationState & {
 
   return {
     ...state,
-    requestPermission: requestGPSPermission,
+    requestPermission: requestGPSPermission
   };
 }

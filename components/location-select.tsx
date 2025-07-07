@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { LOCATIONS_CONTENT } from "@/data/locations-content";
+import { LOCATIONS } from "@/data/locations";
 
 export function LocationSelect() {
   const router = useRouter();
@@ -24,7 +24,7 @@ export function LocationSelect() {
         <SelectValue placeholder="Choose location" />
       </SelectTrigger>
       <SelectContent>
-        {LOCATIONS_CONTENT.map((location) => (
+        {LOCATIONS.map((location) => (
           <SelectItem key={location.id} value={location.slug}>
             {location.name}
           </SelectItem>

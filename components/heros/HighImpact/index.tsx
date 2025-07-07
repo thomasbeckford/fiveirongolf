@@ -27,7 +27,7 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
             loop
             muted
             playsInline
-            className="absolute inset-0 w-full h-full object-cover "
+            className="absolute inset-0 w-full h-full object-cover rounded-[20px] md:rounded-[60px] lg:rounded-[100px]"
           >
             <source src={backgroundSrc} type="video/mp4" />
             Your browser does not support the video tag.
@@ -37,7 +37,7 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
       case "image":
         return backgroundSrc ? (
           <div
-            className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
+            className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat rounded-[20px] md:rounded-[60px] lg:rounded-[100px]"
             style={{ backgroundImage: `url(${backgroundSrc})` }}
           />
         ) : null;
@@ -46,7 +46,7 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
       default:
         return (
           <div
-            className="absolute inset-0 w-full h-full rounded-[100px]"
+            className="absolute inset-0 w-full h-full rounded-[20px] md:rounded-[60px] lg:rounded-[100px]"
             style={{ backgroundColor }}
           />
         );
@@ -54,22 +54,25 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden border-6 border-fiveiron-lime rounded-[100px]">
+    <div className="relative w-full h-[40vh] sm:h-[70vh] md:h-[80vh] lg:h-screen overflow-hidden border-2 sm:border-4 md:border-6 border-fiveiron-lime rounded-[20px] md:rounded-[60px] lg:rounded-[100px]">
       {/* Background */}
       {renderBackground()}
 
       {/* Overlay for better text readability */}
       {(backgroundType === "video" || backgroundType === "image") && (
         <div
-          className="absolute inset-0 bg-black rounded-[100px]"
+          className="absolute inset-0 bg-black rounded-[20px] md:rounded-[60px] lg:rounded-[100px]"
           style={{ opacity: overlayOpacity }}
         />
       )}
 
       {/* Content */}
-      <div className="relative z-10 h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="space-y-6" style={{ color: textColor }}>
+      <div className="relative z-10 h-full flex items-center justify-center px-3 sm:px-4 md:px-6 lg:px-8">
+        <div className="max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-4xl mx-auto text-center">
+          <div
+            className="space-y-3 sm:space-y-4 md:space-y-6"
+            style={{ color: textColor }}
+          >
             {children}
           </div>
         </div>

@@ -1,12 +1,12 @@
-import Image from "next/image";
-import { IGallerySection } from "@/types/location";
+import Image from 'next/image';
+import { GalleryContent } from '@/lib/schemas/sections';
 
-export function GallerySection({ data }: { data: IGallerySection }) {
+export function GallerySection({ content }: { content: GalleryContent }) {
   return (
     <section className="py-16">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {data.images.map((image, index) => (
+          {content?.images?.map((image, index) => (
             <div key={index} className="relative group">
               <Image
                 src={image.url}

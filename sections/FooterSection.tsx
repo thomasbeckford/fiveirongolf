@@ -1,17 +1,11 @@
-import { IFooterSection } from "@/types/location";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Instagram, Twitter, Youtube, Mail, Phone } from "lucide-react";
-import Link from "next/link";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Instagram, Twitter, Youtube, Mail, Phone } from 'lucide-react';
+import Link from 'next/link';
+import { FooterContent } from '@/lib/schemas/sections';
 
-export function FooterSection({ data }: { data: IFooterSection }) {
+export function FooterSection({ content }: { content: FooterContent }) {
   return (
     <footer className="bg-background">
       {/* Newsletter Section */}
@@ -20,7 +14,7 @@ export function FooterSection({ data }: { data: IFooterSection }) {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-8">
               <h2 className="text-2xl lg:text-3xl font-bold text-primary-foreground uppercase tracking-wide">
-                {data.newsletter.title}
+                {content.newsletter?.title}
               </h2>
             </div>
 
@@ -43,7 +37,7 @@ export function FooterSection({ data }: { data: IFooterSection }) {
                     <SelectValue placeholder="Select Location" />
                   </SelectTrigger>
                   <SelectContent>
-                    {data.newsletter.locations.map((location) => (
+                    {content.newsletter?.locations.map((location) => (
                       <SelectItem key={location.value} value={location.value}>
                         {location.label}
                       </SelectItem>
@@ -74,7 +68,7 @@ export function FooterSection({ data }: { data: IFooterSection }) {
 
             <div className="text-center mt-6">
               <p className="text-sm text-primary-foreground/80 max-w-4xl mx-auto leading-relaxed">
-                {data.newsletter.disclaimer}
+                {content.newsletter?.disclaimer}
               </p>
             </div>
           </div>
@@ -90,28 +84,22 @@ export function FooterSection({ data }: { data: IFooterSection }) {
               <div className="space-y-6">
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 bg-foreground rounded-full flex items-center justify-center">
-                    <span className="text-background font-black text-lg">
-                      5i
-                    </span>
+                    <span className="text-background font-black text-lg">5i</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-foreground uppercase tracking-wide">
-                      FIVE IRON GOLF
-                    </h3>
+                    <h3 className="text-xl font-bold text-foreground uppercase tracking-wide">FIVE IRON GOLF</h3>
                   </div>
                 </div>
 
-                <p className="text-muted-foreground leading-relaxed">
-                  {data.brand.tagline}
-                </p>
+                <p className="text-muted-foreground leading-relaxed">{content.brand?.tagline}</p>
 
                 <div className="flex space-x-4">
-                  {data.brand.socialMedia.map((social) => {
+                  {content.brand?.socialMedia.map((social) => {
                     const IconComponent =
                       {
                         instagram: Instagram,
                         twitter: Twitter,
-                        youtube: Youtube,
+                        youtube: Youtube
                       }[social.platform] || Instagram;
 
                     return (
@@ -131,11 +119,9 @@ export function FooterSection({ data }: { data: IFooterSection }) {
 
               {/* Quick Links */}
               <div className="space-y-6">
-                <h4 className="text-lg font-bold text-foreground uppercase tracking-wide">
-                  Quick Links
-                </h4>
+                <h4 className="text-lg font-bold text-foreground uppercase tracking-wide">Quick Links</h4>
                 <div className="space-y-3">
-                  {data.quickLinks.map((link) => (
+                  {content.quickLinks?.map((link) => (
                     <Link
                       key={link.label}
                       href={link.url}
@@ -149,11 +135,9 @@ export function FooterSection({ data }: { data: IFooterSection }) {
 
               {/* More Links */}
               <div className="space-y-6">
-                <h4 className="text-lg font-bold text-foreground uppercase tracking-wide">
-                  More
-                </h4>
+                <h4 className="text-lg font-bold text-foreground uppercase tracking-wide">More</h4>
                 <div className="space-y-3">
-                  {data.moreLinks.map((link) => (
+                  {content.moreLinks?.map((link) => (
                     <Link
                       key={link.label}
                       href={link.url}
@@ -167,16 +151,14 @@ export function FooterSection({ data }: { data: IFooterSection }) {
 
               {/* Contact */}
               <div className="space-y-6">
-                <h4 className="text-lg font-bold text-foreground uppercase tracking-wide">
-                  HIT US UP
-                </h4>
+                <h4 className="text-lg font-bold text-foreground uppercase tracking-wide">HIT US UP</h4>
                 <div className="space-y-4">
                   <Button
                     asChild
                     variant="outline"
                     className="w-full justify-start border-border text-foreground hover:bg-primary hover:text-primary-foreground"
                   >
-                    <Link href={`mailto:${data.contact.email}`}>
+                    <Link href={`mailto:${content.contact?.email}`}>
                       <Mail className="w-4 h-4 mr-2" />
                       EMAIL
                     </Link>
@@ -187,7 +169,7 @@ export function FooterSection({ data }: { data: IFooterSection }) {
                     variant="outline"
                     className="w-full justify-start border-border text-foreground hover:bg-primary hover:text-primary-foreground"
                   >
-                    <Link href={`tel:${data.contact.phone}`}>
+                    <Link href={`tel:${content.contact?.phone}`}>
                       <Phone className="w-4 h-4 mr-2" />
                       CALL
                     </Link>
@@ -203,7 +185,7 @@ export function FooterSection({ data }: { data: IFooterSection }) {
       <section className="bg-muted py-6">
         <div className="container mx-auto px-4">
           <div className="text-center">
-            <p className="text-muted-foreground text-sm">{data.copyright}</p>
+            <p className="text-muted-foreground text-sm">{content.copyright}</p>
           </div>
         </div>
       </section>

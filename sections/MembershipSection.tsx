@@ -1,26 +1,23 @@
-import { IMembershipSection } from "@/types/location";
-import { DollarSign, Percent, Building } from "lucide-react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
+import { DollarSign, Percent, Building } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent } from '@/components/ui/card';
+import { MembershipContent } from '@/lib/schemas/sections';
 
-export function MembershipSection({ data }: { data: IMembershipSection }) {
+export function MembershipSection({ content }: { content: MembershipContent }) {
   return (
     <>
       {/* Gift Card Banner */}
-      {data.giftCard && (
+      {content.giftCard && (
         <section className="bg-primary py-4">
           <div className="container mx-auto px-4">
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
               <h2 className="text-primary-foreground font-bold text-lg sm:text-xl text-center sm:text-left tracking-wide">
-                {data.giftCard.title}
+                {content.giftCard.title}
               </h2>
-              <Button
-                asChild
-                className="bg-background hover:bg-secondary text-foreground font-semibold"
-              >
-                <Link href={data.giftCard.url}>{data.giftCard.buttonText}</Link>
+              <Button asChild className="bg-background hover:bg-secondary text-foreground font-semibold">
+                <Link href={content.giftCard.url}>{content.giftCard.buttonText}</Link>
               </Button>
             </div>
           </div>
@@ -31,7 +28,7 @@ export function MembershipSection({ data }: { data: IMembershipSection }) {
       <section
         className="py-16 lg:py-24 relative bg-cover bg-center"
         style={{
-          backgroundImage: `url(${data.backgroundImage})`,
+          backgroundImage: `url(${content.backgroundImage})`
         }}
       >
         <div className="absolute inset-0 bg-background/80"></div>
@@ -42,39 +39,27 @@ export function MembershipSection({ data }: { data: IMembershipSection }) {
             <div className="space-y-8 text-foreground">
               <div className="space-y-6">
                 <h2 className="text-4xl lg:text-6xl font-black uppercase leading-tight tracking-wide">
-                  <span className="text-primary">
-                    {data.title?.split(" ")[0]}
-                  </span>{" "}
-                  <span className="text-primary">
-                    {data.title?.split(" ")[1]}
-                  </span>{" "}
-                  <span className="text-foreground">
-                    {data.title?.split(" ").slice(2).join(" ")}
-                  </span>
+                  <span className="text-primary">{content.title?.split(' ')[0]}</span>{' '}
+                  <span className="text-primary">{content.title?.split(' ')[1]}</span>{' '}
+                  <span className="text-foreground">{content.title?.split(' ').slice(2).join(' ')}</span>
                 </h2>
 
                 <h3 className="text-2xl lg:text-3xl font-bold uppercase text-foreground tracking-wide">
-                  {data.subtitle}
+                  {content.subtitle}
                 </h3>
               </div>
 
-              <p className="text-lg leading-relaxed text-muted-foreground max-w-lg">
-                {data.description}
-              </p>
+              <p className="text-lg leading-relaxed text-muted-foreground max-w-lg">{content.description}</p>
 
               {/* Pricing */}
               <div className="space-y-2">
-                <div className="text-3xl lg:text-4xl font-bold text-foreground">
-                  {data.pricing?.monthlyPrice}
-                </div>
-                <div className="text-lg text-muted-foreground">
-                  {data.pricing?.terms}
-                </div>
+                <div className="text-3xl lg:text-4xl font-bold text-foreground">{content.pricing?.monthlyPrice}</div>
+                <div className="text-lg text-muted-foreground">{content.pricing?.terms}</div>
               </div>
 
               {/* Benefits */}
               <div className="space-y-6">
-                {data.benefits?.map((benefit, index) => {
+                {content.benefits?.map((benefit, index) => {
                   const icons = [DollarSign, Percent, Building];
                   const IconComponent = icons[index % icons.length];
 
@@ -84,12 +69,8 @@ export function MembershipSection({ data }: { data: IMembershipSection }) {
                         <IconComponent className="w-6 h-6 text-primary-foreground" />
                       </div>
                       <div>
-                        <h4 className="text-xl font-bold text-foreground mb-2">
-                          {benefit.title}
-                        </h4>
-                        <p className="text-muted-foreground leading-relaxed">
-                          {benefit.description}
-                        </p>
+                        <h4 className="text-xl font-bold text-foreground mb-2">{benefit.title}</h4>
+                        <p className="text-muted-foreground leading-relaxed">{benefit.description}</p>
                       </div>
                     </div>
                   );
@@ -131,9 +112,7 @@ export function MembershipSection({ data }: { data: IMembershipSection }) {
                   />
 
                   {/* Privacy Policy */}
-                  <div className="text-sm text-muted-foreground leading-relaxed">
-                    {data.form?.privacyText}
-                  </div>
+                  <div className="text-sm text-muted-foreground leading-relaxed">{content.form?.privacyText}</div>
 
                   {/* reCAPTCHA placeholder */}
                   <div className="bg-muted border border-border rounded-md p-4 flex items-center justify-center h-20">
@@ -144,7 +123,7 @@ export function MembershipSection({ data }: { data: IMembershipSection }) {
                     type="submit"
                     className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 px-8 text-lg h-auto"
                   >
-                    {data.form?.submitText || "SUBMIT"}
+                    {content.form?.submitText || 'SUBMIT'}
                   </Button>
                 </form>
               </CardContent>

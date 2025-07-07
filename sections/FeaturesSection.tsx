@@ -1,23 +1,19 @@
-import { IFeaturesSection } from "@/types/location";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import { FeaturesContent } from '@/lib/schemas/sections';
 
-export function FeaturesSection({ data }: { data: IFeaturesSection }) {
+export function FeaturesSection({ content }: { content: FeaturesContent }) {
   return (
     <section className="py-16 lg:py-24 bg-background">
       <div className="container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-0 border-2 border-border">
-            {data.features.map((feature, index) => (
+            {content.features?.map((feature, index) => (
               <div
                 key={feature.id}
                 className={`
                   relative p-8 lg:p-12 bg-background hover:bg-card/50 transition-all duration-300 group cursor-pointer
-                  ${
-                    index < data.features.length - 1
-                      ? "md:border-r-2 border-border"
-                      : ""
-                  }
+                  ${index < content.features.length - 1 ? 'md:border-r-2 border-border' : ''}
                 `}
               >
                 {/* Neon Title */}
@@ -31,7 +27,7 @@ export function FeaturesSection({ data }: { data: IFeaturesSection }) {
                         0 0 10px ${feature.neonColor}40,
                         0 0 15px ${feature.neonColor}40,
                         0 0 20px ${feature.neonColor}40
-                      `,
+                      `
                     }}
                   >
                     {feature.title}
@@ -40,9 +36,7 @@ export function FeaturesSection({ data }: { data: IFeaturesSection }) {
 
                 {/* Description */}
                 <div className="mb-12">
-                  <p className="text-muted-foreground leading-relaxed text-lg">
-                    {feature.description}
-                  </p>
+                  <p className="text-muted-foreground leading-relaxed text-lg">{feature.description}</p>
                 </div>
 
                 {/* CTA Link */}
@@ -60,7 +54,7 @@ export function FeaturesSection({ data }: { data: IFeaturesSection }) {
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none"
                   style={{
-                    background: `radial-gradient(circle at center, ${feature.neonColor}20 0%, transparent 70%)`,
+                    background: `radial-gradient(circle at center, ${feature.neonColor}20 0%, transparent 70%)`
                   }}
                 />
               </div>

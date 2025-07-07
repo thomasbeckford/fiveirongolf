@@ -21,7 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { LOCATIONS_CONTENT } from "@/data/locations-content";
+import { LOCATIONS } from "@/data/locations";
 
 const formSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters"),
@@ -53,7 +53,7 @@ export function SubscribeForm() {
   };
 
   return (
-    <div className="w-full bg-primary text-primary-foreground flex items-center justify-center py-12">
+    <div className="w-full bg-primary text-primary-foreground flex items-center justify-center px-[16px] py-[32px]">
       <div className="flex flex-col items-center gap-8">
         <div className="w-full max-w-5xl mx-auto">
           <h2 className="text-2xl font-semibold text-center text-fiveiron-blue uppercase ">
@@ -106,7 +106,7 @@ export function SubscribeForm() {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          {LOCATIONS_CONTENT.map((location) => (
+                          {LOCATIONS.map((location) => (
                             <SelectItem key={location.id} value={location.name}>
                               {location.name}
                             </SelectItem>

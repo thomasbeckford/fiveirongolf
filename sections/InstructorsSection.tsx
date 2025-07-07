@@ -1,30 +1,25 @@
-"use client";
+'use client';
 
-import { ICoachesSection } from "@/types/location";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { InstructorsContent } from '@/lib/schemas/sections';
 
-export function CoachesSection({ data }: { data: ICoachesSection }) {
+export function InstructorsSection({ content }: { content: InstructorsContent }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % Math.ceil(data.coaches.length / 3));
+    setCurrentIndex((prev) => (prev + 1) % Math.ceil(content.coaches.length / 3));
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) =>
-      prev === 0 ? Math.ceil(data.coaches.length / 3) - 1 : prev - 1
-    );
+    setCurrentIndex((prev) => (prev === 0 ? Math.ceil(content.coaches.length / 3) - 1 : prev - 1));
   };
 
-  const visibleCoaches = data.coaches.slice(
-    currentIndex * 3,
-    currentIndex * 3 + 3
-  );
+  const visibleCoaches = content.coaches?.slice(currentIndex * 3, currentIndex * 3 + 3);
 
   return (
     <section className="py-16 lg:py-24 bg-background">
@@ -36,10 +31,9 @@ export function CoachesSection({ data }: { data: ICoachesSection }) {
               <span
                 className="text-transparent bg-clip-text"
                 style={{
-                  background:
-                    "linear-gradient(45deg, var(--fiveiron-orange), var(--fiveiron-tangerine))",
-                  WebkitBackgroundClip: "text",
-                  textShadow: "0 0 30px rgba(255, 165, 0, 0.5)",
+                  background: 'linear-gradient(45deg, var(--fiveiron-orange), var(--fiveiron-tangerine))',
+                  WebkitBackgroundClip: 'text',
+                  textShadow: '0 0 30px rgba(255, 165, 0, 0.5)'
                 }}
               >
                 MEET THE COACHES
@@ -70,7 +64,7 @@ export function CoachesSection({ data }: { data: ICoachesSection }) {
 
             {/* Coaches Grid */}
             <div className="grid md:grid-cols-3 gap-8 px-16">
-              {visibleCoaches.map((coach) => (
+              {visibleCoaches?.map((coach) => (
                 <Card
                   key={coach.id}
                   className="bg-card border-2 border-orange-500/50 hover:border-orange-500 transition-all duration-300 group"
@@ -92,27 +86,17 @@ export function CoachesSection({ data }: { data: ICoachesSection }) {
                       ) : (
                         // 5i Logo placeholder
                         <div className="w-48 h-48 bg-foreground rounded-full flex items-center justify-center">
-                          <div className="text-background text-6xl font-black">
-                            5i
-                          </div>
+                          <div className="text-background text-6xl font-black">5i</div>
                         </div>
                       )}
                     </div>
 
                     {/* Coach Info */}
                     <div className="space-y-2">
-                      <h3 className="text-2xl font-bold uppercase tracking-wide text-foreground">
-                        {coach.name}
-                      </h3>
-                      <p className="text-muted-foreground text-lg">
-                        {coach.title}
-                      </p>
+                      <h3 className="text-2xl font-bold uppercase tracking-wide text-foreground">{coach.name}</h3>
+                      <p className="text-muted-foreground text-lg">{coach.title}</p>
 
-                      {coach.bio && (
-                        <p className="text-sm text-muted-foreground leading-relaxed mt-4">
-                          {coach.bio}
-                        </p>
-                      )}
+                      {coach.bio && <p className="text-sm text-muted-foreground leading-relaxed mt-4">{coach.bio}</p>}
                     </div>
                   </CardContent>
                 </Card>
@@ -126,7 +110,7 @@ export function CoachesSection({ data }: { data: ICoachesSection }) {
               asChild
               className="bg-orange-500 hover:bg-orange-600 text-background font-bold px-8 py-4 text-lg h-auto"
             >
-              <Link href={data.bookLessonUrl}>BOOK A LESSON</Link>
+              <Link href={content.bookLessonUrl || ''}>BOOK A LESSON</Link>
             </Button>
 
             <Button
@@ -134,7 +118,7 @@ export function CoachesSection({ data }: { data: ICoachesSection }) {
               variant="outline"
               className="border-2 border-foreground text-foreground hover:bg-foreground hover:text-background font-bold px-8 py-4 text-lg h-auto"
             >
-              <Link href={data.learnMoreUrl}>LEARN MORE</Link>
+              <Link href={content.learnMoreUrl || ''}>LEARN MORE</Link>
             </Button>
           </div>
         </div>

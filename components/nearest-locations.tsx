@@ -1,162 +1,81 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { MapPin, Navigation, Loader2 } from "lucide-react";
-import { useNearestLocations } from "@/hooks/useNearestLocations";
-import { LocationWithDistance } from "@/hooks/useNearestLocations";
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { MapPin, Loader2, Navigation2 } from 'lucide-react';
+import { useNearestLocations } from '@/hooks/useNearestLocations';
 
-interface NearestLocationsProps {
-  limit?: number;
-  showTitle?: boolean;
+interface NavbarNearestLocationProps {
   className?: string;
+  showLabel?: boolean;
+  variant?: 'compact' | 'minimal' | 'badge';
 }
 
 export function NearestLocations({
-  limit = 5,
-  showTitle = true,
-  className = "",
-}: NearestLocationsProps) {
-  const { nearestLocations, userLocation, isLoading, error, hasUserLocation } =
-    useNearestLocations(limit);
+  className = '',
+  showLabel = true,
+  variant = 'compact'
+}: NavbarNearestLocationProps) {
+  const { nearestLocations, isLoading, error, hasUserLocation } = useNearestLocations(1);
 
+  const nearestLocation = nearestLocations[0];
+
+  // Estados de carga y error
   if (isLoading) {
     return (
-      <div className={`flex items-center justify-center py-8 ${className}`}>
-        <Loader2 className="w-6 h-6 animate-spin mr-2" />
-        <span>Encontrando ubicaciones cercanas...</span>
+      <div className={`flex items-center gap-2 ${className}`}>
+        <Loader2 className="w-4 h-4 animate-spin text-muted-foreground" />
+        {showLabel && <span className="text-sm text-muted-foreground">Buscando...</span>}
       </div>
     );
   }
 
-  if (error || !hasUserLocation) {
+  if (error || !hasUserLocation || !nearestLocation) {
+    return null; // No mostrar nada si hay error o no hay ubicación
+  }
+
+  // Variante Badge - Súper compacta
+  if (variant === 'badge') {
     return (
-      <div className={`text-center py-8 ${className}`}>
-        <p className="text-muted-foreground mb-4">
-          {error || "No se pudo determinar tu ubicación"}
-        </p>
-        <p className="text-sm text-muted-foreground">
-          Puedes navegar por todas las ubicaciones manualmente
-        </p>
-      </div>
+      <Link href={`/locations/${nearestLocation.slug}`} className={className}>
+        <Badge variant="secondary" className="hover:bg-secondary/80 transition-colors cursor-pointer">
+          <MapPin className="w-3 h-3 mr-1" />
+          {nearestLocation.formattedDistance}
+        </Badge>
+      </Link>
     );
   }
 
-  if (nearestLocations.length === 0) {
+  // Variante Minimal - Solo icono y distancia
+  if (variant === 'minimal') {
     return (
-      <div className={`text-center py-8 ${className}`}>
-        <p className="text-muted-foreground">
-          No se encontraron ubicaciones cercanas
-        </p>
-      </div>
+      <Link href={`/locations/${nearestLocation.slug}`} className={className}>
+        <Button variant="ghost" size="sm" className="h-8 px-2">
+          <MapPin className="w-4 h-4 mr-1" />
+          <span className="text-sm">{nearestLocation.formattedDistance}</span>
+        </Button>
+      </Link>
     );
   }
 
+  // Variante Compact - Más información pero compacta
   return (
-    <div className={className}>
-      {showTitle && (
-        <h2 className="text-2xl font-bold mb-6 text-center">
-          📍 Nearest Locations
-        </h2>
-      )}
+    <div className={`flex items-center gap-2 ${className}`}>
+      {showLabel && <span className="text-sm text-muted-foreground hidden sm:inline">Near you:</span>}
 
-      {userLocation && (
-        <div className="text-center mb-6 text-sm text-muted-foreground">
-          {userLocation.source === "gps"
-            ? "📱 Ubicación GPS"
-            : "🌐 Ubicación aproximada"}
-        </div>
-      )}
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {nearestLocations.map(
-          (location: LocationWithDistance, index: number) => (
-            <div key={location.id}>
-              <Card
-                className={`hover:shadow-md transition-shadow ${
-                  index === 0 ? "ring-2 ring-primary/20" : ""
-                }`}
-              >
-                <CardHeader className="pb-3">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <CardTitle className="text-lg leading-tight">
-                        {location.name}
-                      </CardTitle>
-                      <CardDescription className="flex items-center gap-1 mt-1">
-                        <MapPin className="w-3 h-3" />
-                        {location.formattedDistance}
-                        {index === 0 && (
-                          <Badge variant="secondary" className="ml-2 text-xs">
-                            Más cercana
-                          </Badge>
-                        )}
-                      </CardDescription>
-                    </div>
-                  </div>
-
-                  {/* Experiencias disponibles */}
-                  <div className="flex gap-1 mt-2">
-                    {location.experiences?.map((exp) => (
-                      <Badge key={exp} variant="outline" className="text-xs">
-                        {exp}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardHeader>
-
-                <CardContent className="pt-0">
-                  <div className="flex gap-2">
-                    <Link
-                      href={`/locations/${location.urlSlug}`}
-                      className="flex-1"
-                    >
-                      <Button variant="secondary" size="sm" className="w-full">
-                        View Details
-                        <Navigation className="w-4 h-4" />
-                      </Button>
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
+      <Link href={`/locations/${nearestLocation.slug}`}>
+        <Button variant="outline" size="sm" className="h-8 px-3 max-w-[200px]">
+          <div className="flex items-center gap-2 min-w-0">
+            <MapPin className="w-3 h-3 text-primary flex-shrink-0" />
+            <div className="min-w-0 flex items-center gap-1">
+              <span className="text-sm font-medium truncate">{nearestLocation.name}</span>
+              <span className="text-xs text-muted-foreground flex-shrink-0">{nearestLocation.formattedDistance}</span>
             </div>
-          )
-        )}
-      </div>
-
-      {nearestLocations.length === limit && (
-        <div className="text-center mt-6">
-          <Link href="/locations">
-            <Button variant="outline">Ver todas las ubicaciones</Button>
-          </Link>
-        </div>
-      )}
-    </div>
-  );
-}
-
-// Ejemplo de uso
-export function LocationsPageWithNearest() {
-  return (
-    <div className="container mx-auto px-4 py-8">
-      {/* Ubicaciones más cercanas */}
-      <NearestLocations limit={5} />
-
-      {/* Resto del contenido */}
-      <div className="mt-16">
-        <h2 className="text-3xl font-bold text-center mb-12">
-          Todas las ubicaciones
-        </h2>
-        {/* Tu grid original aquí */}
-      </div>
+            <Navigation2 className="w-3 h-3 opacity-50 flex-shrink-0" />
+          </div>
+        </Button>
+      </Link>
     </div>
   );
 }

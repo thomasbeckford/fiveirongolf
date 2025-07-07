@@ -1,18 +1,13 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { MapPin, Loader2, Phone } from "lucide-react";
-import { useLocationsMaster } from "@/hooks/useLocationsMaster";
+import Link from 'next/link';
+import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { MapPin, Loader2, Phone } from 'lucide-react';
+import { useLocations } from '@/hooks/useLocations';
 
 export default function AllLocationsPage() {
-  const { locationsByCity, loading, error } = useLocationsMaster();
+  const { locations, loading, error } = useLocations();
 
   if (loading) {
     return (
@@ -36,7 +31,7 @@ export default function AllLocationsPage() {
   }
 
   // Convertir a array plano
-  const allLocations = Object.values(locationsByCity || {}).flat();
+  const allLocations = Object.values(locations || {}).flat();
 
   return (
     <div className="min-h-screen bg-background py-16">
@@ -46,28 +41,26 @@ export default function AllLocationsPage() {
           <h1 className="text-4xl lg:text-5xl font-bold mb-4">
             All our <span className="text-primary">locations</span>
           </h1>
-          <p className="text-xl text-muted-foreground">
-            {allLocations.length} locations around the world
-          </p>
+          <p className="text-xl text-muted-foreground">{allLocations.length} locations around the world</p>
         </div>
 
         {/* Grid de ubicaciones */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {allLocations.map((location) => {
-            const isClosed = location.name.includes("CLOSED");
+            const isClosed = location.name.includes('CLOSED');
+
+            console.log(allLocations);
 
             return (
               <Link
                 key={location.id}
-                href={isClosed ? "#" : `/locations/${location.slug}`}
+                href={isClosed ? '#' : `/locations/${location.id}`}
                 aria-disabled={isClosed}
                 className={`h-full hover:shadow-lg transition-all cursor-pointer group `}
               >
                 <Card
                   className={`h-full hover:shadow-lg  transition-all cursor-pointer group ${
-                    isClosed
-                      ? "opacity-50 cursor-not-allowed"
-                      : "hover:scale-105"
+                    isClosed ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'
                   }`}
                 >
                   <CardHeader>
@@ -82,9 +75,7 @@ export default function AllLocationsPage() {
                       {/* Nombre */}
                       <CardTitle
                         className={
-                          isClosed
-                            ? "text-muted-foreground"
-                            : "text-lg group-hover:text-primary transition-colors"
+                          isClosed ? 'text-muted-foreground' : 'text-lg group-hover:text-primary transition-colors'
                         }
                       >
                         {location.name}
@@ -93,27 +84,19 @@ export default function AllLocationsPage() {
                       {/* Timezone como ubicación */}
                       <CardDescription className="flex items-center gap-1">
                         <MapPin className="w-4 h-4" />
-                        HARDCODED
+                        {location.timezone}
                       </CardDescription>
 
                       {/* Teléfono */}
                       <div className="flex items-center gap-1 text-sm text-muted-foreground">
                         <Phone className="w-3 h-3" />
-                        HARDCODED
+                        {location.telephone}
                       </div>
 
                       {/* Experiencias */}
                       <div className="flex gap-1 flex-wrap">
-                        {[
-                          "Play and Practice",
-                          "Play and Practice",
-                          "Play and Practice",
-                        ].map((service) => (
-                          <Badge
-                            key={service}
-                            variant="outline"
-                            className="text-xs"
-                          >
+                        {location.experiences.map((service) => (
+                          <Badge key={service} variant="outline" className="text-xs">
                             {service}
                           </Badge>
                         ))}
@@ -124,14 +107,6 @@ export default function AllLocationsPage() {
               </Link>
             );
           })}
-        </div>
-
-        {/* Footer stats */}
-        <div className="text-center mt-16 text-muted-foreground">
-          <p>
-            Encuentra tu Five Iron Golf más cercano y reserva tu experiencia
-            premium
-          </p>
         </div>
       </div>
     </div>

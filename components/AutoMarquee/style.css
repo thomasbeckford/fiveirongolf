@@ -2,7 +2,7 @@
   max-width: 1800px;
   overflow: hidden;
   margin: 0 auto;
-  --speed: 105s;
+  --speed: 55s;
   --item-width: 420px;
   --item-gap: 5px;
   --single-slide-speed: calc(var(--speed) / var(--num-items));

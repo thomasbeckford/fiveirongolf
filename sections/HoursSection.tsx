@@ -1,18 +1,12 @@
-import { IHoursSection } from "@/types/location";
-import { MapPin, Clock } from "lucide-react";
+import { HoursContent } from '@/lib/schemas/sections';
+import { MapPin, Clock } from 'lucide-react';
 
-export function HoursSection({
-  data,
-  address,
-}: {
-  data: IHoursSection;
-  address: string;
-}) {
+export function HoursSection({ content, address = 'nasdfasd' }: { content: HoursContent; address?: string }) {
   return (
     <section
       className="py-16 relative bg-cover bg-center"
       style={{
-        backgroundImage: `url(${data.backgroundImage})`,
+        backgroundImage: `url(${content.backgroundImage})`
       }}
     >
       {/* Overlay */}
@@ -29,9 +23,7 @@ export function HoursSection({
                 <div className="flex items-center gap-3">
                   <MapPin className="w-6 h-6 text-primary" />
                   <div className="text-white">
-                    <div className="text-2xl font-bold uppercase">
-                      {address}
-                    </div>
+                    <div className="text-2xl font-bold uppercase">{address}</div>
                   </div>
                 </div>
               </div>
@@ -51,34 +43,22 @@ export function HoursSection({
 
                 {/* Regular Hours */}
                 <div className="space-y-3">
-                  {data.regularHours.map((hour, index) => (
-                    <div
-                      key={index}
-                      className="flex justify-between items-center"
-                    >
-                      <span className="font-medium uppercase text-sm tracking-wide">
-                        {hour.days}
-                      </span>
+                  {content.regularHours.map((hour, index) => (
+                    <div key={index} className="flex justify-between items-center">
+                      <span className="font-medium uppercase text-sm tracking-wide">{hour.days}</span>
                       <span className="font-bold text-lg">{hour.hours}</span>
                     </div>
                   ))}
                 </div>
 
                 {/* Special Hours */}
-                {data.specialHours && data.specialHours.length > 0 && (
+                {content.specialHours && content.specialHours.length > 0 && (
                   <div className="pt-6 border-t border-gray-600">
-                    <div className="text-primary text-lg font-bold uppercase mb-4">
-                      MEMBERSHIP BENEFIT HOURS
-                    </div>
+                    <div className="text-primary text-lg font-bold uppercase mb-4">MEMBERSHIP BENEFIT HOURS</div>
                     <div className="space-y-2">
-                      {data.specialHours.map((hour, index) => (
-                        <div
-                          key={index}
-                          className="flex justify-between items-center text-sm"
-                        >
-                          <span className="font-medium uppercase tracking-wide">
-                            {hour.description}
-                          </span>
+                      {content.specialHours.map((hour, index) => (
+                        <div key={index} className="flex justify-between items-center text-sm">
+                          <span className="font-medium uppercase tracking-wide">{hour.description}</span>
                           <span className="font-bold">{hour.hours}</span>
                         </div>
                       ))}
