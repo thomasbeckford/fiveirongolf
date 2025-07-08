@@ -22,6 +22,7 @@ interface InstructorSectionFormProps {
   isLoading?: boolean;
   id: string;
   isEnabled?: boolean;
+  onToggleEnabled?: (enabled: boolean) => void;
 }
 
 export function InstructorSectionForm({
@@ -30,7 +31,8 @@ export function InstructorSectionForm({
   onCancel,
   isLoading,
   id,
-  isEnabled = true
+  isEnabled = true,
+  onToggleEnabled
 }: InstructorSectionFormProps) {
   const [isToggling, setIsToggling] = useState(false);
 
@@ -278,6 +280,8 @@ export function InstructorSectionForm({
                                   e.currentTarget.style.display = 'none';
                                   e.currentTarget.nextElementSibling?.classList.remove('hidden');
                                 }}
+                                width={300}
+                                height={300}
                               />
                               <div className="hidden text-gray-500 py-8">
                                 <User className="h-12 w-12 mx-auto mb-2 text-gray-400" />
@@ -470,7 +474,7 @@ export function InstructorSectionForm({
               <Button
                 type="button"
                 variant={isEnabled ? 'destructive' : 'default'}
-                onClick={handleToggleSection}
+                onClick={() => onToggleEnabled?.(!isEnabled)}
                 disabled={isToggling}
                 className="transition-all duration-200"
               >

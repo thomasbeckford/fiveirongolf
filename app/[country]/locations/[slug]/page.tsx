@@ -49,7 +49,7 @@ export const generateMetadata = async ({ params }: { params: Promise<{ slug: str
 };
 
 const getSectionByPage = (sections: Section[], page: PageSection): Section | undefined => {
-  return sections.find((section) => section.page === page);
+  return sections.find((section) => section.page === page && section.enabled);
 };
 
 export default async function LocationsPage({ params }: { params: Promise<{ slug: string }> }) {

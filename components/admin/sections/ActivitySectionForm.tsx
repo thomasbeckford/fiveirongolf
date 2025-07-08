@@ -21,6 +21,7 @@ interface ActivitySectionFormProps {
   isLoading?: boolean;
   id: string;
   isEnabled?: boolean;
+  onToggleEnabled?: (enabled: boolean) => void;
 }
 
 export function ActivitySectionForm({
@@ -29,7 +30,8 @@ export function ActivitySectionForm({
   onCancel,
   isLoading,
   id,
-  isEnabled = true
+  isEnabled = true,
+  onToggleEnabled
 }: ActivitySectionFormProps) {
   const [isToggling, setIsToggling] = useState(false);
 
@@ -378,7 +380,7 @@ export function ActivitySectionForm({
               <Button
                 type="button"
                 variant={isEnabled ? 'destructive' : 'default'}
-                onClick={handleToggleSection}
+                onClick={() => onToggleEnabled?.(!isEnabled)}
                 disabled={isToggling}
                 className="transition-all duration-200"
               >

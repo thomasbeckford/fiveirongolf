@@ -22,9 +22,18 @@ interface FooterSectionFormProps {
   isLoading?: boolean;
   id: string;
   isEnabled?: boolean;
+  onToggleEnabled?: (enabled: boolean) => void;
 }
 
-export function FooterSectionForm({ data, onSave, onCancel, isLoading, id, isEnabled = true }: FooterSectionFormProps) {
+export function FooterSectionForm({
+  data,
+  onSave,
+  onCancel,
+  isLoading,
+  id,
+  isEnabled = true,
+  onToggleEnabled
+}: FooterSectionFormProps) {
   const [isToggling, setIsToggling] = useState(false);
 
   const form = useForm<FooterContent>({
@@ -674,7 +683,7 @@ export function FooterSectionForm({ data, onSave, onCancel, isLoading, id, isEna
               <Button
                 type="button"
                 variant={isEnabled ? 'destructive' : 'default'}
-                onClick={handleToggleSection}
+                onClick={() => onToggleEnabled?.(!isEnabled)}
                 disabled={isToggling}
                 className="transition-all duration-200"
               >

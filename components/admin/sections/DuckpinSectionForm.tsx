@@ -21,6 +21,7 @@ interface DuckpinSectionFormProps {
   isLoading?: boolean;
   id: string;
   isEnabled?: boolean;
+  onToggleEnabled?: (enabled: boolean) => void;
 }
 
 export function DuckpinSectionForm({
@@ -29,7 +30,8 @@ export function DuckpinSectionForm({
   onCancel,
   isLoading,
   id,
-  isEnabled = true
+  isEnabled = true,
+  onToggleEnabled
 }: DuckpinSectionFormProps) {
   const [isToggling, setIsToggling] = useState(false);
 
@@ -602,7 +604,7 @@ export function DuckpinSectionForm({
               <Button
                 type="button"
                 variant={isEnabled ? 'destructive' : 'default'}
-                onClick={handleToggleSection}
+                onClick={() => onToggleEnabled?.(!isEnabled)}
                 disabled={isToggling}
                 className="transition-all duration-200"
               >

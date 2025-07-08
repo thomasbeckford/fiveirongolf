@@ -21,6 +21,7 @@ interface FeaturesSectionFormProps {
   isLoading?: boolean;
   id: string;
   isEnabled?: boolean;
+  onToggleEnabled?: (enabled: boolean) => void;
 }
 
 export function FeaturesSectionForm({
@@ -29,7 +30,8 @@ export function FeaturesSectionForm({
   onCancel,
   isLoading,
   id,
-  isEnabled = true
+  isEnabled = true,
+  onToggleEnabled
 }: FeaturesSectionFormProps) {
   const [isToggling, setIsToggling] = useState(false);
 
@@ -492,7 +494,7 @@ export function FeaturesSectionForm({
               <Button
                 type="button"
                 variant={isEnabled ? 'destructive' : 'default'}
-                onClick={handleToggleSection}
+                onClick={() => onToggleEnabled?.(!isEnabled)}
                 disabled={isToggling}
                 className="transition-all duration-200"
               >

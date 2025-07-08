@@ -33,7 +33,7 @@ import {
   ReviewContent
 } from '@/lib/schemas/sections';
 import { updateLocation } from '@/server/locations/update';
-import { enableSectionWithContent, updateSectionContent } from '@/server/sections/update';
+import { toggleSectionEnabled, updateSectionContent } from '@/server/sections/update';
 import { ILocation } from '@/types/location';
 import { ActivitySectionForm } from './sections/ActivitySectionForm';
 import { HoursSectionForm } from './sections/HoursSectionForm';
@@ -129,9 +129,11 @@ export function LocationEditor({ location }: { location: ILocation }) {
   const router = useRouter();
   const [isSaving, setIsSaving] = useState(false);
   const [activeSection, setActiveSection] = useState<PageSection>(PageSection.GENERAL);
-  const sections = location?.sections || [];
 
-  if (!sections.length) {
+  // Estado local para las secciones
+  const [localSections, setLocalSections] = useState<Section[]>(location?.sections || []);
+
+  if (!localSections.length) {
     return (
       <div>
         <p>No hay secciones disponibles</p>
@@ -141,7 +143,11 @@ export function LocationEditor({ location }: { location: ILocation }) {
 
   // Obtener contenido de una sección específica
   const getSectionContent = (page: PageSection) => {
-    return sections.find((section: Section) => section.page === page)?.content || null;
+    return localSections.find((section: Section) => section.page === page)?.content || null;
+  };
+
+  const getSectionEnabled = (page: PageSection) => {
+    return localSections.find((section: Section) => section.page === page)?.enabled || false;
   };
 
   // Cambiar sección activa
@@ -162,7 +168,7 @@ export function LocationEditor({ location }: { location: ILocation }) {
         experiences: generalData.experiences,
         seoTitle: generalData.seoTitle,
         seoDescription: generalData.seoDescription,
-        sections: sections
+        sections: localSections
       });
       router.refresh();
     } catch (error) {
@@ -173,11 +179,17 @@ export function LocationEditor({ location }: { location: ILocation }) {
     }
   };
 
-  // Guardar sección específica
+  // Guardar sección específica con actualización local inmediata
   const handleSaveSection = async (page: PageSection, content: any) => {
     setIsSaving(true);
     try {
       await updateSectionContent(location.id, page, content);
+
+      // Actualizar estado local inmediatamente
+      setLocalSections((prevSections) =>
+        prevSections.map((section) => (section.page === page ? { ...section, content } : section))
+      );
+
       router.refresh();
     } catch (error) {
       console.error('Error saving section:', error);
@@ -187,17 +199,14 @@ export function LocationEditor({ location }: { location: ILocation }) {
     }
   };
 
-  const activateSection = async () => {
-    setIsSaving(true);
-    try {
-      await enableSectionWithContent(location.id, activeSection);
-      router.refresh();
-    } catch (error) {
-      console.error('Error activating section:', error);
-      alert('Error al activar sección');
-    } finally {
-      setIsSaving(false);
-    }
+  // Función para manejar el toggle de enabled
+  const handleToggleEnabled = async (page: PageSection, enabled: boolean) => {
+    await toggleSectionEnabled({ locationId: location.id, page, enabled });
+
+    // Actualizar estado local inmediatamente para UI responsive
+    setLocalSections((prevSections) =>
+      prevSections.map((section) => (section.page === page ? { ...section, enabled } : section))
+    );
   };
 
   const renderSectionForm = () => {
@@ -229,6 +238,8 @@ export function LocationEditor({ location }: { location: ILocation }) {
             onSave={async (heroData: HeroContent) => {
               await handleSaveSection(PageSection.HERO, heroData);
             }}
+            onToggleEnabled={(enabled: boolean) => handleToggleEnabled(PageSection.HERO, enabled)}
+            isEnabled={getSectionEnabled(PageSection.HERO)}
             isLoading={isSaving}
           />
         );
@@ -241,6 +252,8 @@ export function LocationEditor({ location }: { location: ILocation }) {
             onSave={async (activityData: ActivityContent) => {
               await handleSaveSection(PageSection.ACTIVITIES, activityData);
             }}
+            onToggleEnabled={(enabled: boolean) => handleToggleEnabled(PageSection.ACTIVITIES, enabled)}
+            isEnabled={getSectionEnabled(PageSection.ACTIVITIES)}
             isLoading={isSaving}
           />
         );
@@ -253,6 +266,8 @@ export function LocationEditor({ location }: { location: ILocation }) {
             onSave={async (hoursData: HoursContent) => {
               await handleSaveSection(PageSection.HOURS, hoursData);
             }}
+            onToggleEnabled={(enabled: boolean) => handleToggleEnabled(PageSection.HOURS, enabled)}
+            isEnabled={getSectionEnabled(PageSection.HOURS)}
             isLoading={isSaving}
           />
         );
@@ -265,6 +280,8 @@ export function LocationEditor({ location }: { location: ILocation }) {
             onSave={async (reviewsData: ReviewContent) => {
               await handleSaveSection(PageSection.REVIEWS, reviewsData);
             }}
+            onToggleEnabled={(enabled: boolean) => handleToggleEnabled(PageSection.REVIEWS, enabled)}
+            isEnabled={getSectionEnabled(PageSection.REVIEWS)}
             isLoading={isSaving}
           />
         );
@@ -277,6 +294,8 @@ export function LocationEditor({ location }: { location: ILocation }) {
             onSave={async (galleryData: GalleryContent) => {
               await handleSaveSection(PageSection.GALLERY, galleryData);
             }}
+            onToggleEnabled={(enabled: boolean) => handleToggleEnabled(PageSection.GALLERY, enabled)}
+            isEnabled={getSectionEnabled(PageSection.GALLERY)}
             isLoading={isSaving}
           />
         );
@@ -289,6 +308,8 @@ export function LocationEditor({ location }: { location: ILocation }) {
             onSave={async (instructorData: InstructorContent) => {
               await handleSaveSection(PageSection.INSTRUCTORS, instructorData);
             }}
+            onToggleEnabled={(enabled: boolean) => handleToggleEnabled(PageSection.INSTRUCTORS, enabled)}
+            isEnabled={getSectionEnabled(PageSection.INSTRUCTORS)}
             isLoading={isSaving}
           />
         );
@@ -301,6 +322,8 @@ export function LocationEditor({ location }: { location: ILocation }) {
             onSave={async (multisportData: MultisportContent) => {
               await handleSaveSection(PageSection.MULTISPORT, multisportData);
             }}
+            onToggleEnabled={(enabled: boolean) => handleToggleEnabled(PageSection.MULTISPORT, enabled)}
+            isEnabled={getSectionEnabled(PageSection.MULTISPORT)}
             isLoading={isSaving}
           />
         );
@@ -313,6 +336,8 @@ export function LocationEditor({ location }: { location: ILocation }) {
             onSave={async (duckpinData: DuckpinContent) => {
               await handleSaveSection(PageSection.DUCKPIN, duckpinData);
             }}
+            onToggleEnabled={(enabled: boolean) => handleToggleEnabled(PageSection.DUCKPIN, enabled)}
+            isEnabled={getSectionEnabled(PageSection.DUCKPIN)}
             isLoading={isSaving}
           />
         );
@@ -325,6 +350,8 @@ export function LocationEditor({ location }: { location: ILocation }) {
             onSave={async (featuresData: FeaturesContent) => {
               await handleSaveSection(PageSection.FEATURES, featuresData);
             }}
+            onToggleEnabled={(enabled: boolean) => handleToggleEnabled(PageSection.FEATURES, enabled)}
+            isEnabled={getSectionEnabled(PageSection.FEATURES)}
             isLoading={isSaving}
           />
         );
@@ -337,6 +364,8 @@ export function LocationEditor({ location }: { location: ILocation }) {
             onSave={async (footerData: FooterContent) => {
               await handleSaveSection(PageSection.FOOTER, footerData);
             }}
+            onToggleEnabled={(enabled: boolean) => handleToggleEnabled(PageSection.FOOTER, enabled)}
+            isEnabled={getSectionEnabled(PageSection.FOOTER)}
             isLoading={isSaving}
           />
         );
@@ -355,9 +384,6 @@ export function LocationEditor({ location }: { location: ILocation }) {
                   </h3>
                   <p className="text-white/70">Hace click en el boton activar para activarla</p>
                 </div>
-                <Button variant="outline" onClick={activateSection}>
-                  Activar
-                </Button>
               </div>
             </CardContent>
           </Card>

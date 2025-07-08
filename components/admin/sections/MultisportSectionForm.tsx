@@ -22,6 +22,7 @@ interface MultisportSectionFormProps {
   isLoading?: boolean;
   id: string;
   isEnabled?: boolean;
+  onToggleEnabled?: (enabled: boolean) => void;
 }
 
 export function MultisportSectionForm({
@@ -30,7 +31,8 @@ export function MultisportSectionForm({
   onCancel,
   isLoading,
   id,
-  isEnabled = true
+  isEnabled = true,
+  onToggleEnabled
 }: MultisportSectionFormProps) {
   const [isToggling, setIsToggling] = useState(false);
 
@@ -326,6 +328,8 @@ export function MultisportSectionForm({
                                   e.currentTarget.style.display = 'none';
                                   e.currentTarget.nextElementSibling?.classList.remove('hidden');
                                 }}
+                                width={300}
+                                height={300}
                               />
                               <div className="hidden text-gray-500 py-8">
                                 <GamepadIcon className="h-12 w-12 mx-auto mb-2 text-gray-400" />
@@ -516,7 +520,7 @@ export function MultisportSectionForm({
               <Button
                 type="button"
                 variant={isEnabled ? 'destructive' : 'default'}
-                onClick={handleToggleSection}
+                onClick={() => onToggleEnabled?.(!isEnabled)}
                 disabled={isToggling}
                 className="transition-all duration-200"
               >

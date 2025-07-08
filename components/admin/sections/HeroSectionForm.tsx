@@ -22,9 +22,18 @@ interface HeroSectionFormProps {
   isLoading?: boolean;
   id: string;
   isEnabled?: boolean;
+  onToggleEnabled?: (enabled: boolean) => void;
 }
 
-export function HeroSectionForm({ data, onSave, onCancel, isLoading, id, isEnabled = true }: HeroSectionFormProps) {
+export function HeroSectionForm({
+  data,
+  onSave,
+  onCancel,
+  isLoading,
+  id,
+  isEnabled = true,
+  onToggleEnabled
+}: HeroSectionFormProps) {
   const [isToggling, setIsToggling] = useState(false);
 
   const form = useForm<HeroContent>({
@@ -54,22 +63,9 @@ export function HeroSectionForm({ data, onSave, onCancel, isLoading, id, isEnabl
     onSave(formData);
   };
 
-  const handleToggleSection = async () => {
-    setIsToggling(true);
-    try {
-      await toggleSectionEnabled({
-        locationId: id,
-        page: PageSection.HERO,
-        enabled: !isEnabled
-      });
-    } catch (error) {
-      console.error('Error toggling section:', error);
-    } finally {
-      setIsToggling(false);
-    }
-  };
-
   const isFloorplanAvailable = form.watch('floorplan.available');
+
+  console.log('isEnabled', isEnabled);
 
   return (
     <Card className="w-full max-w-4xl">
@@ -85,6 +81,7 @@ export function HeroSectionForm({ data, onSave, onCancel, isLoading, id, isEnabl
           </span>
         </CardTitle>
       </CardHeader>
+
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -331,7 +328,7 @@ export function HeroSectionForm({ data, onSave, onCancel, isLoading, id, isEnabl
               <Button
                 type="button"
                 variant={isEnabled ? 'destructive' : 'default'}
-                onClick={handleToggleSection}
+                onClick={() => onToggleEnabled?.(!isEnabled)}
                 disabled={isToggling}
                 className="transition-all duration-200"
               >

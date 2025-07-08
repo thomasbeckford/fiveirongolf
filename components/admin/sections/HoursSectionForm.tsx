@@ -20,9 +20,18 @@ interface HoursSectionFormProps {
   isLoading?: boolean;
   id: string;
   isEnabled?: boolean;
+  onToggleEnabled?: (enabled: boolean) => void;
 }
 
-export function HoursSectionForm({ data, onSave, onCancel, isLoading, id, isEnabled = true }: HoursSectionFormProps) {
+export function HoursSectionForm({
+  data,
+  onSave,
+  onCancel,
+  isLoading,
+  id,
+  isEnabled = true,
+  onToggleEnabled
+}: HoursSectionFormProps) {
   const [isToggling, setIsToggling] = useState(false);
 
   const form = useForm<HoursContent>({
@@ -410,7 +419,7 @@ export function HoursSectionForm({ data, onSave, onCancel, isLoading, id, isEnab
               <Button
                 type="button"
                 variant={isEnabled ? 'destructive' : 'default'}
-                onClick={handleToggleSection}
+                onClick={() => onToggleEnabled?.(!isEnabled)}
                 disabled={isToggling}
                 className="transition-all duration-200"
               >

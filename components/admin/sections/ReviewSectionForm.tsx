@@ -22,9 +22,18 @@ interface ReviewSectionFormProps {
   isLoading?: boolean;
   id: string;
   isEnabled?: boolean;
+  onToggleEnabled?: (enabled: boolean) => void;
 }
 
-export function ReviewSectionForm({ data, onSave, onCancel, isLoading, id, isEnabled = true }: ReviewSectionFormProps) {
+export function ReviewSectionForm({
+  data,
+  onSave,
+  onCancel,
+  isLoading,
+  id,
+  isEnabled = true,
+  onToggleEnabled
+}: ReviewSectionFormProps) {
   const [isToggling, setIsToggling] = useState(false);
 
   const form = useForm<ReviewContent>({
@@ -274,7 +283,7 @@ export function ReviewSectionForm({ data, onSave, onCancel, isLoading, id, isEna
               <Button
                 type="button"
                 variant={isEnabled ? 'destructive' : 'default'}
-                onClick={handleToggleSection}
+                onClick={() => onToggleEnabled?.(!isEnabled)}
                 disabled={isToggling}
                 className="transition-all duration-200"
               >
