@@ -6,7 +6,7 @@ import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/s
 import Link from 'next/link';
 import { Button } from './ui/button';
 import Image from 'next/image';
-import { NearestLocations } from './nearest-locations';
+import NearestLocations from './nearest-locations';
 
 const menuSections = {
   'VISIT US': [
@@ -171,17 +171,27 @@ function FullScreenMenu() {
 export default function Navbar() {
   return (
     <nav className="bg-fiveiron-black backdrop-blur-sm border-b border-gray-800 sticky top-0 z-40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <Image src="/5i.svg" alt="FiveIron Golf" width={42} height={40} />
+      <div className="max-w-screen-2xl mx-auto">
+        <div className="flex items-center justify-between h-22">
+          <Link href="/" className="flex items-center space-x-2">
+            <Image src="/5i.svg" alt="FiveIron Golf" width={42} height={40} />
+            <span className=" text-white font-bold text-xl tracking-wider">FiveIron Golf</span>
+          </Link>
 
-          <NearestLocations variant="compact" />
           <div className="flex items-center space-x-4">
+            <Link href="/locations">
+              <Button className="text-xl uppercase font-bold text-white hover:text-fiveiron-lime" variant="ghost">
+                Locations
+              </Button>
+            </Link>
+
             <Link href="/book">
               <Button className="text-xl uppercase font-bold text-white hover:text-fiveiron-lime" variant="ghost">
                 Book Now
               </Button>
             </Link>
+
+            <NearestLocations variant="compact" showLabel={false} />
 
             <FullScreenMenu />
           </div>

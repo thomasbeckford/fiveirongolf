@@ -25,7 +25,6 @@ const homepage = {
 export default async function Home() {
   return (
     <>
-      <Navbar />
       <div className="flex flex-col gap-16">
         <section id="hero" className="bg-fiveiron-tangerine p-6 md:p-12">
           <HighImpactHero backgroundType="video" backgroundSrc="/videos/golf.mp4" overlayOpacity={0.5}>
@@ -66,7 +65,6 @@ export default async function Home() {
           <SubscribeForm />
         </section>
       </div>
-      <Footer />
     </>
   );
 }

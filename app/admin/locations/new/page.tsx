@@ -229,13 +229,13 @@ export default function NewLocationPage() {
 
             {/* Info sobre defaults */}
             <Card className="bg-amber-50 border border-amber-200">
-              <CardContent className="pt-6">
+              <CardContent>
                 <div className="flex items-start gap-3">
                   <div className="p-1 bg-amber-100 rounded">
                     <Building className="h-4 w-4 text-amber-600" />
                   </div>
                   <div>
-                    <h3 className="font-medium text-amber-800 mb-1">Configuración Automática</h3>
+                    <h3 className="font-medium text-amber-800 ">Configuración Automática</h3>
                     <p className="text-sm text-amber-700">
                       Esta ubicación se creará con todas las secciones predeterminadas (Activities, Reviews, Gallery,
                       etc.) usando la configuración de LOCATIONS_DEFAULT. Podrás personalizar cada sección después de la

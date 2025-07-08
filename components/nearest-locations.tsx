@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { MapPin, Loader2, Navigation2 } from 'lucide-react';
 import { useNearestLocations } from '@/hooks/useNearestLocations';
+import { NeonButton } from './ui/neon-button';
 
 interface NavbarNearestLocationProps {
   className?: string;
@@ -12,7 +13,7 @@ interface NavbarNearestLocationProps {
   variant?: 'compact' | 'minimal' | 'badge';
 }
 
-export function NearestLocations({
+export default function NearestLocations({
   className = '',
   showLabel = true,
   variant = 'compact'
@@ -51,7 +52,7 @@ export function NearestLocations({
   if (variant === 'minimal') {
     return (
       <Link href={`/locations/${nearestLocation.slug}`} className={className}>
-        <Button variant="ghost" size="sm" className="h-8 px-2">
+        <Button variant="ghost" size="sm">
           <MapPin className="w-4 h-4 mr-1" />
           <span className="text-sm">{nearestLocation.formattedDistance}</span>
         </Button>
@@ -64,18 +65,14 @@ export function NearestLocations({
     <div className={`flex items-center gap-2 ${className}`}>
       {showLabel && <span className="text-sm text-muted-foreground hidden sm:inline">Near you:</span>}
 
-      <Link href={`/locations/${nearestLocation.slug}`}>
-        <Button variant="outline" size="sm" className="h-8 px-3 max-w-[200px]">
-          <div className="flex items-center gap-2 min-w-0">
-            <MapPin className="w-3 h-3 text-primary flex-shrink-0" />
-            <div className="min-w-0 flex items-center gap-1">
-              <span className="text-sm font-medium truncate">{nearestLocation.name}</span>
-              <span className="text-xs text-muted-foreground flex-shrink-0">{nearestLocation.formattedDistance}</span>
-            </div>
-            <Navigation2 className="w-3 h-3 opacity-50 flex-shrink-0" />
-          </div>
-        </Button>
-      </Link>
+      <Button variant="ghost" className="flex items-center gap-2 min-w-0">
+        <MapPin className="w-5 h-5 text-primary flex-shrink-0" />
+        <div className="min-w-0 flex items-center gap-1">
+          <span className="text-md font-medium truncate">{nearestLocation.name}</span>
+          <span className="text-xs text-muted-foreground flex-shrink-0">{nearestLocation.formattedDistance}</span>
+        </div>
+        <Navigation2 className="w-3 h-3 opacity-50 flex-shrink-0" />
+      </Button>
     </div>
   );
 }
