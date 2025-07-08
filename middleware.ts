@@ -1,27 +1,32 @@
-import { geolocation } from "@vercel/functions";
-import { NextRequest, NextResponse } from "next/server";
-import { regions, getBestLocale, getAllLocaleRoutes } from "./data/regions";
+import { geolocation } from '@vercel/functions';
+import { NextRequest, NextResponse } from 'next/server';
+import { regions, getBestLocale, getAllLocaleRoutes } from './data/regions';
 
 export function middleware(request: NextRequest) {
   try {
-    const defaultCountry = "GB";
+    const defaultCountry = 'GB';
     const data = geolocation(request);
     const country = data.country || defaultCountry;
 
     const { pathname } = request.nextUrl;
 
+    // if /studio
+    if (pathname.startsWith('/studio')) {
+      return NextResponse.next();
+    }
+
     // if /admin
-    if (pathname.startsWith("/admin")) {
+    if (pathname.startsWith('/admin')) {
       return NextResponse.next();
     }
 
     // Debug en desarrollo
-    if (process.env.NODE_ENV === "development") {
+    if (process.env.NODE_ENV === 'development') {
       console.log(`🌍 Country detected: ${country}, Path: ${pathname}`);
     }
 
     // Si ya está en select-region, continuar
-    if (pathname.startsWith("/select-region")) {
+    if (pathname.startsWith('/select-region')) {
       return NextResponse.next();
     }
 
@@ -44,7 +49,7 @@ export function middleware(request: NextRequest) {
 
     // Si país NO soportado → redirect a selector
     if (!country || !regions[country]) {
-      const url = new URL("/select-region", request.url);
+      const url = new URL('/select-region', request.url);
       return NextResponse.redirect(url);
     }
 
@@ -52,28 +57,22 @@ export function middleware(request: NextRequest) {
     const countrySlug = regions[country];
 
     // Estrategia 1: Solo país (como antes)
-    const simpleRedirectPath =
-      pathname === "/" ? `/${countrySlug}` : `/${countrySlug}${pathname}`;
+    const simpleRedirectPath = pathname === '/' ? `/${countrySlug}` : `/${countrySlug}${pathname}`;
 
     // Estrategia 2: País + locale (nueva)
-    const acceptLang = request.headers.get("accept-language");
-    const userLang = acceptLang?.split(",")[0]?.split("-")[0] || "en";
+    const acceptLang = request.headers.get('accept-language');
+    const userLang = acceptLang?.split(',')[0]?.split('-')[0] || 'en';
     const bestLocale = getBestLocale(country, userLang);
     const localeRedirectPath =
-      pathname === "/"
-        ? `/${bestLocale}-${countrySlug}`
-        : `/${bestLocale}-${countrySlug}${pathname}`;
+      pathname === '/' ? `/${bestLocale}-${countrySlug}` : `/${bestLocale}-${countrySlug}${pathname}`;
 
     // Decidir qué estrategia usar basado en una feature flag o config
-    const useLocaleRoutes =
-      process.env.NEXT_PUBLIC_USE_LOCALE_ROUTES === "true";
+    const useLocaleRoutes = process.env.NEXT_PUBLIC_USE_LOCALE_ROUTES === 'true';
 
-    const finalRedirectPath = useLocaleRoutes
-      ? localeRedirectPath
-      : simpleRedirectPath;
+    const finalRedirectPath = useLocaleRoutes ? localeRedirectPath : simpleRedirectPath;
     const url = new URL(finalRedirectPath, request.url);
 
-    if (process.env.NODE_ENV === "development") {
+    if (process.env.NODE_ENV === 'development') {
       console.log(`🔄 Redirecting to: ${finalRedirectPath}`);
       console.log(`📍 User language: ${userLang}, Best locale: ${bestLocale}`);
     }
@@ -81,7 +80,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   } catch (error) {
     // Fallback en caso de error
-    console.error("Middleware error:", error);
+    console.error('Middleware error:', error);
     return NextResponse.next();
   }
 }
@@ -96,6 +95,6 @@ export const config = {
      * - favicon.ico (favicon file)
      * - public files (.png, .jpg, etc.)
      */
-    "/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)",
-  ],
+    '/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)'
+  ]
 };

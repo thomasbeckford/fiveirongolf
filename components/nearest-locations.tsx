@@ -22,7 +22,6 @@ export default function NearestLocations({
 
   const nearestLocation = nearestLocations[0];
 
-  // Estados de carga y error
   if (isLoading) {
     return (
       <div className={`flex items-center gap-2 ${className}`}>
@@ -33,10 +32,9 @@ export default function NearestLocations({
   }
 
   if (error || !hasUserLocation || !nearestLocation) {
-    return null; // No mostrar nada si hay error o no hay ubicación
+    return null;
   }
 
-  // Variante Badge - Súper compacta
   if (variant === 'badge') {
     return (
       <Link href={`/locations/${nearestLocation.slug}`} className={className}>
@@ -62,17 +60,30 @@ export default function NearestLocations({
 
   // Variante Compact - Más información pero compacta
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
-      {showLabel && <span className="text-sm text-muted-foreground hidden sm:inline">Near you:</span>}
+    <div className={`flex items-center gap-3 ${className}`}>
+      {showLabel && (
+        <span className="text-xs uppercase tracking-widest text-gray-500 hidden sm:inline font-medium">Nearest</span>
+      )}
 
-      <Button variant="ghost" className="flex items-center gap-2 min-w-0">
-        <MapPin className="w-5 h-5 text-primary flex-shrink-0" />
-        <div className="min-w-0 flex items-center gap-1">
-          <span className="text-md font-medium truncate">{nearestLocation.name}</span>
-          <span className="text-xs text-muted-foreground flex-shrink-0">{nearestLocation.formattedDistance}</span>
-        </div>
-        <Navigation2 className="w-3 h-3 opacity-50 flex-shrink-0" />
-      </Button>
+      <Link href={`/locations/${nearestLocation.slug}`}>
+        <Button
+          variant="ghost"
+          className="group flex items-center gap-3 px-3 py-2 rounded-lg bg-black/20 border border-gray-700/50 hover:border-fiveiron-lime/60 backdrop-blur-md transition-all duration-200 hover:bg-black/40 min-w-0"
+        >
+          <div className="flex items-center gap-2.5">
+            <MapPin className="w-4 h-4 text-fiveiron-lime group-hover:scale-105 transition-transform duration-150" />
+
+            <div className="flex items-center gap-2 min-w-0">
+              <span className="text-sm font-medium text-white truncate">{nearestLocation.name}</span>
+              <span className="text-xs text-gray-400 bg-gray-800/60 px-2 py-0.5 rounded-full">
+                {nearestLocation.formattedDistance}
+              </span>
+            </div>
+          </div>
+
+          <Navigation2 className="w-3 h-3 text-gray-500 group-hover:text-fiveiron-lime transition-colors duration-150" />
+        </Button>
+      </Link>
     </div>
   );
 }

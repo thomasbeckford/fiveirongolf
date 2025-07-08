@@ -4,8 +4,6 @@ import Image from 'next/image';
 import { NeonButton } from '@/components/ui/neon-button';
 import { SubscribeForm } from '@/components/subscribe-form';
 import AutoMarquee from '@/components/auto-marquee';
-import Navbar from '@/components/navbar';
-import Footer from '@/components/footer';
 
 const homepage = {
   title: 'Five Iron Golf',
@@ -26,11 +24,11 @@ export default async function Home() {
   return (
     <>
       <div className="flex flex-col gap-16">
-        <section id="hero" className="bg-fiveiron-tangerine p-6 md:p-12">
-          <HighImpactHero backgroundType="video" backgroundSrc="/videos/golf.mp4" overlayOpacity={0.5}>
+        <section id="hero" className="">
+          <HighImpactHero backgroundType="video" backgroundSrc="/videos/homepage.mp4" overlayOpacity={0.7}>
             <div className="flex flex-col items-center gap-4 ">
-              <Image src="/5i.svg" alt="Logo" width={100} height={100} />
-              <h2 className="uppercase text-5xl font-semibold tracking-widest">{homepage.title}</h2>
+              <Image src="/5i.svg" alt="Logo" width={140} height={140} />
+              <h1 className="uppercase text-6xl font-semibold tracking-widest">{homepage.title}</h1>
             </div>
           </HighImpactHero>
         </section>

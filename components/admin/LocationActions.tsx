@@ -6,18 +6,24 @@ import { deleteLocation } from '@/server/locations/delete';
 import { Location } from '@/lib/generated/prisma';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 interface LocationActionsProps extends React.PropsWithChildren {
   location: Location;
 }
 
 export function LocationActions({ location }: LocationActionsProps) {
+  const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
   const handleDelete = async () => {
     console.log('Delete location', location.slug);
     if (confirm('¿Estás seguro de que quieres eliminar esta locación?')) {
-      await deleteLocation(location.slug);
-      router.refresh();
+      setIsDeleting(true);
+      const deleted = await deleteLocation(location.slug);
+      if (deleted) {
+        router.refresh();
+      }
+      setIsDeleting(false);
     }
   };
 
@@ -34,7 +40,7 @@ export function LocationActions({ location }: LocationActionsProps) {
           <Edit className="w-4 h-4" />
         </Button>
       </Link>
-      <Button size="sm" variant="destructive" onClick={handleDelete}>
+      <Button size="sm" variant="destructive" onClick={handleDelete} disabled={isDeleting}>
         <Trash2 className="w-4 h-4" />
       </Button>
     </div>

@@ -14,10 +14,10 @@ export function MembershipSection({ content }: { content: MembershipContent }) {
           <div className="container mx-auto px-4">
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
               <h2 className="text-primary-foreground font-bold text-lg sm:text-xl text-center sm:text-left tracking-wide">
-                {content.giftCard.title}
+                {content?.giftCard?.title}
               </h2>
               <Button asChild className="bg-background hover:bg-secondary text-foreground font-semibold">
-                <Link href={content.giftCard.url}>{content.giftCard.buttonText}</Link>
+                <Link href={content?.giftCard?.url || ''}>{content?.giftCard?.buttonText}</Link>
               </Button>
             </div>
           </div>

@@ -1,9 +1,9 @@
-"use client";
-import React from "react";
+'use client';
+import React from 'react';
 
 interface MediumImpactHeroProps {
   children?: React.ReactNode;
-  backgroundType?: "image" | "color";
+  backgroundType?: 'image' | 'color';
   backgroundSrc?: string;
   backgroundColor?: string;
   overlayOpacity?: number;
@@ -16,19 +16,19 @@ interface MediumImpactHeroProps {
 
 export const MediumImpactHero: React.FC<MediumImpactHeroProps> = ({
   children,
-  backgroundType = "color",
+  backgroundType = 'color',
   backgroundSrc,
-  backgroundColor = "#1a1a1a",
+  backgroundColor = '#1a1a1a',
   overlayOpacity = 0.4,
-  textColor = "white",
-  bottomBarColor = "#84cc16",
-  bottomBarText = "INFORMACIÓN ADICIONAL • SERVICIOS • CARACTERÍSTICAS",
-  bottomBarTextColor = "black",
-  height = "60vh",
+  textColor = 'white',
+  bottomBarColor = '#84cc16',
+  bottomBarText = 'INFORMACIÓN ADICIONAL • SERVICIOS • CARACTERÍSTICAS',
+  bottomBarTextColor = 'black',
+  height = '30vh'
 }) => {
   const renderBackground = () => {
     switch (backgroundType) {
-      case "image":
+      case 'image':
         return backgroundSrc ? (
           <div
             className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
@@ -36,14 +36,9 @@ export const MediumImpactHero: React.FC<MediumImpactHeroProps> = ({
           />
         ) : null;
 
-      case "color":
+      case 'color':
       default:
-        return (
-          <div
-            className="absolute inset-0 w-full h-full"
-            style={{ backgroundColor }}
-          />
-        );
+        return <div className="absolute inset-0 w-full h-full" style={{ backgroundColor }} />;
     }
   };
 
@@ -53,11 +48,8 @@ export const MediumImpactHero: React.FC<MediumImpactHeroProps> = ({
       {renderBackground()}
 
       {/* Overlay for better text readability */}
-      {backgroundType === "image" && (
-        <div
-          className="absolute inset-0 bg-black z-10"
-          style={{ opacity: overlayOpacity }}
-        />
+      {backgroundType === 'image' && (
+        <div className="absolute inset-0 bg-black z-10" style={{ opacity: overlayOpacity }} />
       )}
 
       {/* Main Content */}
@@ -74,15 +66,9 @@ export const MediumImpactHero: React.FC<MediumImpactHeroProps> = ({
         </div>
 
         {/* Bottom Bar */}
-        <div
-          className="w-full py-4"
-          style={{ backgroundColor: bottomBarColor }}
-        >
+        <div className="w-full py-4" style={{ backgroundColor: bottomBarColor }}>
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-            <p
-              className="text-sm sm:text-base font-bold tracking-wide uppercase"
-              style={{ color: bottomBarTextColor }}
-            >
+            <p className="text-sm sm:text-base font-bold tracking-wide uppercase" style={{ color: bottomBarTextColor }}>
               {bottomBarText}
             </p>
           </div>
