@@ -17,15 +17,33 @@ import {
   Sparkles,
   Layout
 } from 'lucide-react';
-import { GeneralSectionForm } from '@/components/sections/GeneralSectionForm';
-import { HeroSectionForm } from '@/components/sections/HeroSectionForm';
+import { GeneralSectionForm } from '@/components/admin/sections/GeneralSectionForm';
+import { HeroSectionForm } from '@/components/admin/sections/HeroSectionForm';
 import { PageSection, Section } from '@/lib/generated/prisma';
-import { ActivityContent, HeroContent, HoursContent } from '@/lib/schemas/sections';
+import {
+  ActivityContent,
+  DuckpinContent,
+  FeaturesContent,
+  FooterContent,
+  GalleryContent,
+  HeroContent,
+  HoursContent,
+  InstructorContent,
+  MultisportContent,
+  ReviewContent
+} from '@/lib/schemas/sections';
 import { updateLocation } from '@/server/locations/update';
 import { enableSectionWithContent, updateSectionContent } from '@/server/sections/update';
 import { ILocation } from '@/types/location';
-import { ActivitySectionForm } from '../sections/ActivitySectionForm';
-import { HoursSectionForm } from '../sections/HoursSectionForm';
+import { ActivitySectionForm } from './sections/ActivitySectionForm';
+import { HoursSectionForm } from './sections/HoursSectionForm';
+import { ReviewSectionForm } from './sections/ReviewSectionForm';
+import { GallerySectionForm } from './sections/GallerySectionForm';
+import { InstructorSectionForm } from './sections/InstructorSectionForm';
+import { MultisportSectionForm } from './sections/MultisportSectionForm';
+import { DuckpinSectionForm } from './sections/DuckpinSectionForm';
+import { FeaturesSectionForm } from './sections/FeaturesSectionForm';
+import { FooterSectionForm } from './sections/FooterSectionForm';
 
 const SECTIONS = [
   {
@@ -234,6 +252,90 @@ export function LocationEditor({ location }: { location: ILocation }) {
             data={getSectionContent(PageSection.HOURS) as HoursContent}
             onSave={async (hoursData: HoursContent) => {
               await handleSaveSection(PageSection.HOURS, hoursData);
+            }}
+            isLoading={isSaving}
+          />
+        );
+
+      case PageSection.REVIEWS:
+        return (
+          <ReviewSectionForm
+            id={location.id}
+            data={getSectionContent(PageSection.REVIEWS) as ReviewContent}
+            onSave={async (reviewsData: ReviewContent) => {
+              await handleSaveSection(PageSection.REVIEWS, reviewsData);
+            }}
+            isLoading={isSaving}
+          />
+        );
+
+      case PageSection.GALLERY:
+        return (
+          <GallerySectionForm
+            id={location.id}
+            data={getSectionContent(PageSection.GALLERY) as GalleryContent}
+            onSave={async (galleryData: GalleryContent) => {
+              await handleSaveSection(PageSection.GALLERY, galleryData);
+            }}
+            isLoading={isSaving}
+          />
+        );
+
+      case PageSection.INSTRUCTORS:
+        return (
+          <InstructorSectionForm
+            id={location.id}
+            data={getSectionContent(PageSection.INSTRUCTORS) as InstructorContent}
+            onSave={async (instructorData: InstructorContent) => {
+              await handleSaveSection(PageSection.INSTRUCTORS, instructorData);
+            }}
+            isLoading={isSaving}
+          />
+        );
+
+      case PageSection.MULTISPORT:
+        return (
+          <MultisportSectionForm
+            id={location.id}
+            data={getSectionContent(PageSection.MULTISPORT) as MultisportContent}
+            onSave={async (multisportData: MultisportContent) => {
+              await handleSaveSection(PageSection.MULTISPORT, multisportData);
+            }}
+            isLoading={isSaving}
+          />
+        );
+
+      case PageSection.DUCKPIN:
+        return (
+          <DuckpinSectionForm
+            id={location.id}
+            data={getSectionContent(PageSection.DUCKPIN) as DuckpinContent}
+            onSave={async (duckpinData: DuckpinContent) => {
+              await handleSaveSection(PageSection.DUCKPIN, duckpinData);
+            }}
+            isLoading={isSaving}
+          />
+        );
+
+      case PageSection.FEATURES:
+        return (
+          <FeaturesSectionForm
+            id={location.id}
+            data={getSectionContent(PageSection.FEATURES) as FeaturesContent}
+            onSave={async (featuresData: FeaturesContent) => {
+              await handleSaveSection(PageSection.FEATURES, featuresData);
+            }}
+            isLoading={isSaving}
+          />
+        );
+
+      case PageSection.FOOTER:
+        return (
+          <FooterSectionForm
+            id={location.id}
+            data={getSectionContent(PageSection.FOOTER) as FooterContent}
+            onSave={async (footerData: FooterContent) => {
+              await handleSaveSection(PageSection.FOOTER, footerData);
             }}
             isLoading={isSaving}
           />

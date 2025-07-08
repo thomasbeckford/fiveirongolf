@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { MapPin, Loader2, Phone } from 'lucide-react';
+import { MapPin, Phone } from 'lucide-react';
 import { fetchLocations } from '@/server/locations/fetchAll';
 
 export const metadata = {

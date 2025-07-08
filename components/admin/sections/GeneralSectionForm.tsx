@@ -13,6 +13,7 @@ import { Badge } from '@/components/ui/badge';
 import { Building2, Search, Tag } from 'lucide-react';
 import { GeneralInfoSchema } from '@/lib/schemas/sections';
 import { GeneralInfo } from '@/lib/schemas/sections';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface GeneralSectionFormProps {
   data?: Partial<GeneralInfo>;
@@ -157,13 +158,18 @@ export function GeneralSectionForm({
                     <FormItem>
                       <FormLabel>Zona Horaria</FormLabel>
                       <FormControl>
-                        <select className="w-full px-3 py-2 border border-input bg-background rounded-md" {...field}>
-                          {TIMEZONES.map((tz) => (
-                            <option key={tz} value={tz}>
-                              {tz.replace('America/', '').replace('_', ' ')}
-                            </option>
-                          ))}
-                        </select>
+                        <Select {...field} onValueChange={field.onChange}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Selecciona una zona horaria" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {TIMEZONES.map((tz) => (
+                              <SelectItem key={tz} value={tz}>
+                                {tz.replace('America/', '').replace('_', ' ')}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </FormControl>
                       <FormMessage />
                     </FormItem>

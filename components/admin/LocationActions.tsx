@@ -5,15 +5,19 @@ import { Edit, Trash2, Eye } from 'lucide-react';
 import { deleteLocation } from '@/server/locations/delete';
 import { Location } from '@/lib/generated/prisma';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface LocationActionsProps extends React.PropsWithChildren {
   location: Location;
 }
 
 export function LocationActions({ location }: LocationActionsProps) {
+  const router = useRouter();
   const handleDelete = async () => {
+    console.log('Delete location', location.slug);
     if (confirm('¿Estás seguro de que quieres eliminar esta locación?')) {
-      await deleteLocation(location.id);
+      await deleteLocation(location.slug);
+      router.refresh();
     }
   };
 

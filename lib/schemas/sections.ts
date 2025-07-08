@@ -147,7 +147,7 @@ export const MembershipContentSchema = z.object({
 });
 
 // Instructors Section (previously Coaches)
-export const InstructorsContentSchema = z.object({
+export const InstructorContentSchema = z.object({
   coaches: z.array(
     z.object({
       name: z.string(),
@@ -216,7 +216,7 @@ export const DuckpinContentSchema = z.object({
 });
 
 // Reviews Section
-export const ReviewsContentSchema = z.object({
+export const ReviewContentSchema = z.object({
   title: z.string(),
   reviews: z.array(ReviewSchema),
   ctaText: z.string(),
@@ -287,10 +287,10 @@ export const SectionContentSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('GALLERY'), content: GalleryContentSchema }),
   z.object({ type: z.literal('HOURS'), content: HoursContentSchema }),
   z.object({ type: z.literal('MEMBERSHIP'), content: MembershipContentSchema }),
-  z.object({ type: z.literal('INSTRUCTORS'), content: InstructorsContentSchema }),
+  z.object({ type: z.literal('INSTRUCTORS'), content: InstructorContentSchema }),
   z.object({ type: z.literal('MULTISPORT'), content: MultisportContentSchema }),
   z.object({ type: z.literal('DUCKPIN'), content: DuckpinContentSchema }),
-  z.object({ type: z.literal('REVIEWS'), content: ReviewsContentSchema }),
+  z.object({ type: z.literal('REVIEWS'), content: ReviewContentSchema }),
   z.object({ type: z.literal('FEATURES'), content: FeaturesContentSchema }),
   z.object({ type: z.literal('FOOTER'), content: FooterContentSchema })
 ]);
@@ -309,13 +309,13 @@ export const getSectionContentSchema = (sectionType: string) => {
     case 'MEMBERSHIP':
       return MembershipContentSchema;
     case 'INSTRUCTORS':
-      return InstructorsContentSchema;
+      return InstructorContentSchema;
     case 'MULTISPORT':
       return MultisportContentSchema;
     case 'DUCKPIN':
       return DuckpinContentSchema;
     case 'REVIEWS':
-      return ReviewsContentSchema;
+      return ReviewContentSchema;
     case 'FEATURES':
       return FeaturesContentSchema;
     case 'FOOTER':
@@ -331,10 +331,10 @@ export type ActivityContent = z.infer<typeof ActivityContentSchema>;
 export type GalleryContent = z.infer<typeof GalleryContentSchema>;
 export type HoursContent = z.infer<typeof HoursContentSchema>;
 export type MembershipContent = z.infer<typeof MembershipContentSchema>;
-export type InstructorsContent = z.infer<typeof InstructorsContentSchema>;
+export type InstructorContent = z.infer<typeof InstructorContentSchema>;
 export type MultisportContent = z.infer<typeof MultisportContentSchema>;
 export type DuckpinContent = z.infer<typeof DuckpinContentSchema>;
-export type ReviewsContent = z.infer<typeof ReviewsContentSchema>;
+export type ReviewContent = z.infer<typeof ReviewContentSchema>;
 export type FeaturesContent = z.infer<typeof FeaturesContentSchema>;
 export type FooterContent = z.infer<typeof FooterContentSchema>;
 export type GeneralInfo = z.infer<typeof GeneralInfoSchema>;
