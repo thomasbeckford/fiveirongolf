@@ -2,9 +2,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Star } from 'lucide-react';
 import Link from 'next/link';
-import { ReviewsContent } from '@/lib/schemas/sections';
+import { ReviewContent } from '@/lib/schemas/sections';
 
-export function ReviewsSection({ data }: { data: ReviewsContent }) {
+export function ReviewsSection({ data }: { data: ReviewContent }) {
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, index) => (
       <Star

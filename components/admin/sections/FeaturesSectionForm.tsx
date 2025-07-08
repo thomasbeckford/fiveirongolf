@@ -11,7 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { FeaturesContentSchema, type FeaturesContent } from '@/lib/schemas/sections';
 import { toggleSectionEnabled } from '@/server/sections/update';
 import { PageSection } from '@/lib/generated/prisma';
-import { Loader2, Eye, EyeOff, Plus, Trash2, GripVertical, Sparkles, Palette } from 'lucide-react';
+import { Loader2, Eye, EyeOff, Plus, Trash2, GripVertical, Palette } from 'lucide-react';
 import { useState } from 'react';
 
 interface FeaturesSectionFormProps {

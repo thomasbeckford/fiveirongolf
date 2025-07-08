@@ -5,7 +5,6 @@ import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { GalleryContentSchema, type GalleryContent } from '@/lib/schemas/sections';
@@ -13,6 +12,7 @@ import { toggleSectionEnabled } from '@/server/sections/update';
 import { PageSection } from '@/lib/generated/prisma';
 import { Loader2, Eye, EyeOff, Plus, Trash2, GripVertical, Image as ImageIcon, ExternalLink } from 'lucide-react';
 import { useState } from 'react';
+import Image from 'next/image';
 
 interface GallerySectionFormProps {
   data: GalleryContent;
@@ -173,7 +173,7 @@ export function GallerySectionForm({
                         <div className="bg-gray-100 rounded-lg p-4 border-2 border-dashed border-gray-300">
                           <div className="flex items-center justify-center">
                             <div className="text-center">
-                              <img
+                              <Image
                                 src={form.watch(`images.${index}.url`)}
                                 alt={form.watch(`images.${index}.alt`) || 'Preview'}
                                 className="max-w-full max-h-48 object-cover rounded-lg shadow-sm"

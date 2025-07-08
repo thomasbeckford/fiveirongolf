@@ -13,6 +13,7 @@ import { toggleSectionEnabled } from '@/server/sections/update';
 import { PageSection } from '@/lib/generated/prisma';
 import { Loader2, Eye, EyeOff, Plus, Trash2, GripVertical, User, ExternalLink } from 'lucide-react';
 import { useState } from 'react';
+import Image from 'next/image';
 
 interface InstructorSectionFormProps {
   data: InstructorContent;
@@ -269,7 +270,7 @@ export function InstructorSectionForm({
                         <div className="bg-gray-100 rounded-lg p-4 border-2 border-dashed border-gray-300">
                           <div className="flex items-center justify-center">
                             <div className="text-center">
-                              <img
+                              <Image
                                 src={form.watch(`coaches.${index}.image`)}
                                 alt={form.watch(`coaches.${index}.name`) || 'Preview'}
                                 className="max-w-full max-h-48 object-cover rounded-lg shadow-sm"

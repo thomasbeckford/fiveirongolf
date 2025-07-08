@@ -12,19 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { FooterContentSchema, type FooterContent } from '@/lib/schemas/sections';
 import { toggleSectionEnabled } from '@/server/sections/update';
 import { PageSection } from '@/lib/generated/prisma';
-import {
-  Loader2,
-  Eye,
-  EyeOff,
-  Plus,
-  Trash2,
-  GripVertical,
-  Mail,
-  Phone,
-  MapPin,
-  ExternalLink,
-  Share2
-} from 'lucide-react';
+import { Loader2, Eye, EyeOff, Plus, Trash2, GripVertical, Mail, Phone, Share2 } from 'lucide-react';
 import { useState } from 'react';
 
 interface FooterSectionFormProps {

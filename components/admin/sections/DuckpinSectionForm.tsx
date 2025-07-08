@@ -11,17 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { DuckpinContentSchema, type DuckpinContent } from '@/lib/schemas/sections';
 import { toggleSectionEnabled } from '@/server/sections/update';
 import { PageSection } from '@/lib/generated/prisma';
-import {
-  Loader2,
-  Eye,
-  EyeOff,
-  Plus,
-  Trash2,
-  GripVertical,
-  HelpCircle,
-  ExternalLink,
-  Image as ImageIcon
-} from 'lucide-react';
+import { Loader2, Eye, EyeOff, Plus, Trash2, GripVertical, ExternalLink, Image as ImageIcon } from 'lucide-react';
 import { useState } from 'react';
 
 interface DuckpinSectionFormProps {
