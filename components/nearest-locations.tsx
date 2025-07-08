@@ -26,7 +26,7 @@ export function NearestLocations({
     return (
       <div className={`flex items-center gap-2 ${className}`}>
         <Loader2 className="w-4 h-4 animate-spin text-muted-foreground" />
-        {showLabel && <span className="text-sm text-muted-foreground">Buscando...</span>}
+        {showLabel && <span className="text-sm text-muted-foreground">Searching...</span>}
       </div>
     );
   }
