@@ -3,9 +3,9 @@ import { ActivitySection } from '@/sections/ActivitySection';
 import { GallerySection } from '@/sections/GallerySection';
 import { HoursSection } from '@/sections/HoursSection';
 import { MembershipSection } from '@/sections/MembershipSection';
-import { ReviewsSection } from '@/sections/ReviewsSection';
+import { ReviewSection } from '@/sections/ReviewSection';
 import { HeroSection } from '@/sections/HeroSection';
-import { InstructorsSection } from '@/sections/InstructorsSection';
+import { InstructorSection } from '@/sections/InstructorSection';
 import { MultisportSection } from '@/sections/MultisportSection';
 import { DuckpinSection } from '@/sections/DuckpinSection';
 import { FeaturesSection } from '@/sections/FeaturesSection';
@@ -17,10 +17,10 @@ import {
   GalleryContent,
   HoursContent,
   MembershipContent,
-  InstructorsContent,
+  InstructorContent,
   MultisportContent,
   DuckpinContent,
-  ReviewsContent,
+  ReviewContent,
   FeaturesContent,
   FooterContent
 } from '@/lib/schemas/sections';
@@ -67,10 +67,10 @@ export default async function LocationsPage({ params }: { params: Promise<{ slug
   const galleryContent = getSectionByPage(sections, PageSection.GALLERY)?.content as GalleryContent;
   const hoursContent = getSectionByPage(sections, PageSection.HOURS)?.content as HoursContent;
   const membershipContent = getSectionByPage(sections, PageSection.MEMBERSHIP)?.content as MembershipContent;
-  const instructorsContent = getSectionByPage(sections, PageSection.INSTRUCTORS)?.content as InstructorsContent;
+  const instructorContent = getSectionByPage(sections, PageSection.INSTRUCTORS)?.content as InstructorContent;
   const multisportContent = getSectionByPage(sections, PageSection.MULTISPORT)?.content as MultisportContent;
   const duckpinContent = getSectionByPage(sections, PageSection.DUCKPIN)?.content as DuckpinContent;
-  const reviewsContent = getSectionByPage(sections, PageSection.REVIEWS)?.content as ReviewsContent;
+  const reviewContent = getSectionByPage(sections, PageSection.REVIEWS)?.content as ReviewContent;
   const featuresContent = getSectionByPage(sections, PageSection.FEATURES)?.content as FeaturesContent;
   const footerContent = getSectionByPage(sections, PageSection.FOOTER)?.content as FooterContent;
 
@@ -85,10 +85,10 @@ export default async function LocationsPage({ params }: { params: Promise<{ slug
       {galleryContent && <GallerySection content={galleryContent} />}
       {hoursContent && <HoursSection content={hoursContent} />}
       {membershipContent && <MembershipSection content={membershipContent} />}
-      {instructorsContent && <InstructorsSection content={instructorsContent} />}
+      {instructorContent && <InstructorSection content={instructorContent} />}
       {multisportContent && <MultisportSection content={multisportContent} />}
       {duckpinContent && <DuckpinSection content={duckpinContent} />}
-      {reviewsContent && <ReviewsSection content={reviewsContent} />}
+      {reviewContent && <ReviewSection content={reviewContent} />}
       {featuresContent && <FeaturesSection content={featuresContent} />}
       {footerContent && <FooterSection content={footerContent} />}
     </>

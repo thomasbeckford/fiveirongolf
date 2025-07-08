@@ -6,9 +6,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { InstructorsContent } from '@/lib/schemas/sections';
+import { InstructorContent } from '@/lib/schemas/sections';
 
-export function InstructorsSection({ content }: { content: InstructorsContent }) {
+export function InstructorSection({ content }: { content: InstructorContent }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
