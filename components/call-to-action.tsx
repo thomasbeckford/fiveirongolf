@@ -1,9 +1,10 @@
-"use client";
-import React from "react";
+'use client';
+import React from 'react';
 
-import { LocationSelect } from "./location-select";
-import Image from "next/image";
-import { Button } from "./ui/button";
+import { LocationSelect } from './location-select';
+import Image from 'next/image';
+import { Button } from './ui/button';
+import Link from 'next/link';
 
 interface CallToActionProps {
   title?: string;
@@ -11,9 +12,9 @@ interface CallToActionProps {
 }
 
 export const CallToAction: React.FC<CallToActionProps> = ({
-  title = "Book Your Visit",
+  title = 'Book Your Visit',
 
-  secondaryAction,
+  secondaryAction
 }) => {
   return (
     <div className="px-4 flex flex-col gap-4 max-w-7xl mx-auto">
@@ -29,20 +30,21 @@ export const CallToAction: React.FC<CallToActionProps> = ({
         <div className="text-left font-rawson">
           <h2 className="text-[40px] font-bold text-primary">{title}</h2>
           <p className="text-white">
-            We fill up <span className="underline">quickly</span> during this
-            season, book up to 2 weeks in advance! Reserve a simulator or
-            schedule your next lesson today.
+            We fill up <span className="underline">quickly</span> during this season, book up to 2 weeks in advance!
+            Reserve a simulator or schedule your next lesson today.
           </p>
         </div>
 
         <div className="flex flex-col justify-start items-start gap-2 w-full md:items-end">
-          <Button
-            variant="ghost"
-            className="p-0 underline text-white underline-offset-4 decoration-primary text-lg flex justify-end"
-            onClick={secondaryAction}
-          >
-            See all locations
-          </Button>
+          <Link href="/locations">
+            <Button
+              variant="link"
+              className="underline text-white underline-offset-4 decoration-primary text-lg flex justify-end "
+              onClick={secondaryAction}
+            >
+              See all locations
+            </Button>
+          </Link>
 
           <div className="w-full md:flex md:justify-end">
             <LocationSelect />

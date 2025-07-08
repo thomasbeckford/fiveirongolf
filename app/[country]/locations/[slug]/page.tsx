@@ -24,12 +24,16 @@ import {
   FeaturesContent,
   FooterContent
 } from '@/lib/schemas/sections';
+import { prisma } from '@/lib/prisma';
+
+export const generateStaticParams = async () => {
+  const locations = await prisma.location.findMany();
+  return locations.map((location) => ({ slug: location.slug }));
+};
 
 export const generateMetadata = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
   const data = await fetchLocation(slug);
-
-  console.log('A0', data);
 
   if (!data) {
     return {
@@ -44,7 +48,6 @@ export const generateMetadata = async ({ params }: { params: Promise<{ slug: str
   };
 };
 
-// Función helper con nombre más consistente
 const getSectionByPage = (sections: Section[], page: PageSection): Section | undefined => {
   return sections.find((section) => section.page === page);
 };
@@ -59,7 +62,6 @@ export default async function LocationsPage({ params }: { params: Promise<{ slug
 
   const { sections } = data;
 
-  // Obtener contenido de todas las secciones
   const heroContent = getSectionByPage(sections, PageSection.HERO)?.content as HeroContent;
   const activityContent = getSectionByPage(sections, PageSection.ACTIVITIES)?.content as ActivityContent;
   const galleryContent = getSectionByPage(sections, PageSection.GALLERY)?.content as GalleryContent;
@@ -77,7 +79,7 @@ export default async function LocationsPage({ params }: { params: Promise<{ slug
   }
 
   return (
-    <div className="location-page">
+    <>
       <HeroSection content={heroContent} slug={slug} />
       {activityContent && <ActivitySection content={activityContent} />}
       {galleryContent && <GallerySection content={galleryContent} />}
@@ -89,6 +91,6 @@ export default async function LocationsPage({ params }: { params: Promise<{ slug
       {reviewsContent && <ReviewsSection content={reviewsContent} />}
       {featuresContent && <FeaturesSection content={featuresContent} />}
       {footerContent && <FooterSection content={footerContent} />}
-    </div>
+    </>
   );
 }

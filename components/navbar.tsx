@@ -173,7 +173,6 @@ export default function Navbar() {
     <nav className="bg-fiveiron-black backdrop-blur-sm border-b border-gray-800 sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
           <Image src="/5i.svg" alt="FiveIron Golf" width={42} height={40} />
 
           <NearestLocations variant="compact" />

@@ -93,7 +93,14 @@ export const LOCATIONS = [
         description:
           "Situated in Chicago's lively River North neighborhood near popular spots like the Magnificent Mile and the Chicago Riverwalk, Five Iron Golf offers a high-tech golf experience in the heart of the city."
       },
-      sections: sectionExample
+      sections: {
+        ...sectionExample,
+        [PageSection.HERO]: {
+          ...sectionExample[PageSection.HERO],
+          title: 'Chicago',
+          subtitle: 'River North'
+        }
+      }
     }
   },
 
@@ -117,7 +124,14 @@ export const LOCATIONS = [
         description:
           "Located in New York's Flatiron District near Union Square and Madison Square Park, Five Iron Golf Flatiron brings a high-tech golf experience to one of the city's most dynamic neighborhoods."
       },
-      sections: sectionExample
+      sections: {
+        ...sectionExample,
+        [PageSection.HERO]: {
+          ...sectionExample[PageSection.HERO],
+          title: 'New York',
+          subtitle: 'Flatiron'
+        }
+      }
     }
   },
 
@@ -141,7 +155,14 @@ export const LOCATIONS = [
         description:
           'Five Iron Golf in Boston Seaport offers an urban indoor golf experience with golf simulators, lessons, swing evaluations, a sports bar, and more.'
       },
-      sections: sectionExample
+      sections: {
+        ...sectionExample,
+        [PageSection.HERO]: {
+          ...sectionExample[PageSection.HERO],
+          title: 'Boston',
+          subtitle: 'Seaport'
+        }
+      }
     }
   }
 ];

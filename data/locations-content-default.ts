@@ -2,15 +2,12 @@ import { PageSection } from '@/lib/generated/prisma';
 
 export const LOCATIONS_DEFAULT = {
   seo: {
-    title: 'Indoor Golf Simulator Bar {locationName} - Five Iron Golf',
-    description:
-      'Experience Five Iron Golf in {locationName}. Premium golf simulators, lessons, and entertainment in a modern setting.'
+    title: 'Indoor Golf Simulator Bar - Five Iron Golf',
+    description: 'Experience Five Iron Golf. Premium golf simulators, lessons, and entertainment in a modern setting.'
   },
   sections: {
     [PageSection.GENERAL]: {},
     [PageSection.HERO]: {
-      title: 'Chicago',
-      subtitle: 'River North',
       backgroundImage: 'https://fiveirongolf.com/wp-content/uploads/2024/08/RN_3.jpg',
       description:
         "Situated in Chicago's lively River North neighborhood near popular spots like the Magnificent Mile and the Chicago Riverwalk, Five Iron Golf offers a high-tech golf experience in the heart of the city. Golfers of all levels can enjoy top-tier simulators, lessons, and a full-service bar.",

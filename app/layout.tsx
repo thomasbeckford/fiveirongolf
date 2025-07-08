@@ -1,10 +1,10 @@
 // src/app/layout.tsx
 
 import type { Metadata } from 'next';
-import './globals.css';
 import { rawson } from '@/fonts';
 import { cn } from '@/lib/utils';
-import { TanstackQueryProvider } from '@/providers/TanstackQuery';
+
+import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Five Iron Golf',
@@ -14,9 +14,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={cn(rawson.variable)}>
-      <body>
-        <TanstackQueryProvider>{children}</TanstackQueryProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

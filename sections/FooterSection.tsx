@@ -4,6 +4,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Instagram, Twitter, Youtube, Mail, Phone } from 'lucide-react';
 import Link from 'next/link';
 import { FooterContent } from '@/lib/schemas/sections';
+import { SubscribeForm } from '@/components/subscribe-form';
 
 export function FooterSection({ content }: { content: FooterContent }) {
   return (
@@ -18,59 +19,7 @@ export function FooterSection({ content }: { content: FooterContent }) {
               </h2>
             </div>
 
-            <form className="flex flex-col lg:flex-row gap-4 max-w-6xl mx-auto">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 flex-1">
-                <Input
-                  type="text"
-                  placeholder="First Name"
-                  className="bg-background text-foreground border-border"
-                  required
-                />
-                <Input
-                  type="text"
-                  placeholder="Last Name"
-                  className="bg-background text-foreground border-border"
-                  required
-                />
-                <Select>
-                  <SelectTrigger className="bg-background text-foreground border-border">
-                    <SelectValue placeholder="Select Location" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {content.newsletter?.locations.map((location) => (
-                      <SelectItem key={location.value} value={location.value}>
-                        {location.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <Input
-                  type="email"
-                  placeholder="Email"
-                  className="bg-background text-foreground border-border"
-                  required
-                />
-                <Input
-                  type="tel"
-                  placeholder="Phone"
-                  className="bg-background text-foreground border-border"
-                  required
-                />
-              </div>
-
-              <Button
-                type="submit"
-                className="bg-blue-900 hover:bg-blue-800 text-white font-bold px-8 py-2 h-auto lg:w-auto"
-              >
-                SUBMIT
-              </Button>
-            </form>
-
-            <div className="text-center mt-6">
-              <p className="text-sm text-primary-foreground/80 max-w-4xl mx-auto leading-relaxed">
-                {content.newsletter?.disclaimer}
-              </p>
-            </div>
+            <SubscribeForm />
           </div>
         </div>
       </section>

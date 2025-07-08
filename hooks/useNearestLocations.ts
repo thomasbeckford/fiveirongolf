@@ -2,8 +2,7 @@ import { useMemo } from 'react';
 import { useGeolocation } from './useGeolocation';
 import { calculateDistance } from '@/lib/distance';
 import { Location } from '@/lib/generated/prisma';
-import { fetchLocations } from '@/server/locations/fetchAll';
-import { useQuery } from '@tanstack/react-query';
+import { useLocations } from './useLocations';
 
 // Formatear distancia para mostrar
 function formatDistance(distance: number): string {
@@ -23,15 +22,7 @@ export interface LocationWithDistance extends Location {
 
 export function useNearestLocations(limit: number = 5) {
   const { location: userLocation, loading: locationLoading, error: locationError } = useGeolocation();
-
-  const {
-    data: locations,
-    isLoading: locationsLoading,
-    error: locationsError
-  } = useQuery({
-    queryKey: ['locations'],
-    queryFn: async () => await fetchLocations()
-  });
+  const { locations, loading: locationsLoading, error: locationsError } = useLocations();
 
   // Esta funcion se recalcula unicamente cuando cambien los datos, sino no se vuelve a calcular
   const nearestLocations = useMemo(() => {
