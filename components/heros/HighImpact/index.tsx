@@ -45,7 +45,7 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
   };
 
   return (
-    <div className={`relative w-full h-[${height}] overflow-hidden`}>
+    <div className="relative w-full overflow-hidden" style={{ height }}>
       {renderBackground()}
 
       {(backgroundType === 'video' || backgroundType === 'image') && (
