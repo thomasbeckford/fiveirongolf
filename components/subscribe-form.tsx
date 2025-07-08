@@ -1,34 +1,22 @@
-"use client";
+'use client';
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { LOCATIONS } from "@/data/locations";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { LOCATIONS } from '@/data/locations';
 
 const formSchema = z.object({
-  firstName: z.string().min(2, "First name must be at least 2 characters"),
-  lastName: z.string().min(2, "Last name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email"),
-  phone: z.string().min(10, "Please enter a valid phone number"),
-  location: z.string().min(1, "Please select a location"),
+  firstName: z.string().min(2, 'First name must be at least 2 characters'),
+  lastName: z.string().min(2, 'Last name must be at least 2 characters'),
+  email: z.string().email('Please enter a valid email'),
+  phone: z.string().min(10, 'Please enter a valid phone number'),
+  location: z.string().min(1, 'Please select a location')
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -37,18 +25,18 @@ export function SubscribeForm() {
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      location: "",
-    },
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      location: ''
+    }
   });
 
   const onSubmit = (data: FormData) => {
-    console.log("Form submitted:", data);
+    console.log('Form submitted:', data);
     // Handle form submission here
-    alert("Thanks for subscribing! 🏌️‍♂️");
+    alert('Thanks for subscribing! 🏌️‍♂️');
     form.reset();
   };
 
@@ -96,12 +84,9 @@ export function SubscribeForm() {
                   name="location"
                   render={({ field }) => (
                     <FormItem>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
-                          <SelectTrigger>
+                          <SelectTrigger className="bg-white border-none text-primary-foreground/80">
                             <SelectValue placeholder="Select Location" />
                           </SelectTrigger>
                         </FormControl>
@@ -152,26 +137,20 @@ export function SubscribeForm() {
                   className="bg-fiveiron-blue hover:bg-fiveiron-blue/80 text-white px-8 py-3 text-lg font-bold uppercase tracking-wider"
                   disabled={form.formState.isSubmitting}
                 >
-                  {form.formState.isSubmitting ? "SUBMITTING..." : "SUBMIT"}
+                  {form.formState.isSubmitting ? 'SUBMITTING...' : 'SUBMIT'}
                 </Button>
               </div>
 
               {/* Legal Text */}
               <div className="text-xs text-primary-foreground/80 leading-relaxed max-w-4xl mx-auto">
                 <p className="text-xs text-fiveiron-blue">
-                  * I consent to receive email communication from Five Iron Golf
-                  and agree to the terms of their{" "}
-                  <span className="underline cursor-pointer">
-                    privacy policy
-                  </span>
-                  . You can opt out at any time by clicking the unsubscribe link
-                  in the email footer. By signing up via text, you agree to
-                  receive recurring automated promotional and personalized
-                  marketing text messages from Five Iron Golf. Consent is not a
-                  condition of any purchase. Reply HELP for help and STOP to
-                  cancel. Msg frequency varies. Msg & data rates may apply.{" "}
-                  <span className="underline cursor-pointer">SMS Terms</span>{" "}
-                  and <span className="underline cursor-pointer">Privacy</span>.
+                  * I consent to receive email communication from Five Iron Golf and agree to the terms of their{' '}
+                  <span className="underline cursor-pointer">privacy policy</span>. You can opt out at any time by
+                  clicking the unsubscribe link in the email footer. By signing up via text, you agree to receive
+                  recurring automated promotional and personalized marketing text messages from Five Iron Golf. Consent
+                  is not a condition of any purchase. Reply HELP for help and STOP to cancel. Msg frequency varies. Msg
+                  & data rates may apply. <span className="underline cursor-pointer">SMS Terms</span> and{' '}
+                  <span className="underline cursor-pointer">Privacy</span>.
                 </p>
               </div>
             </form>

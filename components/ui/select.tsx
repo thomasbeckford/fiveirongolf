@@ -41,7 +41,7 @@ function SelectTrigger({
   children,
   size,
   primary,
-  arrow,
+  arrow = true,
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Trigger> & {
   size?: VariantProps<typeof triggerVariants>['size'];

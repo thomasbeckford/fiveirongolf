@@ -25,6 +25,7 @@ import {
   FooterContent
 } from '@/lib/schemas/sections';
 import { prisma } from '@/lib/prisma';
+import { notFound } from 'next/navigation';
 
 export const generateStaticParams = async () => {
   const locations = await prisma.location.findMany();
@@ -57,7 +58,7 @@ export default async function LocationsPage({ params }: { params: Promise<{ slug
   const data = await fetchLocation(slug);
 
   if (!data) {
-    return <div>Five Iron Golf - Location not found</div>;
+    return notFound();
   }
 
   const { sections } = data;
@@ -73,10 +74,6 @@ export default async function LocationsPage({ params }: { params: Promise<{ slug
   const reviewContent = getSectionByPage(sections, PageSection.REVIEWS)?.content as ReviewContent;
   const featuresContent = getSectionByPage(sections, PageSection.FEATURES)?.content as FeaturesContent;
   const footerContent = getSectionByPage(sections, PageSection.FOOTER)?.content as FooterContent;
-
-  if (!heroContent) {
-    return <div>Five Iron Golf - Location not found</div>;
-  }
 
   return (
     <>

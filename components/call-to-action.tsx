@@ -46,7 +46,7 @@ export const CallToAction: React.FC<CallToActionProps> = ({
             </Button>
           </Link>
 
-          <div className="w-full md:flex md:justify-end">
+          <div className="w-full md:flex md:justify-end overflow-hidden">
             <LocationSelect />
           </div>
         </div>
