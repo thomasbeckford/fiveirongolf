@@ -8,10 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { GalleryContentSchema, type GalleryContent } from '@/lib/schemas/sections';
-import { toggleSectionEnabled } from '@/server/sections/update';
-import { PageSection } from '@/lib/generated/prisma';
 import { Loader2, Eye, EyeOff, Plus, Trash2, GripVertical, Image as ImageIcon, ExternalLink } from 'lucide-react';
-import { useState } from 'react';
 import Image from 'next/image';
 
 interface GallerySectionFormProps {
@@ -19,7 +16,7 @@ interface GallerySectionFormProps {
   onSave: (data: GalleryContent) => void;
   onCancel?: () => void;
   isLoading?: boolean;
-  id: string;
+
   isEnabled?: boolean;
   onToggleEnabled?: (enabled: boolean) => void;
 }
@@ -29,12 +26,10 @@ export function GallerySectionForm({
   onSave,
   onCancel,
   isLoading,
-  id,
+
   isEnabled = true,
   onToggleEnabled
 }: GallerySectionFormProps) {
-  const [isToggling, setIsToggling] = useState(false);
-
   const form = useForm<GalleryContent>({
     resolver: zodResolver(GalleryContentSchema),
     defaultValues: {
@@ -55,21 +50,6 @@ export function GallerySectionForm({
 
   const onSubmit = (formData: GalleryContent) => {
     onSave(formData);
-  };
-
-  const handleToggleSection = async () => {
-    setIsToggling(true);
-    try {
-      await toggleSectionEnabled({
-        locationId: id,
-        page: PageSection.GALLERY,
-        enabled: !isEnabled
-      });
-    } catch (error) {
-      console.error('Error toggling section:', error);
-    } finally {
-      setIsToggling(false);
-    }
   };
 
   const addImage = () => {
@@ -335,17 +315,17 @@ export function GallerySectionForm({
                 type="button"
                 variant={isEnabled ? 'destructive' : 'default'}
                 onClick={() => onToggleEnabled?.(!isEnabled)}
-                disabled={isToggling}
+                disabled={isLoading}
                 className="transition-all duration-200"
               >
-                {isToggling ? (
+                {isLoading ? (
                   <Loader2 className="h-4 w-4 animate-spin mr-2" />
                 ) : isEnabled ? (
                   <EyeOff className="h-4 w-4 mr-2" />
                 ) : (
                   <Eye className="h-4 w-4 mr-2" />
                 )}
-                {isToggling ? 'Procesando...' : isEnabled ? 'Desactivar' : 'Activar'}
+                {isLoading ? 'Procesando...' : isEnabled ? 'Desactivar' : 'Activar'}
               </Button>
 
               <div className="flex gap-3">

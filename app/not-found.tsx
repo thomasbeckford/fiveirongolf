@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { MapPin, Calendar, Users, Trophy, Tag, GraduationCap, Home, ArrowRight, Target } from 'lucide-react';
+import { MapPin, Users, Trophy, Tag, GraduationCap, Home, ArrowRight, Target } from 'lucide-react';
 
 export default function NotFound() {
   const quickLinks = [
@@ -78,7 +78,7 @@ export default function NotFound() {
             </div>
             <p className="text-xl md:text-2xl text-primary font-semibold mb-2 tracking-wider">PAGE NOT FOUND</p>
             <p className="text-gray-300 text-lg max-w-2xl mx-auto leading-relaxed">
-              Looks like your shot went wide! The page you're looking for is no longer available. Choose one of the
+              Looks like your shot went wide! The page you are looking for is no longer available. Choose one of the
               options below to get back on course.
             </p>
           </div>
@@ -98,7 +98,7 @@ export default function NotFound() {
           <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-8">Explore What We Have to Offer</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {quickLinks.map((link, index) => (
+            {quickLinks.map((link) => (
               <Link key={link.title} href={link.href}>
                 <div className="group relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 hover:border-lime-400/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-lime-400/10 cursor-pointer overflow-hidden">
                   {/* Gradient Overlay */}

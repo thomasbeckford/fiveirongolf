@@ -11,7 +11,7 @@ import { Loader2 } from 'lucide-react';
 export function LocationSelect() {
   const router = useRouter();
   const { locations } = useLocations();
-  const { nearestLocations, isLoading, error, hasUserLocation } = useNearestLocations(1);
+  const { nearestLocations, isLoading } = useNearestLocations(1);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleLocationChange = (slug: string) => {

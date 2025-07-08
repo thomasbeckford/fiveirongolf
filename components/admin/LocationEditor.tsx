@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import {
   Settings,
   Target,
@@ -233,7 +232,6 @@ export function LocationEditor({ location }: { location: ILocation }) {
       case PageSection.HERO:
         return (
           <HeroSectionForm
-            id={location.id}
             data={getSectionContent(PageSection.HERO) as HeroContent}
             onSave={async (heroData: HeroContent) => {
               await handleSaveSection(PageSection.HERO, heroData);
@@ -247,7 +245,6 @@ export function LocationEditor({ location }: { location: ILocation }) {
       case PageSection.ACTIVITIES:
         return (
           <ActivitySectionForm
-            id={location.id}
             data={getSectionContent(PageSection.ACTIVITIES) as ActivityContent}
             onSave={async (activityData: ActivityContent) => {
               await handleSaveSection(PageSection.ACTIVITIES, activityData);
@@ -261,7 +258,6 @@ export function LocationEditor({ location }: { location: ILocation }) {
       case PageSection.HOURS:
         return (
           <HoursSectionForm
-            id={location.id}
             data={getSectionContent(PageSection.HOURS) as HoursContent}
             onSave={async (hoursData: HoursContent) => {
               await handleSaveSection(PageSection.HOURS, hoursData);
@@ -275,7 +271,6 @@ export function LocationEditor({ location }: { location: ILocation }) {
       case PageSection.REVIEWS:
         return (
           <ReviewSectionForm
-            id={location.id}
             data={getSectionContent(PageSection.REVIEWS) as ReviewContent}
             onSave={async (reviewsData: ReviewContent) => {
               await handleSaveSection(PageSection.REVIEWS, reviewsData);
@@ -289,7 +284,6 @@ export function LocationEditor({ location }: { location: ILocation }) {
       case PageSection.GALLERY:
         return (
           <GallerySectionForm
-            id={location.id}
             data={getSectionContent(PageSection.GALLERY) as GalleryContent}
             onSave={async (galleryData: GalleryContent) => {
               await handleSaveSection(PageSection.GALLERY, galleryData);
@@ -303,7 +297,6 @@ export function LocationEditor({ location }: { location: ILocation }) {
       case PageSection.INSTRUCTORS:
         return (
           <InstructorSectionForm
-            id={location.id}
             data={getSectionContent(PageSection.INSTRUCTORS) as InstructorContent}
             onSave={async (instructorData: InstructorContent) => {
               await handleSaveSection(PageSection.INSTRUCTORS, instructorData);
@@ -317,7 +310,6 @@ export function LocationEditor({ location }: { location: ILocation }) {
       case PageSection.MULTISPORT:
         return (
           <MultisportSectionForm
-            id={location.id}
             data={getSectionContent(PageSection.MULTISPORT) as MultisportContent}
             onSave={async (multisportData: MultisportContent) => {
               await handleSaveSection(PageSection.MULTISPORT, multisportData);
@@ -331,7 +323,6 @@ export function LocationEditor({ location }: { location: ILocation }) {
       case PageSection.DUCKPIN:
         return (
           <DuckpinSectionForm
-            id={location.id}
             data={getSectionContent(PageSection.DUCKPIN) as DuckpinContent}
             onSave={async (duckpinData: DuckpinContent) => {
               await handleSaveSection(PageSection.DUCKPIN, duckpinData);
@@ -345,7 +336,6 @@ export function LocationEditor({ location }: { location: ILocation }) {
       case PageSection.FEATURES:
         return (
           <FeaturesSectionForm
-            id={location.id}
             data={getSectionContent(PageSection.FEATURES) as FeaturesContent}
             onSave={async (featuresData: FeaturesContent) => {
               await handleSaveSection(PageSection.FEATURES, featuresData);
@@ -359,7 +349,6 @@ export function LocationEditor({ location }: { location: ILocation }) {
       case PageSection.FOOTER:
         return (
           <FooterSectionForm
-            id={location.id}
             data={getSectionContent(PageSection.FOOTER) as FooterContent}
             onSave={async (footerData: FooterContent) => {
               await handleSaveSection(PageSection.FOOTER, footerData);

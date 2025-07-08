@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { MapPin, Loader2, Navigation2 } from 'lucide-react';
 import { useNearestLocations } from '@/hooks/useNearestLocations';
-import { NeonButton } from './ui/neon-button';
 
 interface NavbarNearestLocationProps {
   className?: string;

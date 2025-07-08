@@ -9,17 +9,13 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { ActivityContentSchema, type ActivityContent } from '@/lib/schemas/sections';
-import { toggleSectionEnabled } from '@/server/sections/update';
-import { PageSection } from '@/lib/generated/prisma';
 import { Loader2, Eye, EyeOff, Plus, Trash2, GripVertical } from 'lucide-react';
-import { useState } from 'react';
 
 interface ActivitySectionFormProps {
   data: ActivityContent;
   onSave: (data: ActivityContent) => void;
   onCancel?: () => void;
   isLoading?: boolean;
-  id: string;
   isEnabled?: boolean;
   onToggleEnabled?: (enabled: boolean) => void;
 }
@@ -29,12 +25,9 @@ export function ActivitySectionForm({
   onSave,
   onCancel,
   isLoading,
-  id,
   isEnabled = true,
   onToggleEnabled
 }: ActivitySectionFormProps) {
-  const [isToggling, setIsToggling] = useState(false);
-
   const form = useForm<ActivityContent>({
     resolver: zodResolver(ActivityContentSchema),
     defaultValues: {
@@ -65,21 +58,6 @@ export function ActivitySectionForm({
 
   const onSubmit = (formData: ActivityContent) => {
     onSave(formData);
-  };
-
-  const handleToggleSection = async () => {
-    setIsToggling(true);
-    try {
-      await toggleSectionEnabled({
-        locationId: id,
-        page: PageSection.ACTIVITIES,
-        enabled: !isEnabled
-      });
-    } catch (error) {
-      console.error('Error toggling section:', error);
-    } finally {
-      setIsToggling(false);
-    }
   };
 
   const addService = () => {
@@ -381,17 +359,17 @@ export function ActivitySectionForm({
                 type="button"
                 variant={isEnabled ? 'destructive' : 'default'}
                 onClick={() => onToggleEnabled?.(!isEnabled)}
-                disabled={isToggling}
+                disabled={isLoading}
                 className="transition-all duration-200"
               >
-                {isToggling ? (
+                {isLoading ? (
                   <Loader2 className="h-4 w-4 animate-spin mr-2" />
                 ) : isEnabled ? (
                   <EyeOff className="h-4 w-4 mr-2" />
                 ) : (
                   <Eye className="h-4 w-4 mr-2" />
                 )}
-                {isToggling ? 'Procesando...' : isEnabled ? 'Desactivar' : 'Activar'}
+                {isLoading ? 'Procesando...' : isEnabled ? 'Desactivar' : 'Activar'}
               </Button>
 
               <div className="flex gap-3">

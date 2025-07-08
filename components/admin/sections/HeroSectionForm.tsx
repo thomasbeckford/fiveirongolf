@@ -10,17 +10,14 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { HeroContentSchema, type HeroContent } from '@/lib/schemas/sections';
-import { toggleSectionEnabled } from '@/server/sections/update';
-import { PageSection } from '@/lib/generated/prisma';
 import { Loader2, Eye, EyeOff } from 'lucide-react';
-import { useState } from 'react';
 
 interface HeroSectionFormProps {
   data: HeroContent;
   onSave: (data: HeroContent) => void;
   onCancel?: () => void;
   isLoading?: boolean;
-  id: string;
+
   isEnabled?: boolean;
   onToggleEnabled?: (enabled: boolean) => void;
 }
@@ -30,12 +27,10 @@ export function HeroSectionForm({
   onSave,
   onCancel,
   isLoading,
-  id,
+
   isEnabled = true,
   onToggleEnabled
 }: HeroSectionFormProps) {
-  const [isToggling, setIsToggling] = useState(false);
-
   const form = useForm<HeroContent>({
     resolver: zodResolver(HeroContentSchema),
     defaultValues: {
@@ -329,17 +324,17 @@ export function HeroSectionForm({
                 type="button"
                 variant={isEnabled ? 'destructive' : 'default'}
                 onClick={() => onToggleEnabled?.(!isEnabled)}
-                disabled={isToggling}
+                disabled={isLoading}
                 className="transition-all duration-200"
               >
-                {isToggling ? (
+                {isLoading ? (
                   <Loader2 className="h-4 w-4 animate-spin mr-2" />
                 ) : isEnabled ? (
                   <EyeOff className="h-4 w-4 mr-2" />
                 ) : (
                   <Eye className="h-4 w-4 mr-2" />
                 )}
-                {isToggling ? 'Procesando...' : isEnabled ? 'Desactivar' : 'Activar'}
+                {isLoading ? 'Procesando...' : isEnabled ? 'Desactivar' : 'Activar'}
               </Button>
 
               <div className="flex gap-3">

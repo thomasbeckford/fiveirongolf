@@ -8,17 +8,14 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { HoursContentSchema, type HoursContent } from '@/lib/schemas/sections';
-import { toggleSectionEnabled } from '@/server/sections/update';
-import { PageSection } from '@/lib/generated/prisma';
 import { Loader2, Eye, EyeOff, Plus, Trash2, Clock, Calendar, Star } from 'lucide-react';
-import { useState } from 'react';
 
 interface HoursSectionFormProps {
   data: HoursContent;
   onSave: (data: HoursContent) => void;
   onCancel?: () => void;
   isLoading?: boolean;
-  id: string;
+
   isEnabled?: boolean;
   onToggleEnabled?: (enabled: boolean) => void;
 }
@@ -28,12 +25,10 @@ export function HoursSectionForm({
   onSave,
   onCancel,
   isLoading,
-  id,
+
   isEnabled = true,
   onToggleEnabled
 }: HoursSectionFormProps) {
-  const [isToggling, setIsToggling] = useState(false);
-
   const form = useForm<HoursContent>({
     resolver: zodResolver(HoursContentSchema),
     defaultValues: {
@@ -70,21 +65,6 @@ export function HoursSectionForm({
 
   const onSubmit = (formData: HoursContent) => {
     onSave(formData);
-  };
-
-  const handleToggleSection = async () => {
-    setIsToggling(true);
-    try {
-      await toggleSectionEnabled({
-        locationId: id,
-        page: PageSection.HOURS,
-        enabled: !isEnabled
-      });
-    } catch (error) {
-      console.error('Error toggling section:', error);
-    } finally {
-      setIsToggling(false);
-    }
   };
 
   const addRegularHours = () => {
@@ -420,17 +400,17 @@ export function HoursSectionForm({
                 type="button"
                 variant={isEnabled ? 'destructive' : 'default'}
                 onClick={() => onToggleEnabled?.(!isEnabled)}
-                disabled={isToggling}
+                disabled={isLoading}
                 className="transition-all duration-200"
               >
-                {isToggling ? (
+                {isLoading ? (
                   <Loader2 className="h-4 w-4 animate-spin mr-2" />
                 ) : isEnabled ? (
                   <EyeOff className="h-4 w-4 mr-2" />
                 ) : (
                   <Eye className="h-4 w-4 mr-2" />
                 )}
-                {isToggling ? 'Procesando...' : isEnabled ? 'Desactivar' : 'Activar'}
+                {isLoading ? 'Procesando...' : isEnabled ? 'Desactivar' : 'Activar'}
               </Button>
 
               <div className="flex gap-3">
