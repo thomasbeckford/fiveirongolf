@@ -3,6 +3,7 @@ import { CollectionConfig } from 'payload';
 
 const Media: CollectionConfig = {
   slug: 'media',
+
   labels: {
     singular: 'Media',
     plural: 'Media'
@@ -18,8 +19,8 @@ const Media: CollectionConfig = {
     delete: ({ req: { user } }) => Boolean(user)
   },
   upload: {
-    staticDir: 'public/media',
     mimeTypes: ['image/*'],
+
     imageSizes: [
       {
         name: 'thumbnail',
