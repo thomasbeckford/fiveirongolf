@@ -5,20 +5,31 @@ import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { MultisportContent } from '@/lib/schemas/sections';
+import { Location } from '@/payload/generated-types';
 
-export function MultisportSection({ content }: { content: MultisportContent }) {
+export function MultisportSection({ location }: { location: Location }) {
+  const { MultisportSchema } = location;
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  if (!MultisportSchema?.slides?.length) {
+    return (
+      <section className="bg-background py-16">
+        <div className="container mx-auto px-4 text-center">
+          <p className="text-muted-foreground">No multisport content available</p>
+        </div>
+      </section>
+    );
+  }
+
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % (content.slides?.length || 0));
+    setCurrentSlide((prev) => (prev + 1) % (MultisportSchema?.slides?.length || 1));
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? (content.slides?.length || 0) - 1 : prev - 1));
+    setCurrentSlide((prev) => (prev === 0 ? (MultisportSchema?.slides?.length || 1) - 1 : prev - 1));
   };
 
-  const currentSlideData = content.slides?.[currentSlide] || {};
+  const currentSlideData = MultisportSchema?.slides?.[currentSlide] || {};
 
   return (
     <section className="bg-background">
@@ -26,7 +37,7 @@ export function MultisportSection({ content }: { content: MultisportContent }) {
       <div className="bg-card py-6">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl lg:text-3xl font-bold text-center uppercase tracking-wider">
-            <span className="text-red-500">{content.topBanner || ''}</span>
+            <span className="text-red-500">{MultisportSchema?.topBanner || ''}</span>
           </h2>
         </div>
       </div>
@@ -39,7 +50,7 @@ export function MultisportSection({ content }: { content: MultisportContent }) {
               {/* Left Side - Image Carousel */}
               <div className="relative">
                 <div className="aspect-video rounded-2xl overflow-hidden">
-                  {currentSlideData.image && (
+                  {currentSlideData?.image && (
                     <Image
                       src={currentSlideData.image}
                       alt={currentSlideData.title}
@@ -83,12 +94,12 @@ export function MultisportSection({ content }: { content: MultisportContent }) {
                         textShadow: '0 0 30px rgba(203, 25, 71, 0.5)'
                       }}
                     >
-                      {currentSlideData.title}
+                      {currentSlideData?.title}
                     </span>
                   </h3>
 
                   <h4 className="text-2xl lg:text-3xl font-bold uppercase text-foreground tracking-wide">
-                    {currentSlideData.subtitle}
+                    {currentSlideData?.subtitle}
                   </h4>
                 </div>
 
@@ -114,7 +125,7 @@ export function MultisportSection({ content }: { content: MultisportContent }) {
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-              {content.sports?.map((sport, index) => (
+              {MultisportSchema?.sports?.map((sport, index) => (
                 <button
                   key={sport.id}
                   onClick={() => setCurrentSlide(index)}

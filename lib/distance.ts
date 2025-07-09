@@ -1,4 +1,4 @@
-import { Location } from '@/lib/generated/prisma';
+import { Location } from '@/payload/generated-types';
 
 // lib/distance.ts
 type Coordinates = {
@@ -53,15 +53,26 @@ export function findNearestLocation(
   if (flatLocations.length === 0) return null;
 
   let nearestLocation = flatLocations[0];
+
+  const latitude = nearestLocation.GeneralSchema?.coordinates?.[0];
+  const longitude = nearestLocation.GeneralSchema?.coordinates?.[1];
+
+  if (!latitude || !longitude) return null;
+
   let minDistance = calculateDistance(userLocation, {
-    lat: parseFloat(nearestLocation.latitude),
-    lng: parseFloat(nearestLocation.longitude)
+    lat: parseFloat(latitude.toString()),
+    lng: parseFloat(longitude.toString())
   });
 
   for (const location of flatLocations) {
+    const latitude = location.GeneralSchema?.coordinates?.[0];
+    const longitude = location.GeneralSchema?.coordinates?.[1];
+
+    if (!latitude || !longitude) continue;
+
     const locationCoords = {
-      lat: parseFloat(location.latitude),
-      lng: parseFloat(location.longitude)
+      lat: parseFloat(latitude.toString()),
+      lng: parseFloat(longitude.toString())
     };
 
     const distance = calculateDistance(userLocation, locationCoords);

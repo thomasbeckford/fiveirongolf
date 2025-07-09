@@ -1,17 +1,17 @@
 // hooks/useLocations.ts
 import { useState, useEffect } from 'react';
-import { ILocation } from '@/types/location';
-import { fetchLocations } from '@/server/locations/fetchAll';
+import { getLocations } from '@/server/api';
+import { Location } from '@/payload/generated-types';
 
 export function useLocations() {
-  const [locations, setLocations] = useState<ILocation[]>([]);
+  const [locations, setLocations] = useState<Location[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const getLocations = async () => {
+  const getLocationsData = async () => {
     try {
       setLoading(true);
-      const data = await fetchLocations();
+      const data = await getLocations();
       setLocations(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unknown error');
@@ -21,7 +21,7 @@ export function useLocations() {
   };
 
   useEffect(() => {
-    getLocations();
+    getLocationsData();
   }, []);
 
   return {

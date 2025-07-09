@@ -4,14 +4,17 @@ import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { DuckpinContent } from '@/lib/schemas/sections';
+import { Location } from '@/payload/generated-types';
+import { getImageUrl } from '@/lib/getImageUrl';
 
-export function DuckpinSection({ content }: { content: DuckpinContent }) {
+export function DuckpinSection({ location }: { location: Location }) {
+  const { DuckpinSchema } = location;
+
   return (
     <section
       className="py-16 lg:py-24 relative bg-cover bg-center"
       style={{
-        backgroundImage: `url(${content.backgroundImage})`
+        backgroundImage: `url(${getImageUrl(DuckpinSchema?.backgroundImage)})` // Quitar .url
       }}
     >
       <div className="absolute inset-0 bg-blue-900/80"></div>
@@ -20,7 +23,7 @@ export function DuckpinSection({ content }: { content: DuckpinContent }) {
         <div className="max-w-7xl mx-auto">
           {/* Icons Row */}
           <div className="flex justify-center space-x-8 lg:space-x-16 mb-12">
-            {content.icons?.map((icon, index) => (
+            {DuckpinSchema?.icons?.map((icon, index) => (
               <div key={index} className="w-16 h-16 lg:w-20 lg:h-20">
                 <Image
                   src={icon.url}
@@ -41,32 +44,32 @@ export function DuckpinSection({ content }: { content: DuckpinContent }) {
             <div className="space-y-8 text-foreground">
               <div className="space-y-6">
                 <h2 className="text-3xl lg:text-4xl font-bold uppercase tracking-wide text-foreground">
-                  {content.preTitle}
+                  {DuckpinSchema?.preTitle}
                 </h2>
 
                 <h3 className="text-5xl lg:text-7xl font-black uppercase leading-tight">
-                  <span className="text-primary">{content.title}</span>
+                  <span className="text-primary">{DuckpinSchema?.title}</span>
                 </h3>
               </div>
 
               <div className="space-y-6">
-                <p className="text-lg leading-relaxed text-muted-foreground">{content.description}</p>
+                <p className="text-lg leading-relaxed text-muted-foreground">{DuckpinSchema?.description}</p>
 
-                <p className="text-lg leading-relaxed text-muted-foreground">{content.callToAction}</p>
+                <p className="text-lg leading-relaxed text-muted-foreground">{DuckpinSchema?.callToAction}</p>
               </div>
 
               <Button
                 asChild
                 className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-4 text-lg h-auto"
               >
-                <Link href={content.bookingUrl || ''}>{content.buttonText || ''}</Link>
+                <Link href={DuckpinSchema?.bookingUrl || ''}>{DuckpinSchema?.buttonText || ''}</Link>
               </Button>
             </div>
 
             {/* Right Side - FAQ Accordion */}
             <div className="w-full">
               <Accordion type="single" collapsible className="w-full space-y-4">
-                {content.faqs?.map((faq) => (
+                {DuckpinSchema?.faqs?.map((faq) => (
                   <AccordionItem
                     key={faq.id}
                     value={faq.id}

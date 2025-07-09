@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import { useGeolocation } from './useGeolocation';
 import { calculateDistance } from '@/lib/distance';
-import { Location } from '@/lib/generated/prisma';
 import { useLocations } from './useLocations';
+import { Location } from '@/payload/generated-types';
 
 // Formatear distancia para mostrar
 function formatDistance(distance: number): string {
@@ -23,7 +23,7 @@ export interface LocationWithDistance extends Location {
 export function useNearestLocations(limit: number = 5) {
   const { location: userLocation, loading: locationLoading, error: locationError } = useGeolocation();
   const { locations, loading: locationsLoading, error: locationsError } = useLocations();
-
+  console.log('locations', locations);
   // Esta funcion se recalcula unicamente cuando cambien los datos, sino no se vuelve a calcular
   const nearestLocations = useMemo(() => {
     // Si no tenemos ubicación del usuario o ubicaciones de golf, retornar vacío
@@ -50,15 +50,18 @@ export function useNearestLocations(limit: number = 5) {
     // Calcular distancia para cada ubicación usando tu función
     const locationsWithDistance: LocationWithDistance[] = flatLocations
       .map((location) => {
+        const latitude = location.GeneralSchema?.coordinates?.[1];
+        const longitude = location.GeneralSchema?.coordinates?.[0];
+
         // Validar que la ubicación tiene coordenadas válidas
-        if (!location.latitude || !location.longitude) {
+        if (!latitude || !longitude) {
           console.warn('Location missing coordinates:', location);
           return null;
         }
 
         const locationCoords = {
-          lat: parseFloat(location.latitude),
-          lng: parseFloat(location.longitude)
+          lat: parseFloat(latitude.toString()),
+          lng: parseFloat(longitude.toString())
         };
 
         // Validar que las coordenadas son números válidos

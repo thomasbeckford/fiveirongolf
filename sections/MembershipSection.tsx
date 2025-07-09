@@ -3,21 +3,23 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
-import { MembershipContent } from '@/lib/schemas/sections';
+import { Location } from '@/payload/generated-types';
 
-export function MembershipSection({ content }: { content: MembershipContent }) {
+export function MembershipSection({ location }: { location: Location }) {
+  const { GeneralSchema, MembershipSchema } = location;
+
   return (
     <>
       {/* Gift Card Banner */}
-      {content.giftCard && (
+      {MembershipSchema?.giftCard && (
         <section className="bg-primary py-4">
           <div className="container mx-auto px-4">
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
               <h2 className="text-primary-foreground font-bold text-lg sm:text-xl text-center sm:text-left tracking-wide">
-                {content?.giftCard?.title}
+                {MembershipSchema?.giftCard?.title}
               </h2>
               <Button asChild className="bg-background hover:bg-secondary text-foreground font-semibold">
-                <Link href={content?.giftCard?.url || ''}>{content?.giftCard?.buttonText}</Link>
+                <Link href={MembershipSchema?.giftCard?.url || ''}>{MembershipSchema?.giftCard?.buttonText}</Link>
               </Button>
             </div>
           </div>
@@ -28,7 +30,7 @@ export function MembershipSection({ content }: { content: MembershipContent }) {
       <section
         className="py-16 lg:py-24 relative bg-cover bg-center"
         style={{
-          backgroundImage: `url(${content.backgroundImage})`
+          backgroundImage: `url(${MembershipSchema?.backgroundImage})`
         }}
       >
         <div className="absolute inset-0 bg-background/80"></div>
@@ -39,27 +41,29 @@ export function MembershipSection({ content }: { content: MembershipContent }) {
             <div className="space-y-8 text-foreground">
               <div className="space-y-6">
                 <h2 className="text-4xl lg:text-6xl font-black uppercase leading-tight tracking-wide">
-                  <span className="text-primary">{content.title?.split(' ')[0]}</span>{' '}
-                  <span className="text-primary">{content.title?.split(' ')[1]}</span>{' '}
-                  <span className="text-foreground">{content.title?.split(' ').slice(2).join(' ')}</span>
+                  <span className="text-primary">{MembershipSchema?.title?.split(' ')[0]}</span>{' '}
+                  <span className="text-primary">{MembershipSchema?.title?.split(' ')[1]}</span>{' '}
+                  <span className="text-foreground">{MembershipSchema?.title?.split(' ').slice(2).join(' ')}</span>
                 </h2>
 
                 <h3 className="text-2xl lg:text-3xl font-bold uppercase text-foreground tracking-wide">
-                  {content.subtitle}
+                  {MembershipSchema?.subtitle}
                 </h3>
               </div>
 
-              <p className="text-lg leading-relaxed text-muted-foreground max-w-lg">{content.description}</p>
+              <p className="text-lg leading-relaxed text-muted-foreground max-w-lg">{MembershipSchema?.description}</p>
 
               {/* Pricing */}
               <div className="space-y-2">
-                <div className="text-3xl lg:text-4xl font-bold text-foreground">{content.pricing?.monthlyPrice}</div>
-                <div className="text-lg text-muted-foreground">{content.pricing?.terms}</div>
+                <div className="text-3xl lg:text-4xl font-bold text-foreground">
+                  {MembershipSchema?.pricing?.monthlyPrice}
+                </div>
+                <div className="text-lg text-muted-foreground">{MembershipSchema?.pricing?.terms}</div>
               </div>
 
               {/* Benefits */}
               <div className="space-y-6">
-                {content.benefits?.map((benefit, index) => {
+                {MembershipSchema?.benefits?.map((benefit, index) => {
                   const icons = [DollarSign, Percent, Building];
                   const IconComponent = icons[index % icons.length];
 
@@ -112,7 +116,9 @@ export function MembershipSection({ content }: { content: MembershipContent }) {
                   />
 
                   {/* Privacy Policy */}
-                  <div className="text-sm text-muted-foreground leading-relaxed">{content.form?.privacyText}</div>
+                  <div className="text-sm text-muted-foreground leading-relaxed">
+                    {MembershipSchema?.form?.privacyText}
+                  </div>
 
                   {/* reCAPTCHA placeholder */}
                   <div className="bg-muted border border-border rounded-md p-4 flex items-center justify-center h-20">
@@ -123,7 +129,7 @@ export function MembershipSection({ content }: { content: MembershipContent }) {
                     type="submit"
                     className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 px-8 text-lg h-auto"
                   >
-                    {content.form?.submitText || 'SUBMIT'}
+                    {MembershipSchema?.form?.submitText || 'SUBMIT'}
                   </Button>
                 </form>
               </CardContent>

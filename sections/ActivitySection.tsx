@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import { ActivityContent } from '@/lib/schemas/sections';
+import { Location } from '@/payload/generated-types';
 
-export function ActivitySection({ content }: { content: ActivityContent }) {
+export function ActivitySection({ location }: { location: Location }) {
+  const { ActivitySchema } = location;
   const serviceStyles = [
     {
       titleGradient: 'from-cyan-400 to-blue-500',
@@ -34,7 +35,7 @@ export function ActivitySection({ content }: { content: ActivityContent }) {
     <section className="py-16 bg-black text-white">
       <div className="container mx-auto px-4">
         <div className="space-y-16">
-          {content?.services?.map((service, index) => {
+          {ActivitySchema?.services?.map((service, index) => {
             const style = serviceStyles[index] || serviceStyles[0];
 
             return (
@@ -65,7 +66,7 @@ export function ActivitySection({ content }: { content: ActivityContent }) {
                         <div className="space-y-1">
                           {service.pricing.map((price, i) => (
                             <div key={i} className="text-sm text-gray-300">
-                              {price}
+                              {price.item}
                             </div>
                           ))}
                         </div>
@@ -92,7 +93,7 @@ export function ActivitySection({ content }: { content: ActivityContent }) {
 
                     <div className="flex flex-col sm:flex-row gap-4">
                       <Link
-                        href={service.primaryCta?.url}
+                        href={service.primaryCta?.url || ''}
                         className={`${style.buttonColor} px-8 py-4 rounded-lg font-bold text-lg inline-flex items-center justify-center gap-2 transition-colors`}
                       >
                         {service.primaryCta?.text} {style.buttonIcon}
@@ -100,7 +101,7 @@ export function ActivitySection({ content }: { content: ActivityContent }) {
 
                       {service.secondaryCta && (
                         <Link
-                          href={service.secondaryCta?.url}
+                          href={service.secondaryCta?.url || ''}
                           className="border-2 border-gray-600 hover:border-gray-400 text-white px-8 py-4 rounded-lg font-bold text-lg inline-flex items-center justify-center transition-colors"
                         >
                           {service.secondaryCta?.text}

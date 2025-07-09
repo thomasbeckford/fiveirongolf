@@ -1,0 +1,142 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import './theme.css';
+
+@custom-variant dark (&:is(.dark *));
+@plugin '@tailwindcss/typography';
+
+:root {
+  /* Core theme colors using oklch format for better color manipulation */
+  --background: oklch(0.067 0 0); /* #111111 black */
+  --foreground: oklch(1 0 0); /* #FFFFFF white */
+  --card: oklch(0.15 0 0); /* Slightly lighter than black */
+  --card-foreground: oklch(1 0 0); /* #FFFFFF white */
+  --popover: oklch(0.1 0 0); /* Very dark gray */
+  --popover-foreground: oklch(0.93 0 0); /* #ECECEC gray */
+  --primary: oklch(0.85 0.18 130); /* #BFF300 lime */
+  --primary-foreground: oklch(0.067 0 0); /* #111111 black */
+  --secondary: oklch(0.16 0 0); /* Dark gray */
+  --secondary-foreground: oklch(1 0 0); /* #FFFFFF white */
+  --muted: oklch(0.16 0 0); /* Dark gray */
+  --muted-foreground: oklch(0.65 0 0); /* Medium gray */
+  --accent: oklch(0.2 0 0); /* Darker gray */
+  --accent-foreground: oklch(1 0 0); /* #FFFFFF white */
+  --destructive: oklch(0.55 0.25 25); /* #CB1947 cardinal */
+  --destructive-foreground: oklch(1 0 0); /* #FFFFFF white */
+  --border: oklch(0.25 0 0); /* Border gray */
+  --input: oklch(0.15 0 0); /* Input background */
+  --ring: oklch(0.85 0.18 130); /* #BFF300 lime for focus rings */
+
+  /* Chart colors using Five Iron palette */
+  --chart-1: oklch(0.85 0.18 130); /* #BFF300 lime */
+  --chart-2: oklch(0.55 0.15 220); /* #048DCA sky */
+  --chart-3: oklch(0.85 0.3 180); /* #00F1F1 cyan */
+  --chart-4: oklch(0.75 0.15 70); /* #FFA500 orange */
+  --chart-5: oklch(0.55 0.25 25); /* #CB1947 cardinal */
+
+  /* Sidebar colors */
+  --sidebar: oklch(0.067 0 0); /* #111111 black */
+  --sidebar-foreground: oklch(1 0 0); /* #FFFFFF white */
+  --sidebar-primary: oklch(0.85 0.18 130); /* #BFF300 lime */
+  --sidebar-primary-foreground: oklch(0.067 0 0); /* #111111 black */
+  --sidebar-accent: oklch(0.2 0 0); /* Dark accent */
+  --sidebar-accent-foreground: oklch(1 0 0); /* #FFFFFF white */
+  --sidebar-border: oklch(0.25 0 0); /* Border gray */
+  --sidebar-ring: oklch(0.85 0.18 130); /* #BFF300 lime */
+
+  /* Five Iron Golf specific colors (exact from Figma) */
+  --fiveiron-white: #ffffff;
+  --fiveiron-black: #111111;
+  --fiveiron-gray: #ececec;
+  --fiveiron-sky: #048dca;
+  --fiveiron-blue: #06538c;
+  --fiveiron-cyan: #00f1f1;
+  --fiveiron-olive: #4d7400;
+  --fiveiron-green: #03481c;
+  --fiveiron-lime: #bff300;
+  --fiveiron-orange: #ffa500;
+  --fiveiron-tangerine: #ff4800;
+  --fiveiron-yellow: #fff730;
+  --fiveiron-violet: #c93392;
+  --fiveiron-cardinal: #cb1947;
+  --fiveiron-pink: #ff7da7;
+
+  /* Typography */
+  --font-sans: var(--font-rawson), 'Work Sans', Outfit, sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+
+  /* Border radius */
+  --radius: 0.5rem;
+
+  /* Shadows */
+  --shadow-2xs: 0px 1px 3px 0px hsl(0 0% 0% / 0.09);
+  --shadow-xs: 0px 1px 3px 0px hsl(0 0% 0% / 0.09);
+  --shadow-sm: 0px 1px 3px 0px hsl(0 0% 0% / 0.17), 0px 1px 2px -1px hsl(0 0% 0% / 0.17);
+  --shadow: 0px 1px 3px 0px hsl(0 0% 0% / 0.17), 0px 1px 2px -1px hsl(0 0% 0% / 0.17);
+  --shadow-md: 0px 1px 3px 0px hsl(0 0% 0% / 0.17), 0px 2px 4px -1px hsl(0 0% 0% / 0.17);
+  --shadow-lg: 0px 1px 3px 0px hsl(0 0% 0% / 0.17), 0px 4px 6px -1px hsl(0 0% 0% / 0.17);
+  --shadow-xl: 0px 1px 3px 0px hsl(0 0% 0% / 0.17), 0px 8px 10px -1px hsl(0 0% 0% / 0.17);
+  --shadow-2xl: 0px 1px 3px 0px hsl(0 0% 0% / 0.43);
+
+  /* Typography tracking */
+  --tracking-normal: 0.025em;
+  --spacing: 0.25rem;
+}
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+  }
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

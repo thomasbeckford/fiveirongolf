@@ -1,12 +1,16 @@
-import { HoursContent } from '@/lib/schemas/sections';
 import { MapPin, Clock } from 'lucide-react';
+import { Location } from '@/payload/generated-types';
+import { getImageUrl } from '@/lib/getImageUrl';
 
-export function HoursSection({ content, address = 'nasdfasd' }: { content: HoursContent; address?: string }) {
+export function HoursSection({ location }: { location: Location }) {
+  const { GeneralSchema, HoursSchema } = location;
+  const address = GeneralSchema?.address;
+
   return (
     <section
       className="py-16 relative bg-cover bg-center"
       style={{
-        backgroundImage: `url(${content.backgroundImage})`
+        backgroundImage: `url(${getImageUrl(HoursSchema?.backgroundImage)})`
       }}
     >
       {/* Overlay */}
@@ -43,7 +47,7 @@ export function HoursSection({ content, address = 'nasdfasd' }: { content: Hours
 
                 {/* Regular Hours */}
                 <div className="space-y-3">
-                  {content.regularHours.map((hour, index) => (
+                  {location.HoursSchema?.regularHours?.map((hour, index) => (
                     <div key={index} className="flex justify-between items-center">
                       <span className="font-medium uppercase text-sm tracking-wide">{hour.days}</span>
                       <span className="font-bold text-lg">{hour.hours}</span>
@@ -52,11 +56,11 @@ export function HoursSection({ content, address = 'nasdfasd' }: { content: Hours
                 </div>
 
                 {/* Special Hours */}
-                {content.specialHours && content.specialHours.length > 0 && (
+                {HoursSchema?.specialHours && HoursSchema?.specialHours.length > 0 && (
                   <div className="pt-6 border-t border-gray-600">
                     <div className="text-primary text-lg font-bold uppercase mb-4">MEMBERSHIP BENEFIT HOURS</div>
                     <div className="space-y-2">
-                      {content.specialHours.map((hour, index) => (
+                      {HoursSchema?.specialHours.map((hour, index) => (
                         <div key={index} className="flex justify-between items-center text-sm">
                           <span className="font-medium uppercase tracking-wide">{hour.description}</span>
                           <span className="font-bold">{hour.hours}</span>

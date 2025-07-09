@@ -1,6 +1,4 @@
 'use server';
-import { prisma } from '@/lib/prisma';
-import { ILocation } from '@/types/location';
 
 // const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 

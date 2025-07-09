@@ -1,12 +1,23 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Instagram, Twitter, Youtube, Mail, Phone } from 'lucide-react';
+import { Instagram, Twitter, Youtube, Mail, Phone, Facebook, Linkedin } from 'lucide-react';
 import Link from 'next/link';
-import { FooterContent } from '@/lib/schemas/sections';
+import { Location } from '@/payload/generated-types';
 import { SubscribeForm } from '@/components/subscribe-form';
 
-export function FooterSection({ content }: { content: FooterContent }) {
+export function FooterSection({ location }: { location: Location }) {
+  const { FooterSchema } = location;
+
+  // Mapa completo de iconos para redes sociales
+  const socialIcons = {
+    instagram: Instagram,
+    twitter: Twitter,
+    facebook: Facebook,
+    youtube: Youtube,
+    linkedin: Linkedin
+  } as const;
+
   return (
     <footer className="bg-background">
       {/* Newsletter Section */}
@@ -15,7 +26,7 @@ export function FooterSection({ content }: { content: FooterContent }) {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-8">
               <h2 className="text-2xl lg:text-3xl font-bold text-primary-foreground uppercase tracking-wide">
-                {content.newsletter?.title}
+                {FooterSchema?.newsletter?.title}
               </h2>
             </div>
 
@@ -40,16 +51,12 @@ export function FooterSection({ content }: { content: FooterContent }) {
                   </div>
                 </div>
 
-                <p className="text-muted-foreground leading-relaxed">{content.brand?.tagline}</p>
+                <p className="text-muted-foreground leading-relaxed">{FooterSchema?.brand?.tagline}</p>
 
                 <div className="flex space-x-4">
-                  {content.brand?.socialMedia.map((social) => {
-                    const IconComponent =
-                      {
-                        instagram: Instagram,
-                        twitter: Twitter,
-                        youtube: Youtube
-                      }[social.platform] || Instagram;
+                  {FooterSchema?.brand?.socialMedia?.map((social) => {
+                    // Usar el ícono correspondiente o Instagram como fallback
+                    const IconComponent = socialIcons[social.platform as keyof typeof socialIcons] || Instagram;
 
                     return (
                       <Link
@@ -70,7 +77,7 @@ export function FooterSection({ content }: { content: FooterContent }) {
               <div className="space-y-6">
                 <h4 className="text-lg font-bold text-foreground uppercase tracking-wide">Quick Links</h4>
                 <div className="space-y-3">
-                  {content.quickLinks?.map((link) => (
+                  {FooterSchema?.quickLinks?.map((link) => (
                     <Link
                       key={link.label}
                       href={link.url}
@@ -86,7 +93,7 @@ export function FooterSection({ content }: { content: FooterContent }) {
               <div className="space-y-6">
                 <h4 className="text-lg font-bold text-foreground uppercase tracking-wide">More</h4>
                 <div className="space-y-3">
-                  {content.moreLinks?.map((link) => (
+                  {FooterSchema?.moreLinks?.map((link) => (
                     <Link
                       key={link.label}
                       href={link.url}
@@ -102,27 +109,31 @@ export function FooterSection({ content }: { content: FooterContent }) {
               <div className="space-y-6">
                 <h4 className="text-lg font-bold text-foreground uppercase tracking-wide">HIT US UP</h4>
                 <div className="space-y-4">
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="w-full justify-start border-border text-foreground hover:bg-primary hover:text-primary-foreground"
-                  >
-                    <Link href={`mailto:${content.contact?.email}`}>
-                      <Mail className="w-4 h-4 mr-2" />
-                      EMAIL
-                    </Link>
-                  </Button>
+                  {FooterSchema?.contact?.email && (
+                    <Button
+                      asChild
+                      variant="outline"
+                      className="w-full justify-start border-border text-foreground hover:bg-primary hover:text-primary-foreground"
+                    >
+                      <Link href={`mailto:${FooterSchema.contact.email}`}>
+                        <Mail className="w-4 h-4 mr-2" />
+                        EMAIL
+                      </Link>
+                    </Button>
+                  )}
 
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="w-full justify-start border-border text-foreground hover:bg-primary hover:text-primary-foreground"
-                  >
-                    <Link href={`tel:${content.contact?.phone}`}>
-                      <Phone className="w-4 h-4 mr-2" />
-                      CALL
-                    </Link>
-                  </Button>
+                  {FooterSchema?.contact?.phone && (
+                    <Button
+                      asChild
+                      variant="outline"
+                      className="w-full justify-start border-border text-foreground hover:bg-primary hover:text-primary-foreground"
+                    >
+                      <Link href={`tel:${FooterSchema.contact.phone}`}>
+                        <Phone className="w-4 h-4 mr-2" />
+                        CALL
+                      </Link>
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>
@@ -134,7 +145,7 @@ export function FooterSection({ content }: { content: FooterContent }) {
       <section className="bg-muted py-6">
         <div className="container mx-auto px-4">
           <div className="text-center">
-            <p className="text-muted-foreground text-sm">{content.copyright}</p>
+            <p className="text-muted-foreground text-sm">{FooterSchema?.copyright}</p>
           </div>
         </div>
       </section>

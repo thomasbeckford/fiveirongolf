@@ -10,19 +10,9 @@ export function middleware(request: NextRequest) {
 
     const { pathname } = request.nextUrl;
 
-    // if /studio
-    if (pathname.startsWith('/studio')) {
-      return NextResponse.next();
-    }
-
     // if /admin
     if (pathname.startsWith('/admin')) {
       return NextResponse.next();
-    }
-
-    // Debug en desarrollo
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`🌍 Country detected: ${country}, Path: ${pathname}`);
     }
 
     // Si ya está en select-region, continuar
@@ -71,11 +61,6 @@ export function middleware(request: NextRequest) {
 
     const finalRedirectPath = useLocaleRoutes ? localeRedirectPath : simpleRedirectPath;
     const url = new URL(finalRedirectPath, request.url);
-
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`🔄 Redirecting to: ${finalRedirectPath}`);
-      console.log(`📍 User language: ${userLang}, Best locale: ${bestLocale}`);
-    }
 
     return NextResponse.redirect(url);
   } catch (error) {

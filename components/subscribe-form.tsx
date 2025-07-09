@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { LOCATIONS } from '@/data/locations';
+import { useLocations } from '@/hooks/useLocations';
 
 const formSchema = z.object({
   firstName: z.string().min(2, 'First name must be at least 2 characters'),
@@ -22,6 +22,7 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 export function SubscribeForm() {
+  const { locations } = useLocations();
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -91,7 +92,7 @@ export function SubscribeForm() {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          {LOCATIONS.map((location) => (
+                          {locations.map((location) => (
                             <SelectItem key={location.id} value={location.name}>
                               {location.name}
                             </SelectItem>

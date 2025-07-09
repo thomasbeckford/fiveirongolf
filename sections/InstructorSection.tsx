@@ -6,20 +6,23 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { InstructorContent } from '@/lib/schemas/sections';
+import { Location } from '@/payload/generated-types';
+import { InstructorSchema } from '@/payload/collections/schemas/InstructorSchema';
 
-export function InstructorSection({ content }: { content: InstructorContent }) {
+export function InstructorSection({ location }: { location: Location }) {
+  const { InstructorSchema } = location;
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const coachesCount = InstructorSchema?.coaches?.length || 0;
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % Math.ceil(content.coaches.length / 3));
+    setCurrentIndex((prev) => (prev + 1) % Math.ceil(coachesCount / 3));
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev === 0 ? Math.ceil(content.coaches.length / 3) - 1 : prev - 1));
+    setCurrentIndex((prev) => (prev === 0 ? Math.ceil(coachesCount / 3) - 1 : prev - 1));
   };
 
-  const visibleCoaches = content.coaches?.slice(currentIndex * 3, currentIndex * 3 + 3);
+  const visibleCoaches = InstructorSchema?.coaches?.slice(currentIndex * 3, currentIndex * 3 + 3);
 
   return (
     <section className="py-16 lg:py-24 bg-background">
@@ -110,7 +113,7 @@ export function InstructorSection({ content }: { content: InstructorContent }) {
               asChild
               className="bg-orange-500 hover:bg-orange-600 text-background font-bold px-8 py-4 text-lg h-auto"
             >
-              <Link href={content.bookLessonUrl || ''}>BOOK A LESSON</Link>
+              <Link href={InstructorSchema?.bookLessonUrl || ''}>BOOK A LESSON</Link>
             </Button>
 
             <Button
@@ -118,7 +121,7 @@ export function InstructorSection({ content }: { content: InstructorContent }) {
               variant="outline"
               className="border-2 border-foreground text-foreground hover:bg-foreground hover:text-background font-bold px-8 py-4 text-lg h-auto"
             >
-              <Link href={content.learnMoreUrl || ''}>LEARN MORE</Link>
+              <Link href={InstructorSchema?.learnMoreUrl || ''}>LEARN MORE</Link>
             </Button>
           </div>
         </div>
