@@ -4,11 +4,8 @@ import { Location } from '@/payload/generated-types';
 import { getPayload } from 'payload';
 import config from '@/payload.config';
 
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 export async function getLocations(): Promise<Location[]> {
   try {
-    await sleep(2000);
     const response = await fetch('http://localhost:3000/api/locations?depth=2');
 
     if (!response.ok) {
@@ -25,7 +22,6 @@ export async function getLocations(): Promise<Location[]> {
 
 export async function getLocationBySlug(slug: string): Promise<Location | null> {
   try {
-    await sleep(2000);
     const payload = await getPayload({ config });
 
     const result = await payload.find({
