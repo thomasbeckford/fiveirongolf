@@ -29,7 +29,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-22">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <Image src="/5i.svg" alt="FiveIron Golf" width={42} height={40} />
+            <Image src="/5i.svg" alt="FiveIron Golf" width={42} height={40} priority />
             <span className="text-white font-bold text-xl tracking-wider">FiveIron Golf</span>
           </Link>
 

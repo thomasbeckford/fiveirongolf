@@ -3,7 +3,7 @@ import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/ca
 import { Badge } from '@/components/ui/badge';
 import { MapPin, Phone } from 'lucide-react';
 import { HighImpactHero } from '@/components/heros/HighImpact';
-import { getLocations } from '@/server/api';
+import { getLocations } from '@/server/actions';
 
 export const metadata = {
   title: 'Five Iron Golf - Locations',
@@ -25,7 +25,7 @@ export default async function AllLocationsPage() {
         </>
       </HighImpactHero>
 
-      <div className="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="flex flex-wrap gap-6 mx-auto justify-center ">
         {allLocations.map((location) => {
           const isClosed = location.name.includes('CLOSED');
 
@@ -34,7 +34,7 @@ export default async function AllLocationsPage() {
               key={location.id}
               href={isClosed ? '#' : `/locations/${location.slug}`}
               aria-disabled={isClosed}
-              className={`h-full hover:shadow-lg transition-all cursor-pointer group `}
+              className={`h-full hover:shadow-lg transition-all cursor-pointer group min-w-[400px]`}
             >
               <Card
                 className={`h-full hover:shadow-lg  transition-all cursor-pointer group ${

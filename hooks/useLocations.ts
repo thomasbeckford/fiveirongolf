@@ -1,6 +1,6 @@
 // hooks/useLocations.ts
 import { useState, useEffect } from 'react';
-import { getLocations } from '@/server/api';
+import { getLocations } from '@/server/actions';
 import { Location } from '@/payload/generated-types';
 
 export function useLocations() {

@@ -1,31 +1,27 @@
-import { ActivitySection } from '@/sections/ActivitySection';
-import { GallerySection } from '@/sections/GallerySection';
-import { HoursSection } from '@/sections/HoursSection';
-import { MembershipSection } from '@/sections/MembershipSection';
-import { ReviewSection } from '@/sections/ReviewSection';
-import { HeroSection } from '@/sections/HeroSection';
-import { InstructorSection } from '@/sections/InstructorSection';
-import { MultisportSection } from '@/sections/MultisportSection';
-import { DuckpinSection } from '@/sections/DuckpinSection';
-import { FeaturesSection } from '@/sections/FeaturesSection';
-import { FooterSection } from '@/sections/FooterSection';
-
+import { ActivitySection } from '@/screens/locations/ActivitySection';
+import { GallerySection } from '@/screens/locations/GallerySection';
+import { HoursSection } from '@/screens/locations/HoursSection';
+import { MembershipSection } from '@/screens/locations/MembershipSection';
+import { ReviewSection } from '@/screens/locations/ReviewSection';
+import { HeroSection } from '@/screens/locations/HeroSection';
+import { InstructorSection } from '@/screens/locations/InstructorSection';
+import { MultisportSection } from '@/screens/locations/MultisportSection';
+import { DuckpinSection } from '@/screens/locations/DuckpinSection';
+import { FeaturesSection } from '@/screens/locations/FeaturesSection';
+import { FooterSection } from '@/screens/locations/FooterSection';
 import { notFound } from 'next/navigation';
-import { getLocationBySlug } from '@/server/api';
+import { getLocationBySlug } from '@/server/actions';
 
 export default async function LocationsPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const location = await getLocationBySlug(slug);
+  if (!location) return notFound();
 
-  if (!location) {
-    return notFound();
-  }
-
-  console.log(location);
+  console.log('Location', location);
 
   return (
-    <>
-      <HeroSection location={location} />
+    <div className="animate-in fade-in duration-300">
+      {location.HeroSchema && <HeroSection location={location} />}
       {location.ActivitySchema && <ActivitySection location={location} />}
       {location.GallerySchema && <GallerySection location={location} />}
       {location.HoursSchema && <HoursSection location={location} />}
@@ -36,6 +32,6 @@ export default async function LocationsPage({ params }: { params: Promise<{ slug
       {location.ReviewSchema && <ReviewSection location={location} />}
       {location.FeaturesSchema && <FeaturesSection location={location} />}
       {location.FooterSchema && <FooterSection location={location} />}
-    </>
+    </div>
   );
 }

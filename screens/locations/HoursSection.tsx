@@ -1,6 +1,7 @@
 import { MapPin, Clock } from 'lucide-react';
 import { Location } from '@/payload/generated-types';
 import { getImageUrl } from '@/lib/getImageUrl';
+import Link from 'next/link';
 
 export function HoursSection({ location }: { location: Location }) {
   const { GeneralSchema, HoursSchema } = location;
@@ -30,6 +31,7 @@ export function HoursSection({ location }: { location: Location }) {
                     <div className="text-2xl font-bold uppercase">{address}</div>
                   </div>
                 </div>
+                <Link href={HoursSchema?.simRentalPricing.url || ''}>{HoursSchema?.simRentalPricing.title}</Link>
               </div>
             </div>
           </div>

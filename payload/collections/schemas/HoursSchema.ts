@@ -18,6 +18,31 @@ export const HoursSchema: Tab = {
           }
         },
         {
+          name: 'simRentalPricing',
+          label: 'Sim Rental Pricing',
+          type: 'group',
+          fields: [
+            {
+              name: 'title',
+              label: 'Title',
+              type: 'text',
+              required: true,
+              admin: {
+                description: 'e.g., "SIM RENTAL PRICING"'
+              }
+            },
+            {
+              name: 'url',
+              label: 'URL',
+              type: 'text',
+              required: true,
+              admin: {
+                description: 'Link for the primary action'
+              }
+            }
+          ]
+        },
+        {
           name: 'regularHours',
           label: 'Regular Hours',
           type: 'array',

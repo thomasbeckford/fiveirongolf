@@ -8,6 +8,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Location } from '@/payload/generated-types';
 import { InstructorSchema } from '@/payload/collections/schemas/InstructorSchema';
+import { getImageUrl } from '@/lib/getImageUrl';
 
 export function InstructorSection({ location }: { location: Location }) {
   const { InstructorSchema } = location;
@@ -66,7 +67,7 @@ export function InstructorSection({ location }: { location: Location }) {
             </Button>
 
             {/* Coaches Grid */}
-            <div className="grid md:grid-cols-3 gap-8 px-16">
+            <div className="grid md:grid-cols-3 gap-8">
               {visibleCoaches?.map((coach) => (
                 <Card
                   key={coach.id}
@@ -78,12 +79,12 @@ export function InstructorSection({ location }: { location: Location }) {
                       {coach.image ? (
                         <div className="w-full h-full rounded-lg overflow-hidden">
                           <Image
-                            src={coach.image}
+                            src={getImageUrl(coach.image)}
                             alt={coach.name}
                             width={500}
                             height={500}
                             className="w-full h-full object-cover"
-                            unoptimized
+                            priority
                           />
                         </div>
                       ) : (
@@ -99,7 +100,21 @@ export function InstructorSection({ location }: { location: Location }) {
                       <h3 className="text-2xl font-bold uppercase tracking-wide text-foreground">{coach.name}</h3>
                       <p className="text-muted-foreground text-lg">{coach.title}</p>
 
-                      {coach.bio && <p className="text-sm text-muted-foreground leading-relaxed mt-4">{coach.bio}</p>}
+                      {coach.bio && (
+                        <p
+                          className="text-sm text-muted-foreground leading-relaxed mt-4 max-w-lg hover:max-h-[100px]"
+                          style={{
+                            maxHeight: '100px',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            display: '-webkit-box',
+                            WebkitLineClamp: 3,
+                            WebkitBoxOrient: 'vertical'
+                          }}
+                        >
+                          {coach.bio}
+                        </p>
+                      )}
                     </div>
                   </CardContent>
                 </Card>

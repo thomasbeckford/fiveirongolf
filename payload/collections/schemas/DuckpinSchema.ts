@@ -18,34 +18,6 @@ export const DuckpinSchema: Tab = {
           }
         },
         {
-          name: 'icons',
-          label: 'Decorative Icons',
-          type: 'array',
-          fields: [
-            {
-              name: 'url',
-              label: 'Icon URL',
-              type: 'text',
-              required: true,
-              admin: {
-                description: 'Path to the icon file'
-              }
-            },
-            {
-              name: 'alt',
-              label: 'Alt Text',
-              type: 'text',
-              required: true,
-              admin: {
-                description: 'Alternative text for the icon'
-              }
-            }
-          ],
-          admin: {
-            description: 'Decorative icons displayed in the section'
-          }
-        },
-        {
           name: 'preTitle',
           label: 'Pre-title Text',
           type: 'text',

@@ -260,6 +260,16 @@ export interface Location {
      * URL to background image for hours section
      */
     backgroundImage?: (string | null) | Media;
+    simRentalPricing: {
+      /**
+       * e.g., "SIM RENTAL PRICING"
+       */
+      title: string;
+      /**
+       * Link for the primary action
+       */
+      url: string;
+    };
     /**
      * Regular operating hours grouped by days
      */
@@ -448,39 +458,29 @@ export interface Location {
      */
     ctaUrl?: string | null;
   };
-  MultisportSchema?: {
+  MultisportSchema: {
     /**
      * Main banner text above the multisport section
      */
     topBanner?: string | null;
+    title?: string | null;
+    subtitle?: string | null;
+    description: string;
+    /**
+     * Call-to-action button text
+     */
+    ctaText?: string | null;
+    /**
+     * Call-to-action button link
+     */
+    ctaUrl?: string | null;
     /**
      * Add slides for the multisport carousel
      */
     slides?:
       | {
-          /**
-           * Unique identifier for the slide
-           */
-          id: string;
-          title: string;
-          subtitle?: string | null;
-          description: string;
-          /**
-           * Additional features or benefits text
-           */
-          features?: string | null;
-          /**
-           * URL to slide image
-           */
-          image?: string | null;
-          /**
-           * Call-to-action button text
-           */
-          ctaText?: string | null;
-          /**
-           * Call-to-action button link
-           */
-          ctaUrl?: string | null;
+          image?: (string | null) | Media;
+          id?: string | null;
         }[]
       | null;
     /**
@@ -504,22 +504,6 @@ export interface Location {
      * URL to background image for the duckpin section
      */
     backgroundImage?: (string | null) | Media;
-    /**
-     * Decorative icons displayed in the section
-     */
-    icons?:
-      | {
-          /**
-           * Path to the icon file
-           */
-          url: string;
-          /**
-           * Alternative text for the icon
-           */
-          alt: string;
-          id?: string | null;
-        }[]
-      | null;
     /**
      * Text that appears before the main title
      */
@@ -906,6 +890,12 @@ export interface LocationsSelect<T extends boolean = true> {
     | T
     | {
         backgroundImage?: T;
+        simRentalPricing?:
+          | T
+          | {
+              title?: T;
+              url?: T;
+            };
         regularHours?:
           | T
           | {
@@ -1000,17 +990,16 @@ export interface LocationsSelect<T extends boolean = true> {
     | T
     | {
         topBanner?: T;
+        title?: T;
+        subtitle?: T;
+        description?: T;
+        ctaText?: T;
+        ctaUrl?: T;
         slides?:
           | T
           | {
-              id?: T;
-              title?: T;
-              subtitle?: T;
-              description?: T;
-              features?: T;
               image?: T;
-              ctaText?: T;
-              ctaUrl?: T;
+              id?: T;
             };
         sports?:
           | T
@@ -1023,13 +1012,6 @@ export interface LocationsSelect<T extends boolean = true> {
     | T
     | {
         backgroundImage?: T;
-        icons?:
-          | T
-          | {
-              url?: T;
-              alt?: T;
-              id?: T;
-            };
         preTitle?: T;
         title?: T;
         description?: T;

@@ -5,7 +5,6 @@ interface HighImpactHeroProps {
   children?: React.ReactNode;
   backgroundType?: 'video' | 'image' | 'color';
   backgroundSrc?: string;
-  backgroundColor?: string;
   overlayOpacity?: number;
   textColor?: string;
   height?: string;
@@ -15,7 +14,6 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
   children,
   backgroundType = 'color',
   backgroundSrc,
-  backgroundColor = '#1a1a1a',
   overlayOpacity = 0.4,
   textColor = 'white',
   height = '40vh'
@@ -40,7 +38,7 @@ export const HighImpactHero: React.FC<HighImpactHeroProps> = ({
 
       case 'color':
       default:
-        return <div className="absolute inset-0 w-full h-full" style={{ backgroundColor }} />;
+        return <div className="absolute inset-0 w-full h-full bg-accent" />;
     }
   };
 

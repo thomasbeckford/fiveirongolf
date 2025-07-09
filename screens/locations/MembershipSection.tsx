@@ -4,9 +4,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { Location } from '@/payload/generated-types';
+import { getImageUrl } from '@/lib/getImageUrl';
 
 export function MembershipSection({ location }: { location: Location }) {
-  const { GeneralSchema, MembershipSchema } = location;
+  const { MembershipSchema } = location;
 
   return (
     <>
@@ -30,7 +31,7 @@ export function MembershipSection({ location }: { location: Location }) {
       <section
         className="py-16 lg:py-24 relative bg-cover bg-center"
         style={{
-          backgroundImage: `url(${MembershipSchema?.backgroundImage})`
+          backgroundImage: `url(${getImageUrl(MembershipSchema?.backgroundImage)})`
         }}
       >
         <div className="absolute inset-0 bg-background/80"></div>
@@ -83,7 +84,7 @@ export function MembershipSection({ location }: { location: Location }) {
             </div>
 
             {/* Right Side - Form */}
-            <Card className="bg-card/95 backdrop-blur-sm border-border">
+            <Card className="bg-card/15 backdrop-blur-sm border-border">
               <CardContent className="p-8 lg:p-10">
                 <form className="space-y-6">
                   <div className="grid sm:grid-cols-2 gap-4">
@@ -134,6 +135,10 @@ export function MembershipSection({ location }: { location: Location }) {
                 </form>
               </CardContent>
             </Card>
+            <div className="flex flex-col gap-2 md:flex-row">
+              <Button variant="default">Learn More</Button>
+              <Button variant="link">Events Calendar</Button>
+            </div>
           </div>
         </div>
       </section>

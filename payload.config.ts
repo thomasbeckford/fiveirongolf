@@ -1,4 +1,3 @@
-
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
 import { buildConfig } from 'payload';

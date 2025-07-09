@@ -6,20 +6,11 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Location } from '@/payload/generated-types';
+import { getImageUrl } from '@/lib/getImageUrl';
 
 export function MultisportSection({ location }: { location: Location }) {
   const { MultisportSchema } = location;
   const [currentSlide, setCurrentSlide] = useState(0);
-
-  if (!MultisportSchema?.slides?.length) {
-    return (
-      <section className="bg-background py-16">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-muted-foreground">No multisport content available</p>
-        </div>
-      </section>
-    );
-  }
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % (MultisportSchema?.slides?.length || 1));
@@ -29,15 +20,13 @@ export function MultisportSection({ location }: { location: Location }) {
     setCurrentSlide((prev) => (prev === 0 ? (MultisportSchema?.slides?.length || 1) - 1 : prev - 1));
   };
 
-  const currentSlideData = MultisportSchema?.slides?.[currentSlide] || {};
-
   return (
     <section className="bg-background">
       {/* Top Banner */}
       <div className="bg-card py-6">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto py-4 bg-white uppercase">
           <h2 className="text-2xl lg:text-3xl font-bold text-center uppercase tracking-wider">
-            <span className="text-red-500">{MultisportSchema?.topBanner || ''}</span>
+            <span className="text-red-500 ">{MultisportSchema?.topBanner || ''}</span>
           </h2>
         </div>
       </div>
@@ -50,14 +39,14 @@ export function MultisportSection({ location }: { location: Location }) {
               {/* Left Side - Image Carousel */}
               <div className="relative">
                 <div className="aspect-video rounded-2xl overflow-hidden">
-                  {currentSlideData?.image && (
+                  {MultisportSchema?.slides?.[currentSlide]?.image && (
                     <Image
-                      src={currentSlideData.image}
-                      alt={currentSlideData.title}
+                      src={getImageUrl(MultisportSchema?.slides?.[currentSlide]?.image || '')}
+                      alt={'multisport'}
                       className="w-full h-full object-cover"
                       width={1000}
                       height={1000}
-                      unoptimized
+                      priority
                     />
                   )}
                 </div>
@@ -85,34 +74,19 @@ export function MultisportSection({ location }: { location: Location }) {
               {/* Right Side - Content */}
               <div className="space-y-8 text-foreground">
                 <div className="space-y-6">
-                  <h3 className="text-5xl lg:text-7xl font-black uppercase leading-tight">
-                    <span
-                      className="text-transparent bg-clip-text"
-                      style={{
-                        background: 'linear-gradient(45deg, var(--fiveiron-cardinal), var(--fiveiron-pink))',
-                        WebkitBackgroundClip: 'text',
-                        textShadow: '0 0 30px rgba(203, 25, 71, 0.5)'
-                      }}
-                    >
-                      {currentSlideData?.title}
-                    </span>
-                  </h3>
+                  <h3 className="text-5xl lg:text-7xl font-black uppercase leading-tight">{MultisportSchema?.title}</h3>
 
                   <h4 className="text-2xl lg:text-3xl font-bold uppercase text-foreground tracking-wide">
-                    {currentSlideData?.subtitle}
+                    {MultisportSchema?.subtitle}
                   </h4>
                 </div>
 
                 <div className="space-y-6">
-                  <p className="text-lg leading-relaxed text-muted-foreground">{currentSlideData.description}</p>
-
-                  {currentSlideData.features && (
-                    <p className="text-base leading-relaxed text-muted-foreground">{currentSlideData.features}</p>
-                  )}
+                  <p className="text-lg leading-relaxed text-muted-foreground">{MultisportSchema?.description}</p>
                 </div>
 
                 <Button asChild className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg h-auto">
-                  <Link href={currentSlideData.ctaUrl || ''}>{currentSlideData.ctaText || ''}</Link>
+                  <Link href={MultisportSchema?.ctaUrl || ''}>{MultisportSchema?.ctaText || ''}</Link>
                 </Button>
               </div>
             </div>

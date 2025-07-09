@@ -1,6 +1,7 @@
 {
   "name": "fiveirongolf",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -35,12 +36,12 @@
     "lodash": "^4.17.21",
     "lucide-react": "^0.525.0",
     "motion": "^12.22.0",
-    "next": "15.3.4",
+    "next": "15.3.5",
     "next-themes": "^0.4.6",
     "payload": "^3.46.0",
     "radix-ui": "^1.4.2",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "react-hook-form": "^7.59.0",
     "sharp": "^0.34.2",
     "sonner": "^2.0.5",

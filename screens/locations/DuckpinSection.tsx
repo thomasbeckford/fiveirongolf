@@ -10,6 +10,29 @@ import { getImageUrl } from '@/lib/getImageUrl';
 export function DuckpinSection({ location }: { location: Location }) {
   const { DuckpinSchema } = location;
 
+  const duckpinIcons = [
+    {
+      url: 'https://fiveirongolf.com/wp-content/uploads/2024/08/ic-duckpin-1.svg',
+      alt: 'Duckpin'
+    },
+    {
+      url: 'https://fiveirongolf.com/wp-content/uploads/2024/08/ic-duckpin-2.svg',
+      alt: 'Duckpin'
+    },
+    {
+      url: 'https://fiveirongolf.com/wp-content/uploads/2024/08/ic-duckpin-3.svg',
+      alt: 'Duckpin'
+    },
+    {
+      url: 'https://fiveirongolf.com/wp-content/uploads/2024/08/ic-duckpin-4.svg',
+      alt: 'Duckpin'
+    },
+    {
+      url: 'https://fiveirongolf.com/wp-content/uploads/2024/08/ic-duckpin-5.svg',
+      alt: 'Duckpin'
+    }
+  ];
+
   return (
     <section
       className="py-16 lg:py-24 relative bg-cover bg-center"
@@ -17,13 +40,13 @@ export function DuckpinSection({ location }: { location: Location }) {
         backgroundImage: `url(${getImageUrl(DuckpinSchema?.backgroundImage)})` // Quitar .url
       }}
     >
-      <div className="absolute inset-0 bg-blue-900/80"></div>
+      <div className="absolute inset-0 bg-blue-950/90"></div>
 
       <div className="relative z-10 container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
           {/* Icons Row */}
           <div className="flex justify-center space-x-8 lg:space-x-16 mb-12">
-            {DuckpinSchema?.icons?.map((icon, index) => (
+            {duckpinIcons.map((icon, index) => (
               <div key={index} className="w-16 h-16 lg:w-20 lg:h-20">
                 <Image
                   src={icon.url}
@@ -31,6 +54,7 @@ export function DuckpinSection({ location }: { location: Location }) {
                   width={20}
                   height={20}
                   className="w-full h-full object-contain"
+                  priority
                   style={{
                     filter: 'brightness(0) invert(1) sepia(1) saturate(10000%) hue-rotate(60deg)'
                   }}
@@ -48,13 +72,12 @@ export function DuckpinSection({ location }: { location: Location }) {
                 </h2>
 
                 <h3 className="text-5xl lg:text-7xl font-black uppercase leading-tight">
-                  <span className="text-primary">{DuckpinSchema?.title}</span>
+                  <span className="text-white">{DuckpinSchema?.title}</span>
                 </h3>
               </div>
 
               <div className="space-y-6">
                 <p className="text-lg leading-relaxed text-muted-foreground">{DuckpinSchema?.description}</p>
-
                 <p className="text-lg leading-relaxed text-muted-foreground">{DuckpinSchema?.callToAction}</p>
               </div>
 
@@ -72,14 +95,14 @@ export function DuckpinSection({ location }: { location: Location }) {
                 {DuckpinSchema?.faqs?.map((faq) => (
                   <AccordionItem
                     key={faq.id}
-                    value={faq.id}
-                    className="bg-card/90 backdrop-blur-sm border-2 border-primary/50 rounded-lg px-6 data-[state=open]:border-primary"
+                    value={faq.id.toString()}
+                    className="bg-card/15 backdrop-blur-sm border-2 border-primary/50 rounded-lg px-6 data-[state=open]:border-primary"
                   >
                     <AccordionTrigger className="text-foreground font-bold uppercase tracking-wide text-sm lg:text-base hover:no-underline py-6 [&[data-state=open]>svg]:rotate-180">
                       {faq.question}
                     </AccordionTrigger>
-                    <AccordionContent className="pb-6">
-                      <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                    <AccordionContent>
+                      <p className="text-muted-foreground text-md leading-relaxed">{faq.answer}</p>
                     </AccordionContent>
                   </AccordionItem>
                 ))}

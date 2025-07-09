@@ -100,18 +100,63 @@ function validateLocationData(data: any): boolean {
   return true;
 }
 
+// Create a unique identifier for each location
+function createLocationKey(data: any): string {
+  // Use name + email as unique identifier
+  const name = data.name?.toLowerCase().trim();
+  const email = data.GeneralSchema?.email?.toLowerCase().trim();
+  return `${name}|${email}`;
+}
+
+// Get existing locations and create a Set of processed keys
+async function getExistingLocations(payload: any): Promise<Set<string>> {
+  const existingLocations = await payload.find({
+    collection: 'locations',
+    select: {
+      name: true,
+      'GeneralSchema.email': true
+    },
+    limit: 1000 // Adjust if you have more locations
+  });
+
+  const processedKeys = new Set<string>();
+
+  existingLocations.docs.forEach((doc: any) => {
+    const key = createLocationKey(doc);
+    processedKeys.add(key);
+  });
+
+  return processedKeys;
+}
+
 const seed = async () => {
   const payload = await getPayload({ config });
 
-  console.log('🌱 Starting seed process with intelligent defaults...');
+  console.log('🌱 Starting incremental seed process...');
+
+  // Get existing locations to avoid duplicates
+  console.log('🔍 Checking existing locations...');
+  const existingKeys = await getExistingLocations(payload);
+  console.log(`📊 Found ${existingKeys.size} existing locations`);
 
   let created = 0;
+  let skipped = 0;
   let failed = 0;
 
   for (const specificData of LOCATIONS_SPECIFIC_DATA) {
     try {
       console.log(`\n📍 Processing: ${specificData.name}`);
       console.log(`   📧 Email: ${specificData.GeneralSchema?.email || 'N/A'}`);
+
+      // Create unique key for this location
+      const locationKey = createLocationKey(specificData);
+
+      // Check if this location already exists
+      if (existingKeys.has(locationKey)) {
+        console.log(`⏭️  Skipping existing location: ${specificData.name}`);
+        skipped++;
+        continue;
+      }
 
       // Smart merge with defaults
       let mergedData = smartMerge(LOCATIONS_DEFAULT, specificData);
@@ -124,7 +169,7 @@ const seed = async () => {
       }
 
       // Show debug info before sanitization
-      console.log('🔍 Full merged data structure:');
+      console.log('🔍 Processing new location...');
 
       // Sanitize data to remove problematic fields
       mergedData = sanitizeForPayload(mergedData);
@@ -147,6 +192,9 @@ const seed = async () => {
       });
 
       console.log(`✅ Created: ${specificData.name} (ID: ${result.id})`);
+
+      // Add to existing keys to avoid duplicates in same run
+      existingKeys.add(locationKey);
       created++;
     } catch (error) {
       console.log(`❌ Failed to create ${specificData.name}:`);
@@ -156,9 +204,11 @@ const seed = async () => {
     }
   }
 
-  console.log(`\n🎉 Seed completed!`);
+  console.log(`\n🎉 Incremental seed completed!`);
   console.log(`   ✅ Created: ${created} locations`);
+  console.log(`   ⏭️  Skipped: ${skipped} locations (already exist)`);
   console.log(`   ❌ Failed: ${failed} locations`);
+  console.log(`   📊 Total processed: ${created + skipped + failed} locations`);
 
   process.exit(0);
 };

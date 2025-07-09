@@ -18,7 +18,7 @@ const Media: CollectionConfig = {
     delete: ({ req: { user } }) => Boolean(user)
   },
   upload: {
-    staticDir: 'media',
+    staticDir: 'public/media',
     mimeTypes: ['image/*'],
     imageSizes: [
       {

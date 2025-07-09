@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Location } from '@/payload/generated-types';
 import { getImageUrl } from '@/lib/getImageUrl';
+import LocationBadge from '@/components/location-badge';
 
 export async function HeroSection({ location }: { location: Location }) {
   if (!location) return null;
@@ -11,12 +12,17 @@ export async function HeroSection({ location }: { location: Location }) {
 
   return (
     <section
-      className="hero-section relative min-h-[60vh] sm:min-h-[25vh] lg:min-h-[45vh] bg-cover bg-center flex items-center"
+      id="hero-section"
+      className="relative min-h-[60vh] sm:min-h-[25vh] lg:min-h-[45vh] bg-cover bg-center flex items-center"
       style={{
         backgroundImage: `url(${getImageUrl(HeroSchema.backgroundImage)})`
       }}
     >
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/50"></div>
+
+      <div className="absolute top-4 right-4">
+        <LocationBadge status={location.status} />
+      </div>
 
       <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
