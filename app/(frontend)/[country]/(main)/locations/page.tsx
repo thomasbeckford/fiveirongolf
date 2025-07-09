@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { MapPin, Phone } from 'lucide-react';
 import { HighImpactHero } from '@/components/heros/HighImpact';
 import { getLocations } from '@/server/actions';
+import LocationBadge from '@/components/location-badge';
 
 export const metadata = {
   title: 'Five Iron Golf - Locations',
@@ -42,19 +43,17 @@ export default async function AllLocationsPage() {
                 }`}
               >
                 <CardHeader>
-                  <div className="space-y-3">
-                    {isClosed && (
-                      <Badge variant="destructive" className="w-fit">
-                        Closed
-                      </Badge>
-                    )}
-
+                  <div className="space-y-3 ">
                     <CardTitle
                       className={
                         isClosed ? 'text-muted-foreground' : 'text-lg group-hover:text-primary transition-colors'
                       }
                     >
-                      {location.name}
+                      <div className="flex justify-between gap-2 w-full">
+                        {location.name}
+
+                        <LocationBadge status={location.status} />
+                      </div>
                     </CardTitle>
 
                     <CardDescription className="flex items-center gap-1">
