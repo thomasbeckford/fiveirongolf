@@ -23,7 +23,7 @@ export interface LocationWithDistance extends Location {
 export function useNearestLocations(limit: number = 5) {
   const { location: userLocation, loading: locationLoading, error: locationError } = useGeolocation();
   const { locations, loading: locationsLoading, error: locationsError } = useLocations();
-  console.log('locations', locations);
+
   // Esta funcion se recalcula unicamente cuando cambien los datos, sino no se vuelve a calcular
   const nearestLocations = useMemo(() => {
     // Si no tenemos ubicación del usuario o ubicaciones de golf, retornar vacío

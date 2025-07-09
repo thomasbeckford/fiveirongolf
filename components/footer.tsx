@@ -105,7 +105,7 @@ const Footer = () => {
       </div>
 
       {/* Copyright */}
-      <div className="w-full bg-white text-black text-center py-3">
+      <div className="w-full bg-primary text-primary-foreground text-lg text-center py-3">
         <p className="text-sm">Five Iron Golf 2025 ® All Rights Reserved</p>
       </div>
     </footer>

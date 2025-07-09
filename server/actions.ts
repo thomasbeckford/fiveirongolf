@@ -6,14 +6,18 @@ import config from '@/payload.config';
 
 export async function getLocations(): Promise<Location[]> {
   try {
-    const response = await fetch('http://localhost:3000/api/locations?depth=2');
+    const payload = await getPayload({ config });
 
-    if (!response.ok) {
+    const result = await payload.find({
+      collection: 'locations',
+      depth: 2
+    });
+
+    if (!result) {
       throw new Error('Failed to fetch locations');
     }
 
-    const data = await response.json();
-    return data.docs; // ✅ Correcto - devuelve el array completo
+    return result.docs;
   } catch (error) {
     console.error('Error fetching locations:', error);
     return [];
