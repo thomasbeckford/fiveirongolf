@@ -2,9 +2,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Star } from 'lucide-react';
 import Link from 'next/link';
-import { ReviewContent } from '@/lib/schemas/sections';
+import { ReviewSchema } from '@/payload/collections/schemas/ReviewSchema';
+import { Location } from '@/payload/generated-types';
 
-export function ReviewsSection({ data }: { data: ReviewContent }) {
+export function ReviewsSection({ location }: { location: Location }) {
+  const { ReviewSchema } = location;
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, index) => (
       <Star
@@ -20,12 +22,14 @@ export function ReviewsSection({ data }: { data: ReviewContent }) {
         <div className="max-w-7xl mx-auto">
           {/* Title */}
           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-5xl font-bold uppercase tracking-wider text-foreground">{data.title}</h2>
+            <h2 className="text-3xl lg:text-5xl font-bold uppercase tracking-wider text-foreground">
+              {ReviewSchema?.title}
+            </h2>
           </div>
 
           {/* Reviews Grid */}
           <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {data.reviews.map((review, index) => (
+            {ReviewSchema?.reviews?.map((review, index) => (
               <Card
                 key={index}
                 className="bg-card border-l-4 border-l-muted hover:border-l-primary transition-colors duration-300 h-full"
@@ -36,12 +40,12 @@ export function ReviewsSection({ data }: { data: ReviewContent }) {
 
                   {/* Review Text */}
                   <div className="flex-grow mb-6">
-                    <p className="text-muted-foreground leading-relaxed text-base">{review.text}</p>
+                    <p className="text-muted-foreground leading-relaxed text-base">{review.text || ''}</p>
                   </div>
 
                   {/* Author */}
                   <div className="text-right">
-                    <p className="text-foreground font-semibold text-lg">{review.author}</p>
+                    <p className="text-foreground font-semibold text-lg">{review.author || ''}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -54,7 +58,7 @@ export function ReviewsSection({ data }: { data: ReviewContent }) {
               asChild
               className="bg-foreground hover:bg-muted text-background font-bold px-12 py-4 text-lg h-auto rounded-lg"
             >
-              <Link href={data.ctaUrl}>{data.ctaText}</Link>
+              <Link href={ReviewSchema?.ctaUrl || ''}>{ReviewSchema?.ctaText || ''}</Link>
             </Button>
           </div>
         </div>
