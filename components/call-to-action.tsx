@@ -1,4 +1,5 @@
 'use client';
+
 import React from 'react';
 
 import { LocationSelect } from './location-select';
@@ -11,11 +12,7 @@ interface CallToActionProps {
   secondaryAction?: () => void;
 }
 
-export const CallToAction: React.FC<CallToActionProps> = ({
-  title = 'Book Your Visit',
-
-  secondaryAction
-}) => {
+export const CallToAction: React.FC<CallToActionProps> = ({ title = 'Book Your Visit', secondaryAction }) => {
   return (
     <div className="px-4 flex flex-col gap-4 max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row md:items-center gap-4 items-start w-full">

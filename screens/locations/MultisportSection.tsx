@@ -20,6 +20,8 @@ export function MultisportSection({ location }: { location: Location }) {
     setCurrentSlide((prev) => (prev === 0 ? (MultisportSchema?.slides?.length || 1) - 1 : prev - 1));
   };
 
+  const slideImage = getImageUrl(MultisportSchema?.slides?.[currentSlide]?.image) || null;
+
   return (
     <section className="bg-background">
       {/* Top Banner */}
@@ -39,10 +41,10 @@ export function MultisportSection({ location }: { location: Location }) {
               {/* Left Side - Image Carousel */}
               <div className="relative">
                 <div className="aspect-video rounded-2xl overflow-hidden">
-                  {MultisportSchema?.slides?.[currentSlide]?.image && (
+                  {slideImage && (
                     <Image
-                      src={getImageUrl(MultisportSchema?.slides?.[currentSlide]?.image || '')}
-                      alt={'multisport'}
+                      src={slideImage}
+                      alt="multisport"
                       className="w-full h-full object-cover"
                       width={1000}
                       height={1000}
