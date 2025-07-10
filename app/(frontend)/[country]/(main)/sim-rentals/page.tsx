@@ -3,6 +3,8 @@ import { MediumImpactHero } from '@/components/heros/MediumImpact';
 import { Heading } from '@/components/ui/heading';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { Select, SelectItem, SelectTrigger, SelectContent, SelectValue } from '@/components/ui/select';
+import { LocationSelect } from '@/components/location-select';
 
 export default function Leagues() {
   return (
@@ -19,7 +21,7 @@ export default function Leagues() {
 
       <div className="max-w-screen-2xl mx-auto flex flex-col items-center gap-4">
         <div className="w-full mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-1 lg:gap-2">
             {/* Play a round */}
             <div className="group">
               <div className="relative overflow-hidden rounded-lg mb-4">
@@ -118,13 +120,37 @@ export default function Leagues() {
           <span className="text-fiveiron-yellow">Play or Practice</span>
         </Heading>
 
-        <p className="text-center text-white max-w-xl mx-auto">
-          Two players compete weekly, but load your bench with as many subs as you think you need to win! The team’s 4
-          best scores count so don’t sweat it in you miss a week. Free agents are welcome, we’ll pair you up!
-        </p>
-      </div>
+        <div className="max-w-screen-2xl mx-auto flex flex-col gap-12">
+          <div className="flex lg:flex-row flex-col gap-4">
+            <Image
+              src="https://fiveirongolf.com/wp-content/uploads/2025/04/sim-remtal-bg.jpg"
+              alt="Sim Rentals"
+              width={212}
+              height={212}
+              className="w-full h-auto"
+              style={{
+                maskImage: `
+                linear-gradient(to left, black 90%, transparent),
+                linear-gradient(to bottom, black 90%, transparent),
+                linear-gradient(to top, black 90%, transparent),
+                linear-gradient(to right, black 90%, transparent)
+              `,
+                maskComposite: 'intersect'
+              }}
+            />
 
-      <div></div>
+            <div className="flex flex-col gap-4">
+              <p className="text-center text-white max-w-xl mx-auto">How it works</p>
+              <p className="text-center text-white max-w-xl mx-auto">
+                Book a bay by the hour; prices vary by day, time, and location so check your desired location’s schedule
+                for particular pricing!
+              </p>
+
+              <LocationSelect experience="simulator" />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

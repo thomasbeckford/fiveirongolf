@@ -10,7 +10,7 @@ import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { Button } from './ui/button';
 import Link from 'next/link';
 
-export function LocationSelect(): JSX.Element {
+export function LocationSelect({ experience }: { experience?: string }): JSX.Element {
   const router = useRouter();
   const { locations } = useLocations();
   const { nearestLocations, isLoading } = useNearestLocations(1);
@@ -26,6 +26,10 @@ export function LocationSelect(): JSX.Element {
     // Si no había location guardada, redirigir con transición
     if (!currentLocation) {
       startTransition(() => {
+        if (experience)
+          return router.push(
+            `https://booking.fiveirongolf.com/select-experience?location=${slug}&experience=${experience}`
+          );
         router.push(`/locations/${slug}`);
       });
     }
