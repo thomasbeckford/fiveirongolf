@@ -18,9 +18,9 @@ export default function Navbar() {
 
   const links = [
     { name: 'Leagues', href: '/leagues' },
-    { name: 'Book Now', href: '/book-now' },
     { name: 'Sim Rentals', href: '/sim-rentals' },
-    { name: 'Instructors', href: '/instructors' }
+    { name: 'Instructors', href: '/instructors' },
+    { name: 'Book Now', href: '/book-now' }
   ];
 
   return (

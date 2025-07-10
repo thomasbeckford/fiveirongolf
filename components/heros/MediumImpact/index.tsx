@@ -3,76 +3,50 @@ import React from 'react';
 
 interface MediumImpactHeroProps {
   children?: React.ReactNode;
-  backgroundType?: 'image' | 'color';
   backgroundSrc?: string;
   backgroundColor?: string;
-  overlayOpacity?: number;
-  textColor?: string;
+  height?: string;
+  bottomBar?: boolean;
   bottomBarColor?: string;
   bottomBarText?: string;
-  bottomBarTextColor?: string;
-  height?: string;
+  className?: string;
 }
 
 export const MediumImpactHero: React.FC<MediumImpactHeroProps> = ({
   children,
-  backgroundType = 'color',
   backgroundSrc,
   backgroundColor = '#1a1a1a',
-  overlayOpacity = 0.4,
-  textColor = 'white',
+  height = '30vh',
+  bottomBar = true,
   bottomBarColor = '#84cc16',
-  bottomBarText = 'INFORMACIÓN ADICIONAL • SERVICIOS • CARACTERÍSTICAS',
-  bottomBarTextColor = 'black',
-  height = '30vh'
+  bottomBarText = 'ADDITIONAL INFORMATION • SERVICES • FEATURES',
+  className = ''
 }) => {
-  const renderBackground = () => {
-    switch (backgroundType) {
-      case 'image':
-        return backgroundSrc ? (
-          <div
-            className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${backgroundSrc})` }}
-          />
-        ) : null;
-
-      case 'color':
-      default:
-        return <div className="absolute inset-0 w-full h-full" style={{ backgroundColor }} />;
-    }
-  };
+  const backgroundStyle = backgroundSrc
+    ? { backgroundImage: `url(${backgroundSrc})`, backgroundSize: 'cover', backgroundPosition: 'center' }
+    : { backgroundColor };
 
   return (
-    <div className="relative w-full overflow-hidden" style={{ height }}>
+    <div className={`relative w-full overflow-hidden ${className}`} style={{ height }}>
       {/* Background */}
-      {renderBackground()}
+      <div className="absolute inset-0" style={backgroundStyle} />
 
-      {/* Overlay for better text readability */}
-      {backgroundType === 'image' && (
-        <div className="absolute inset-0 bg-black z-10" style={{ opacity: overlayOpacity }} />
-      )}
+      {/* Overlay solo si hay imagen */}
+      {backgroundSrc && <div className="absolute inset-0 bg-black/40" />}
 
-      {/* Main Content */}
-      <div className="relative z-20 h-full flex flex-col">
-        {/* Text Content Area */}
-        <div className="flex-1 flex items-center justify-start">
-          <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-            <div className="max-w-4xl">
-              <div className="space-y-4" style={{ color: textColor }}>
-                {children}
-              </div>
-            </div>
-          </div>
-        </div>
+      {/* Content */}
+      <div className="relative z-10 h-full flex flex-col">
+        {/* Main Content - Sin restricciones de ancho */}
+        <div className="flex-1 flex items-center text-white">{children}</div>
 
         {/* Bottom Bar */}
-        <div className="w-full py-4" style={{ backgroundColor: bottomBarColor }}>
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-            <p className="text-sm sm:text-base font-bold tracking-wide uppercase" style={{ color: bottomBarTextColor }}>
-              {bottomBarText}
-            </p>
+        {bottomBar && (
+          <div className="w-full py-4" style={{ backgroundColor: bottomBarColor }}>
+            <div className="px-6 sm:px-8 lg:px-12">
+              <p className="text-sm sm:text-base font-bold tracking-wide uppercase text-black">{bottomBarText}</p>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
