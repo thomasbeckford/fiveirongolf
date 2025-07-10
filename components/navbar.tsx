@@ -14,8 +14,6 @@ export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  const activeSection = pathname.split('/')[1];
-
   const links = [
     { name: 'Leagues', href: '/leagues' },
     { name: 'Sim Rentals', href: '/sim-rentals' },
@@ -37,11 +35,13 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center space-x-4">
             <NearestLocations variant="compact" showLabel={false} />
             {links.map((link) => (
-              <Link key={link.name} href={link.href}>
+              <Link key={link.name} href={link.href} onClick={() => setOpen(false)}>
                 <Button
-                  variant="link"
-                  className={`text-xl uppercase font-bold hover:text-lime-200 transition-colors !no-underline ${
-                    activeSection === link.href.split('/')[1] ? 'text-fiveiron-lime' : 'text-white'
+                  variant="ghost"
+                  className={`w-full justify-start text-lg uppercase font-bold transition-colors px-4 py-6 ${
+                    pathname.includes(link.href)
+                      ? 'text-fiveiron-lime bg-fiveiron-lime/10 border-l-4 border-fiveiron-lime'
+                      : 'text-white hover:text-fiveiron-lime hover:bg-fiveiron-lime/10'
                   }`}
                 >
                   {link.name}
@@ -71,7 +71,7 @@ export default function Navbar() {
                     <Button
                       variant="ghost"
                       className={`w-full justify-start text-lg uppercase font-bold transition-colors px-4 py-6 ${
-                        activeSection === link.href.split('/')[1]
+                        pathname.includes(link.href)
                           ? 'text-fiveiron-lime bg-fiveiron-lime/10 border-l-4 border-fiveiron-lime'
                           : 'text-white hover:text-fiveiron-lime hover:bg-fiveiron-lime/5'
                       }`}
