@@ -3,10 +3,10 @@ import { MediumImpactHero } from '@/components/heros/MediumImpact';
 import { Heading } from '@/components/ui/heading';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Select, SelectItem, SelectTrigger, SelectContent, SelectValue } from '@/components/ui/select';
 import { LocationSelect } from '@/components/location-select';
+import { getLocations } from '@/server/actions';
 
-export default function Leagues() {
+export default async function Leagues() {
   return (
     <div className="flex flex-col gap-20">
       <MediumImpactHero bottomBar={false}>
@@ -147,6 +147,18 @@ export default function Leagues() {
               </p>
 
               <LocationSelect experience="simulator" />
+              <Button variant="link">Cancelation Policy</Button>
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row justify-between items-center align-center gap-2">
+            <div className="px-8 py-6 bg-slate-100 text-black w-full rounded flex flex-col md:flex-row justify-between items-center gap-2">
+              <p className="text-center text-2xl font-semibold tracking-wide uppercase">
+                Looking to plan a party with us?
+              </p>
+              <Button size="lg" variant="primary">
+                Book a private lesson
+              </Button>
             </div>
           </div>
         </div>

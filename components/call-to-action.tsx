@@ -1,18 +1,18 @@
-'use client';
-
 import React from 'react';
 
 import { LocationSelect } from './location-select';
 import Image from 'next/image';
 import { Button } from './ui/button';
 import Link from 'next/link';
+import { getLocations } from '@/server/actions';
+import { Location } from '@/payload/generated-types';
 
 interface CallToActionProps {
   title?: string;
   secondaryAction?: () => void;
 }
 
-export const CallToAction: React.FC<CallToActionProps> = ({ title = 'Book Your Visit', secondaryAction }) => {
+export async function CallToAction({ title = 'Book Your Visit', secondaryAction }: CallToActionProps) {
   return (
     <div className="px-4 flex flex-col gap-4 max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row md:items-center gap-4 items-start w-full">
@@ -50,4 +50,4 @@ export const CallToAction: React.FC<CallToActionProps> = ({ title = 'Book Your V
       </div>
     </div>
   );
-};
+}

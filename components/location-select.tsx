@@ -4,26 +4,25 @@ import { JSX, useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { ChevronDown } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useLocations } from '@/hooks/useLocations';
-import { useNearestLocations } from '@/hooks/useNearestLocations';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { Button } from './ui/button';
 import Link from 'next/link';
+import useSWR from 'swr';
+import { getLocations } from '@/server/actions';
 
 export function LocationSelect({ experience }: { experience?: string }): JSX.Element {
   const router = useRouter();
-  const { locations } = useLocations();
-  const { nearestLocations, isLoading } = useNearestLocations(1);
+
+  const { data: locations, error, isLoading } = useSWR('locations', getLocations);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentLocation, setCurrentLocation, mounted] = useLocalStorage('location');
-  const currentLocationName = locations.find((location) => location.slug === currentLocation)?.name;
+  const currentLocationName = locations?.find((location) => location.slug === currentLocation)?.name;
   const [isPending, startTransition] = useTransition();
 
   const selectLocation = (slug: string): void => {
     setCurrentLocation(slug);
 
-    // Si no había location guardada, redirigir con transición
     if (!currentLocation) {
       startTransition(() => {
         if (experience)
@@ -95,7 +94,7 @@ export function LocationSelect({ experience }: { experience?: string }): JSX.Ele
               </div>
 
               <div className="max-h-60 overflow-y-auto">
-                {locations.map((location, index) => (
+                {locations?.map((location, index) => (
                   <SelectItem
                     key={location.id}
                     value={location.slug}

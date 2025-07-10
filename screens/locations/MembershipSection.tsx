@@ -136,7 +136,7 @@ export function MembershipSection({ location }: { location: Location }) {
               </CardContent>
             </Card>
             <div className="flex flex-col gap-2 md:flex-row">
-              <Button variant="default">Learn More</Button>
+              <Button>Learn More</Button>
               <Button variant="link">Events Calendar</Button>
             </div>
           </div>

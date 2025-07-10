@@ -12,6 +12,7 @@ export function useLocations() {
     try {
       setLoading(true);
       const data = await getLocations();
+
       setLocations(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unknown error');
