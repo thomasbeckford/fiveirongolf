@@ -44,3 +44,6 @@ next-env.d.ts
 .next/
 out/
 build/
+
+app/(frontend)/\[country\]/booking/
+server/classes.ts
