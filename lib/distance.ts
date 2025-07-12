@@ -54,8 +54,8 @@ export function findNearestLocation(
 
   let nearestLocation = flatLocations[0];
 
-  const latitude = nearestLocation.GeneralSchema?.coordinates?.[0];
-  const longitude = nearestLocation.GeneralSchema?.coordinates?.[1];
+  const latitude = nearestLocation.coordinates?.[0];
+  const longitude = nearestLocation.coordinates?.[1];
 
   if (!latitude || !longitude) return null;
 
@@ -65,8 +65,8 @@ export function findNearestLocation(
   });
 
   for (const location of flatLocations) {
-    const latitude = location.GeneralSchema?.coordinates?.[0];
-    const longitude = location.GeneralSchema?.coordinates?.[1];
+    const latitude = location.coordinates?.[0];
+    const longitude = location.coordinates?.[1];
 
     if (!latitude || !longitude) continue;
 

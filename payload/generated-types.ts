@@ -124,26 +124,49 @@ export interface UserAuthOperations {
 export interface Location {
   id: string;
   /**
-   * e.g., "Chicago River North"
+   * e.g., "Chicago River North", "Main Street"
    */
   name: string;
+  /**
+   * Auto-generated from name if empty
+   */
   slug: string;
+  /**
+   * e.g., "Port Chester", "Chicago"
+   */
+  city: string;
   status: 'active' | 'coming-soon' | 'temp-closed' | 'closed';
+  /**
+   * Legacy field - use Status instead
+   */
+  comingSoon?: boolean | null;
   experiences?: ('Golf' | 'Bowling' | 'Multisport')[] | null;
-  duckpinBowling?: boolean | null;
-  GeneralSchema: {
-    address: string;
-    phone: string;
-    email: string;
-    /**
-     * Click on map or enter coordinates
-     *
-     * @minItems 2
-     * @maxItems 2
-     */
-    coordinates?: [number, number] | null;
-    timezone?: ('America/New_York' | 'America/Chicago' | 'America/Denver' | 'America/Los_Angeles') | null;
-  };
+  hasDuckpin?: boolean | null;
+  /**
+   * Complete street address including city, state, and ZIP
+   */
+  address: string;
+  /**
+   * e.g., "Port Chester, NY 10573"
+   */
+  address_zipcode?: string | null;
+  /**
+   * Format: (555) 123-4567
+   */
+  phone?: string | null;
+  email?: string | null;
+  /**
+   * Click on map or enter coordinates manually
+   *
+   * @minItems 2
+   * @maxItems 2
+   */
+  coordinates?: [number, number] | null;
+  /**
+   * Direct link to Google Maps location
+   */
+  mapUrl?: string | null;
+  timezone?: ('America/New_York' | 'America/Chicago' | 'America/Denver' | 'America/Los_Angeles') | null;
   SeoSchema?: {
     /**
      * Keep under 60 characters for Google
@@ -660,8 +683,22 @@ export interface Location {
  */
 export interface Media {
   id: string;
-  alt: string;
-  caption?: string | null;
+  alt?: string | null;
+  caption?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -682,7 +719,7 @@ export interface Media {
       filesize?: number | null;
       filename?: string | null;
     };
-    hero?: {
+    square?: {
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -690,7 +727,39 @@ export interface Media {
       filesize?: number | null;
       filename?: string | null;
     };
-    card?: {
+    small?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    medium?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    large?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    xlarge?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    og?: {
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -721,6 +790,9 @@ export interface User {
   id: string;
   updatedAt: string;
   createdAt: string;
+  enableAPIKey?: boolean | null;
+  apiKey: string;
+  apiKeyIndex?: string | null;
   email: string;
   resetPasswordToken?: string | null;
   resetPasswordExpiration?: string | null;
@@ -809,18 +881,18 @@ export interface PayloadMigration {
 export interface LocationsSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
+  city?: T;
   status?: T;
+  comingSoon?: T;
   experiences?: T;
-  duckpinBowling?: T;
-  GeneralSchema?:
-    | T
-    | {
-        address?: T;
-        phone?: T;
-        email?: T;
-        coordinates?: T;
-        timezone?: T;
-      };
+  hasDuckpin?: T;
+  address?: T;
+  address_zipcode?: T;
+  phone?: T;
+  email?: T;
+  coordinates?: T;
+  mapUrl?: T;
+  timezone?: T;
   SeoSchema?:
     | T
     | {
@@ -1125,7 +1197,7 @@ export interface MediaSelect<T extends boolean = true> {
               filesize?: T;
               filename?: T;
             };
-        hero?:
+        square?:
           | T
           | {
               url?: T;
@@ -1135,7 +1207,47 @@ export interface MediaSelect<T extends boolean = true> {
               filesize?: T;
               filename?: T;
             };
-        card?:
+        small?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        medium?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        large?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        xlarge?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        og?:
           | T
           | {
               url?: T;
@@ -1166,6 +1278,9 @@ export interface LeaguesSelect<T extends boolean = true> {
 export interface UsersSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
+  enableAPIKey?: T;
+  apiKey?: T;
+  apiKeyIndex?: T;
   email?: T;
   resetPasswordToken?: T;
   resetPasswordExpiration?: T;

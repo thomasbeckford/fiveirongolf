@@ -20,7 +20,7 @@ const ScrollMarquee = ({
     let realWordCount = 0;
 
     return (
-      <motion.div className="flex whitespace-nowrap text-4xl font-medium will-change-transform" style={{ x }}>
+      <motion.div className="flex whitespace-nowrap text-4xl will-change-transform " style={{ x }}>
         {/* repeat words 5 times */}
         {[...words, ...words, ...words, ...words, ...words].map((word, i) => {
           const isSymbol = word === '·';
@@ -41,7 +41,7 @@ const ScrollMarquee = ({
   };
 
   return (
-    <div className={`overflow-hidden bg-black py-4 mx-auto max-w-full ${className}`}>
+    <div className={`overflow-hidden bg-black py-4 mx-auto max-w-full  ${className}`}>
       {renderLine(wordsLine1, x1)}
       {renderLine(wordsLine2, x2)}
     </div>

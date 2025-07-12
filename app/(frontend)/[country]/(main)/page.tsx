@@ -1,9 +1,9 @@
 import { CallToAction } from '@/components/call-to-action';
-import { HighImpactHero } from '@/components/heros/HighImpact';
 import Image from 'next/image';
 import { NeonButton } from '@/components/ui/neon-button';
 import { SubscribeForm } from '@/components/subscribe-form';
 import AutoMarquee from '@/components/auto-marquee';
+import LandingHero from '@/components/landing-hero';
 
 const homepage = {
   title: 'Five Iron Golf',
@@ -23,14 +23,9 @@ const homepage = {
 export default async function Home() {
   return (
     <>
-      <div className="flex flex-col gap-16">
-        <section id="hero" className="">
-          <HighImpactHero backgroundType="video" backgroundSrc="/videos/homepage.mp4" overlayOpacity={0.7}>
-            <div className="flex flex-col items-center gap-4 ">
-              <Image src="/5i.svg" alt="Logo" width={140} height={140} />
-              <h1 className="uppercase text-6xl font-semibold tracking-widest">{homepage.title}</h1>
-            </div>
-          </HighImpactHero>
+      <div className="flex flex-col gap-16 ">
+        <section id="hero">
+          <LandingHero />
         </section>
 
         <section id="cta">

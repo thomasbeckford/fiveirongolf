@@ -1,60 +1,73 @@
-// collections/Media.ts
-import { CollectionConfig } from 'payload';
+import type { CollectionConfig } from 'payload';
 
-const Media: CollectionConfig = {
+import { FixedToolbarFeature, InlineToolbarFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
+
+export const Media: CollectionConfig = {
   slug: 'media',
-
-  labels: {
-    singular: 'Media',
-    plural: 'Media'
-  },
-  admin: {
-    useAsTitle: 'alt',
-    group: 'Media'
-  },
   access: {
     read: () => true,
-    create: ({ req: { user } }) => Boolean(user),
+    create: () => true,
     update: ({ req: { user } }) => Boolean(user),
     delete: ({ req: { user } }) => Boolean(user)
-  },
-  upload: {
-    mimeTypes: ['image/*'],
-
-    imageSizes: [
-      {
-        name: 'thumbnail',
-        width: 300,
-        height: 300,
-        position: 'centre'
-      },
-      {
-        name: 'hero',
-        width: 1920,
-        height: 1080,
-        position: 'centre'
-      },
-      {
-        name: 'card',
-        width: 640,
-        height: 480,
-        position: 'centre'
-      }
-    ]
   },
   fields: [
     {
       name: 'alt',
-      label: 'Alt Text',
-      type: 'text',
-      required: true
+      type: 'text'
+      //required: true,
     },
     {
       name: 'caption',
-      label: 'Caption',
-      type: 'text'
+      type: 'richText',
+      editor: lexicalEditor({
+        features: ({ rootFeatures }) => {
+          return [...rootFeatures, FixedToolbarFeature(), InlineToolbarFeature()];
+        }
+      })
     }
-  ]
+  ],
+  upload: {
+    // Upload to the public/media directory in Next.js making them publicly accessible even outside of Payload
+    staticDir: path.resolve(dirname, '../../public/media'),
+    adminThumbnail: 'thumbnail',
+    focalPoint: true,
+    imageSizes: [
+      {
+        name: 'thumbnail',
+        width: 300
+      },
+      {
+        name: 'square',
+        width: 500,
+        height: 500
+      },
+      {
+        name: 'small',
+        width: 600
+      },
+      {
+        name: 'medium',
+        width: 900
+      },
+      {
+        name: 'large',
+        width: 1400
+      },
+      {
+        name: 'xlarge',
+        width: 1920
+      },
+      {
+        name: 'og',
+        width: 1200,
+        height: 630,
+        crop: 'center'
+      }
+    ]
+  }
 };
-
-export default Media;

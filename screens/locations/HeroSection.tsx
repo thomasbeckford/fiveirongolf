@@ -8,7 +8,7 @@ import LocationBadge from '@/components/location-badge';
 export async function HeroSection({ location }: { location: Location }) {
   if (!location) return null;
 
-  const { GeneralSchema, HeroSchema } = location;
+  const { HeroSchema } = location;
 
   return (
     <section
@@ -52,7 +52,7 @@ export async function HeroSection({ location }: { location: Location }) {
                     <MapPin className="w-5 h-5 stroke-primary flex-shrink-0" />
                     <span className="text-sm font-medium uppercase tracking-wide text-primary">Location</span>
                   </div>
-                  <p className="text-sm sm:text-base">{GeneralSchema.address}</p>
+                  <p className="text-sm sm:text-base">{location.address}</p>
                 </div>
 
                 {/* Contact */}
@@ -62,8 +62,8 @@ export async function HeroSection({ location }: { location: Location }) {
                     <span className="text-sm font-medium uppercase tracking-wide text-primary">Contact</span>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <p className="text-sm sm:text-base">{GeneralSchema.phone}</p>
-                    <p className="text-sm sm:text-base">{GeneralSchema.email}</p>
+                    <p className="text-sm sm:text-base">{location.phone}</p>
+                    <p className="text-sm sm:text-base">{location.email}</p>
                   </div>
                 </div>
 

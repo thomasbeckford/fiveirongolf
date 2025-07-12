@@ -50,8 +50,8 @@ export function useNearestLocations(limit: number = 5) {
     // Calcular distancia para cada ubicación usando tu función
     const locationsWithDistance: LocationWithDistance[] = flatLocations
       .map((location) => {
-        const latitude = location.GeneralSchema?.coordinates?.[1];
-        const longitude = location.GeneralSchema?.coordinates?.[0];
+        const latitude = location.coordinates?.[1];
+        const longitude = location.coordinates?.[0];
 
         // Validar que la ubicación tiene coordenadas válidas
         if (!latitude || !longitude) {

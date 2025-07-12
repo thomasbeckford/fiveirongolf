@@ -1,17 +1,15 @@
 export const LOCATIONS_DEFAULT = {
   status: 'active',
   experiences: ['Golf'],
-  duckpinBowling: false,
+  hasDuckpin: false,
   slug: 'default',
   name: 'Default Location',
-
-  GeneralSchema: {
-    address: '123 Main St, Unknown City, XX 00000',
-    phone: '(555) 123-4567',
-    email: 'info@fiveirongolf.com',
-    coordinates: [-74.006, 40.7128],
-    timezone: 'America/New_York'
-  },
+  city: 'Unknown City',
+  address: '123 Main St, Unknown City, XX 00000',
+  phone: '(555) 123-4567',
+  email: 'info@fiveirongolf.com',
+  coordinates: [-74.006, 40.7128],
+  timezone: 'America/New_York',
 
   SeoSchema: {
     title: 'Indoor Golf Simulator Bar - Five Iron Golf',

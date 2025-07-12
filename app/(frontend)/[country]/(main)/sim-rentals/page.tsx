@@ -4,22 +4,23 @@ import { Heading } from '@/components/ui/heading';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { LocationSelect } from '@/components/location-select';
-import { getLocations } from '@/server/actions';
+import { RollingText } from '@/components/animate-ui/text/rolling';
+import { SplittingText } from '@/components/animate-ui/text/splitting';
 
 export default async function Leagues() {
   return (
-    <div className="flex flex-col gap-20">
+    <div className="flex flex-col gap-20 ">
       <MediumImpactHero bottomBar={false}>
         <div className="flex flex-col text-center  max-w-xl mx-auto">
           <span className="text-5xl font-semibold tracking-widest uppercase">Five Iron Golf</span>
           <Heading variant="secondary" size="lg" className="flex flex-col">
-            <span>Simulator</span>
-            <span>Rentals</span>
+            <RollingText text="Simulator" />
+            <SplittingText text="Rentals" />
           </Heading>
         </div>
       </MediumImpactHero>
 
-      <div className="max-w-screen-2xl mx-auto flex flex-col items-center gap-4">
+      <div className="max-w-screen-2xl mx-auto flex flex-col items-center gap-4 px-6">
         <div className="w-full mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-1 lg:gap-2">
             {/* Play a round */}
@@ -52,7 +53,7 @@ export default async function Leagues() {
             </div>
 
             {/* Perfect your swing */}
-            <div className="group">
+            <div className="group ">
               <div className="relative overflow-hidden rounded-lg mb-4">
                 <Image
                   src="https://fiveirongolf.com/wp-content/uploads/2024/04/1-daily_sim_time-mobile.jpg"
@@ -81,7 +82,7 @@ export default async function Leagues() {
             </div>
 
             {/* Games for all ages */}
-            <div className="group md:col-span-2 xl:col-span-1">
+            <div className="group md:col-span-2 xl:col-span-1 ">
               <div className="relative overflow-hidden rounded-lg mb-4">
                 <Image
                   src="https://fiveirongolf.com/wp-content/uploads/2025/04/streets-of-neon-1024x683.jpg"
@@ -114,7 +115,7 @@ export default async function Leagues() {
         <Button>Sign up today</Button>
       </div>
 
-      <div className="max-w-screen-2xl mx-auto flex flex-col gap-12">
+      <div className="max-w-screen-2xl mx-auto flex flex-col gap-12 px-6">
         <Heading variant="white" size="lg" className="flex flex-col items-center text-center capitalize">
           <span>Sim Rentals</span>
           <span className="text-fiveiron-yellow">Play or Practice</span>
@@ -150,17 +151,15 @@ export default async function Leagues() {
               <Button variant="link">Cancelation Policy</Button>
             </div>
           </div>
+        </div>
+      </div>
 
-          <div className="flex flex-col md:flex-row justify-between items-center align-center gap-2">
-            <div className="px-8 py-6 bg-slate-100 text-black w-full rounded flex flex-col md:flex-row justify-between items-center gap-2">
-              <p className="text-center text-2xl font-semibold tracking-wide uppercase">
-                Looking to plan a party with us?
-              </p>
-              <Button size="lg" variant="primary">
-                Book a private lesson
-              </Button>
-            </div>
-          </div>
+      <div className="w-full mx-auto">
+        <div className="px-8 py-6  bg-slate-300 text-black w-full rounded flex flex-col md:flex-row justify-evenly items-center gap-2">
+          <p className="text-center text-2xl font-semibold tracking-wide uppercase">Looking to plan a party with us?</p>
+          <Button size="lg" variant="primary">
+            Book a private lesson
+          </Button>
         </div>
       </div>
     </div>

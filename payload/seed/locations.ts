@@ -1,27 +1,889 @@
 // payload/seed/locations.ts
 export const LOCATIONS_SPECIFIC_DATA = [
   {
-    name: 'Chicago River North',
-    slug: 'chicago-river-north',
-    experiences: ['Golf', 'Bowling'],
-
-    GeneralSchema: {
-      address: '609 N Dearborn St, Chicago, IL 60654',
-      phone: '(312) 613-4653',
-      email: 'rivernorth@fiveirongolf.com',
-      coordinates: [-87.631005, 41.890251], // [lng, lat]
-      timezone: 'America/Chicago'
-    },
-
+    name: 'Main Street',
+    slug: 'port-chester-main-street',
+    city: 'Port Chester',
+    address: '179 N Main Street, Port Chester, NY 10573',
+    phone: '',
+    email: 'portchester@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: true,
+    experiences: ['Golf'],
     SeoSchema: {
-      title: 'Golf Simulators Chicago River North - Five Iron Golf',
-      description:
-        "High-tech golf experience in Chicago's River North near Magnificent Mile. Simulators, lessons, and full bar."
+      title: 'Golf in Port Chester - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Port Chester. Coming soon!'
     },
-
+    HeroSchema: {
+      title: 'Port Chester',
+      subtitle: 'Main Street',
+      backgroundImage: 'local:port-chester-main-street-hero.jpg',
+      ctaButton: {
+        text: 'Join Waitlist',
+        url: 'https://fiveirongolf.com/locations/port-chester-main-street#waitlist',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Downtown',
+    slug: 'syracuse-downtown',
+    city: 'Syracuse',
+    address: '400 South Salina Street, Syracuse, NY 13202',
+    phone: '',
+    email: 'syracuse@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: true,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in Syracuse - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Syracuse. Coming soon!'
+    },
+    HeroSchema: {
+      title: 'Syracuse',
+      subtitle: 'Downtown',
+      backgroundImage: 'local:syracuse-downtown-hero.jpg',
+      ctaButton: {
+        text: 'Join Waitlist',
+        url: 'https://fiveirongolf.com/locations/syracuse-downtown#waitlist',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Shaker Heights',
+    slug: 'cleveland-shaker-heights',
+    city: 'Cleveland',
+    address: '20040 Van Aken Blvd., Shaker Heights, OH 44122',
+    phone: '',
+    email: '',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: true,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in Cleveland - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Cleveland. Coming soon!'
+    },
+    HeroSchema: {
+      title: 'Cleveland',
+      subtitle: 'Shaker Heights',
+      backgroundImage: 'local:cleveland-shaker-heights-hero.jpg',
+      ctaButton: {
+        text: 'Join Waitlist',
+        url: 'https://fiveirongolf.com/locations/cleveland-shaker-heights#waitlist',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Rockefeller Center',
+    slug: 'nyc-rockefeller-center',
+    city: 'NYC',
+    address: '1290 Ave. of the Americas, New York, NY 10104',
+    phone: '',
+    email: '',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: true,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in NYC - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in NYC. Coming soon!'
+    },
+    HeroSchema: {
+      title: 'NYC',
+      subtitle: 'Rockefeller Center',
+      backgroundImage: 'local:nyc-rockefeller-center-hero.jpg',
+      ctaButton: {
+        text: 'Join Waitlist',
+        url: 'https://fiveirongolf.com/locations/nyc-rockefeller-center#waitlist',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Seaport',
+    slug: 'boston-seaport',
+    city: 'Boston',
+    address: '311 Summer Street, Boston, MA 02210',
+    phone: '1(800)513-5153',
+    email: 'seaport@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: true,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in Boston - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Boston. Coming soon!'
+    },
+    HeroSchema: {
+      title: 'Boston',
+      subtitle: 'Seaport',
+      backgroundImage: 'local:boston-seaport-hero.jpg',
+      ctaButton: {
+        text: 'Join Waitlist',
+        url: 'https://fiveirongolf.com/locations/boston-seaport#waitlist',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Midtown',
+    slug: 'nashville-midtown',
+    city: 'Nashville',
+    address: '905 20th Ave. S, Nashville, TN 37212',
+    phone: '',
+    email: '',
+    coordinates: [0, 0],
+    timezone: 'America/Chicago',
+    hasDuckpin: false,
+    comingSoon: true,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in Nashville - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Nashville. Coming soon!'
+    },
+    HeroSchema: {
+      title: 'Nashville',
+      subtitle: 'Midtown',
+      backgroundImage: 'local:nashville-midtown-hero.jpg',
+      ctaButton: {
+        text: 'Join Waitlist',
+        url: 'https://fiveirongolf.com/locations/nashville-midtown#waitlist',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Clayton',
+    slug: 'st-louis-clayton',
+    city: 'St. Louis',
+    address: '8015 Forysth Blvd., Clayton, MO 63105',
+    phone: '',
+    email: '',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in St. Louis - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in St. Louis. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'St. Louis',
+      subtitle: 'Clayton',
+      backgroundImage: 'local:st-louis-clayton-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=st-louis-clayton',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Logan Square',
+    slug: 'philadelphia-logan-square',
+    city: 'Philadelphia',
+    address: '1717 Arch Street, Suite 140  Philadelphia, PA 19103',
+    phone: '1(800)513-5153',
+    email: 'logansquare@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in Philadelphia - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Philadelphia. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'Philadelphia',
+      subtitle: 'Logan Square',
+      backgroundImage: 'local:philadelphia-logan-square-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=philadelphia-logan-square',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'North Loop',
+    slug: 'minneapolis-north-loop',
+    city: 'Minneapolis',
+    address: '729 N Washington Ave. Suite D, Minneapolis, MN 55401',
+    phone: '1(800)513-5153',
+    email: 'minneapolis@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in Minneapolis - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Minneapolis. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'Minneapolis',
+      subtitle: 'North Loop',
+      backgroundImage: 'local:minneapolis-north-loop-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=minneapolis-north-loop',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Yukon',
+    slug: 'oklahoma-city-yukon',
+    city: 'Oklahoma City',
+    address: '11300 W Reno Ave. Suite A, Yukon, OK, 73099',
+    phone: '(405) 265-7016',
+    email: 'yukon@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in Oklahoma City - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Oklahoma City. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'Oklahoma City',
+      subtitle: 'Yukon',
+      backgroundImage: 'local:oklahoma-city-yukon-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=oklahoma-city-yukon',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Kirkland',
+    slug: 'seattle-kirkland',
+    city: 'Seattle',
+    address: '425 Urban Plz., Suite 200, Kirkland, WA 98033',
+    phone: '1(800)513-5153',
+    email: 'kirkland@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/Los_Angeles',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in Seattle - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Seattle. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'Seattle',
+      subtitle: 'Kirkland',
+      backgroundImage: 'local:seattle-kirkland-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=seattle-kirkland',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'NULU',
+    slug: 'louisville-nulu',
+    city: 'Louisville',
+    address: '836 E Market St., Louisville, KY 40206',
+    phone: '(502)384-8270',
+    email: 'louisville@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in Louisville - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Louisville. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'Louisville',
+      subtitle: 'NULU',
+      backgroundImage: 'local:louisville-nulu-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=louisville-nulu',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Downtown',
+    slug: 'erie-downtown',
+    city: 'Erie',
+    address: '1000 State St., Erie, PA 16501',
+    phone: '(814)402-4653',
+    email: 'erie@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in Erie - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Erie. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'Erie',
+      subtitle: 'Downtown',
+      backgroundImage: 'local:erie-downtown-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=erie-downtown',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Midtown',
+    slug: 'atlanta-midtown',
+    city: 'Atlanta',
+    address: '675 W Peachtree St. NW, Suite 209, Atlanta, GA 30308',
+    phone: '1(800)513-5153',
+    email: 'atlanta@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in Atlanta - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Atlanta. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'Atlanta',
+      subtitle: 'Midtown',
+      backgroundImage: 'local:atlanta-midtown-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=atlanta-midtown',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Downtown',
+    slug: 'indianapolis-downtown',
+    city: 'Indianapolis',
+    address: '421 N Pennsylvania St., Suite 101, Indianapolis, IN 46204',
+    phone: '1(800)513-5153',
+    email: 'indianapolis@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in Indianapolis - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Indianapolis. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'Indianapolis',
+      subtitle: 'Downtown',
+      backgroundImage: 'local:indianapolis-downtown-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=indianapolis-downtown',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Grand Central',
+    slug: 'nyc-grand-central',
+    city: 'NYC',
+    address: '101 Park Ave., Floor 3, New York, NY 10017',
+    phone: '1(800)513-5153',
+    email: 'grandcentral@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in NYC - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in NYC. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'NYC',
+      subtitle: 'Grand Central',
+      backgroundImage: 'local:nyc-grand-central-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=nyc-grand-central',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Downtown',
+    slug: 'detroit-downtown',
+    city: 'Detroit',
+    address: '600 W Lafayette Blvd., Suite 5i, Detroit, MI 48226',
+    phone: '1(800)513-5153',
+    email: 'detroit@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/Detroit',
+    hasDuckpin: true,
+    comingSoon: false,
+    experiences: ['Golf', 'Duckpin Bowling'],
+    SeoSchema: {
+      title: 'Golf & Duckpin Bowling in Detroit - Five Iron Golf',
+      description: 'Experience Golf and Duckpin Bowling at Five Iron Golf in Detroit. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'Detroit',
+      subtitle: 'Downtown',
+      backgroundImage: 'local:detroit-downtown-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=detroit-downtown',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Downtown',
+    slug: 'cleveland-downtown',
+    city: 'Cleveland',
+    address: '1101 Euclid Ave., Cleveland, OH 44115',
+    phone: '1(800)513-5153',
+    email: 'cleveland@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in Cleveland - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Cleveland. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'Cleveland',
+      subtitle: 'Downtown',
+      backgroundImage: 'local:cleveland-downtown-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=cleveland-downtown',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Downtown',
+    slug: 'cincinnati-downtown',
+    city: 'Cincinnati',
+    address: '80 W 5th St., Cincinnati, OH 45202',
+    phone: '1(800)513-5153',
+    email: 'cincinnati@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in Cincinnati - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Cincinnati. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'Cincinnati',
+      subtitle: 'Downtown',
+      backgroundImage: 'local:cincinnati-downtown-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=cincinnati-downtown',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Upper East Side',
+    slug: 'nyc-upper-east-side',
+    city: 'NYC',
+    address: '1681 3rd Ave., New York, NY 10128',
+    phone: '1(800)513-5153',
+    email: 'uppereastside@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in NYC - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in NYC. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'NYC',
+      subtitle: 'Upper East Side',
+      backgroundImage: 'local:nyc-upper-east-side-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=nyc-upper-east-side',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Long Island City',
+    slug: 'nyc-long-island-city',
+    city: 'NYC',
+    address: '22-43 Jackson Ave., Long Island City, NY 11101',
+    phone: '1(800)513-5153',
+    email: 'lic@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in NYC - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in NYC. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'NYC',
+      subtitle: 'Long Island City',
+      backgroundImage: 'local:nyc-long-island-city-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=nyc-long-island-city',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Government Center',
+    slug: 'boston-government-center',
+    city: 'Boston',
+    address: '1 Washington St., Boston, MA 02108',
+    phone: '1(800)513-5153',
+    email: 'boston@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in Boston - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Boston. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'Boston',
+      subtitle: 'Government Center',
+      backgroundImage: 'local:boston-government-center-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=boston-government-center',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Shelby Township',
+    slug: 'detroit-shelby-township',
+    city: 'Detroit',
+    address: '50773 Corporate Dr., Shelby Township, MI 48315',
+    phone: '1(800)513-5153',
+    email: 'shelby@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/Detroit',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in Detroit - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Detroit. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'Detroit',
+      subtitle: 'Shelby Township',
+      backgroundImage: 'local:detroit-shelby-township-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=detroit-shelby-township',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Fishtown',
+    slug: 'philadelphia-fishtown',
+    city: 'Philadelphia',
+    address: '27 E Allen St., Philadelphia, PA 19123',
+    phone: '1(800)513-5153',
+    email: 'fishtown@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in Philadelphia - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Philadelphia. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'Philadelphia',
+      subtitle: 'Fishtown',
+      backgroundImage: 'local:philadelphia-fishtown-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=philadelphia-fishtown',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Lincoln Park',
+    slug: 'chicago-lincoln-park',
+    city: 'Chicago',
+    address: '1000 W North Ave., #A200, Chicago, IL 60642',
+    phone: '1(800)513-5153',
+    email: 'lincolnpark@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/Chicago',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in Chicago - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Chicago. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'Chicago',
+      subtitle: 'Lincoln Park',
+      backgroundImage: 'local:chicago-lincoln-park-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=chicago-lincoln-park',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Capitol Hill',
+    slug: 'seattle-capitol-hill',
+    city: 'Seattle',
+    address: '1525 11th Ave., Suite 100, Seattle, WA 98122',
+    phone: '1(800)513-5153',
+    email: 'seattle@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/Los_Angeles',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in Seattle - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Seattle. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'Seattle',
+      subtitle: 'Capitol Hill',
+      backgroundImage: 'local:seattle-capitol-hill-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=seattle-capitol-hill',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'The Loop',
+    slug: 'chicago-the-loop',
+    city: 'Chicago',
+    address: '108 N State St., #200, Chicago, IL 60602',
+    phone: '1(800)513-5153',
+    email: 'theloop@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/Chicago',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in Chicago - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Chicago. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'Chicago',
+      subtitle: 'The Loop',
+      backgroundImage: 'local:chicago-the-loop-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=chicago-the-loop',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Market Square',
+    slug: 'pittsburgh-market-square',
+    city: 'Pittsburgh',
+    address: '2 PPG Place, #90, Pittsburgh, PA 15222',
+    phone: '1(800)513-5153',
+    email: 'pittsburgh@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in Pittsburgh - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Pittsburgh. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'Pittsburgh',
+      subtitle: 'Market Square',
+      backgroundImage: 'local:pittsburgh-market-square-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=pittsburgh-market-square',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Penn Quarter',
+    slug: 'dc-penn-quarter',
+    city: 'DC',
+    address: '575 7th St. NW, Washington, DC 20004',
+    phone: '1(800)513-5153',
+    email: 'dc@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in DC - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in DC. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'DC',
+      subtitle: 'Penn Quarter',
+      backgroundImage: 'local:dc-penn-quarter-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=dc-penn-quarter',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'AREA15',
+    slug: 'las-vegas-area15',
+    city: 'Las Vegas',
+    address: '3215 S Rancho Dr., #250, Las Vegas, NV 89102',
+    phone: '1(800)513-5153',
+    email: 'lasvegas@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in Las Vegas - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Las Vegas. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'Las Vegas',
+      subtitle: 'AREA15',
+      backgroundImage: 'local:las-vegas-area15-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=las-vegas-area15',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Herald Square',
+    slug: 'nyc-herald-square',
+    city: 'NYC',
+    address: '883 6th Ave., Floor 3, New York, NY 10001',
+    phone: '1(800)513-5153',
+    email: 'heraldsquare@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in NYC - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in NYC. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'NYC',
+      subtitle: 'Herald Square',
+      backgroundImage: 'local:nyc-herald-square-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=nyc-herald-square',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Rittenhouse',
+    slug: 'philadelphia-rittenhouse',
+    city: 'Philadelphia',
+    address: '2116 Chestnut St., Philadelphia, PA 19103',
+    phone: '1(800)513-5153',
+    email: 'rittenhouse@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in Philadelphia - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Philadelphia. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'Philadelphia',
+      subtitle: 'Rittenhouse',
+      backgroundImage: 'local:philadelphia-rittenhouse-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=philadelphia-rittenhouse',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'River North',
+    slug: 'chicago-river-north',
+    city: 'Chicago',
+    address: '609 N Dearborn St., Chicago, IL 60654',
+    phone: '1(800)513-5153',
+    email: 'rivernorth@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/Chicago',
+    hasDuckpin: true,
+    comingSoon: false,
+    experiences: ['Golf', 'Duckpin Bowling'],
+    SeoSchema: {
+      title: 'Golf & Duckpin Bowling in Chicago - Five Iron Golf',
+      description: 'Experience Golf and Duckpin Bowling at Five Iron Golf in Chicago. Book your simulator today!'
+    },
     HeroSchema: {
       title: 'Chicago',
       subtitle: 'River North',
+      backgroundImage: 'local:chicago-river-north-hero.jpg',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=chicago-river-north',
@@ -29,29 +891,53 @@ export const LOCATIONS_SPECIFIC_DATA = [
       }
     }
   },
-
   {
-    name: 'New York Flatiron',
-    slug: 'nyc-flatiron',
+    name: 'Harbor East',
+    slug: 'baltimore-harbor-east',
+    city: 'Baltimore',
+    address: '415 S Central Ave., Baltimore, MD 21202',
+    phone: '1(800)513-5153',
+    email: 'baltimore@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: false,
     experiences: ['Golf'],
-
-    GeneralSchema: {
-      address: '21 E 15th St, New York, NY 10003',
-      phone: '(646) 964-4653',
-      email: 'flatiron@fiveirongolf.com',
-      coordinates: [-73.9905516, 40.7356566], // [lng, lat]
-      timezone: 'America/New_York'
-    },
-
     SeoSchema: {
-      title: 'Golf Simulators NYC Flatiron - Five Iron Golf',
-      description:
-        "Golf simulators in NYC's Flatiron District near Union Square. High-tech experience in dynamic neighborhood."
+      title: 'Golf in Baltimore - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in Baltimore. Book your simulator today!'
     },
-
     HeroSchema: {
-      title: 'New York',
+      title: 'Baltimore',
+      subtitle: 'Harbor East',
+      backgroundImage: 'local:baltimore-harbor-east-hero.jpg',
+      ctaButton: {
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=baltimore-harbor-east',
+        type: 'primary'
+      }
+    }
+  },
+  {
+    name: 'Flatiron',
+    slug: 'nyc-flatiron',
+    city: 'NYC',
+    address: '138 5th Ave., New York, NY 10011',
+    phone: '1(800)513-5153',
+    email: 'flatiron@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: false,
+    experiences: ['Golf'],
+    SeoSchema: {
+      title: 'Golf in NYC - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in NYC. Book your simulator today!'
+    },
+    HeroSchema: {
+      title: 'NYC',
       subtitle: 'Flatiron',
+      backgroundImage: 'local:nyc-flatiron-hero.jpg',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=nyc-flatiron',
@@ -59,34 +945,30 @@ export const LOCATIONS_SPECIFIC_DATA = [
       }
     }
   },
-
   {
-    name: 'Boston Seaport',
-    slug: 'boston-seaport',
-    status: 'coming-soon',
+    name: 'FiDi',
+    slug: 'nyc-fidi',
+    city: 'NYC',
+    address: '22 Stone St., New York, NY 10004',
+    phone: '1(800)513-5153',
+    email: 'fidi@fiveironstagin.wpengine.com',
+    coordinates: [0, 0],
+    timezone: 'America/New_York',
+    hasDuckpin: false,
+    comingSoon: false,
     experiences: ['Golf'],
-
-    GeneralSchema: {
-      address: '399 Congress St, Boston, MA 02210',
-      phone: '(617) 453-4653',
-      email: 'seaport@fiveirongolf.com',
-      coordinates: [-71.05782455092772, 42.35995794379754], // [lng, lat]
-      timezone: 'America/New_York'
-    },
-
     SeoSchema: {
-      title: 'Golf Simulators Boston Seaport - Five Iron Golf',
-      description:
-        'Urban indoor golf experience in Boston Seaport. Golf simulators, lessons, and sports bar coming soon.'
+      title: 'Golf in NYC - Five Iron Golf',
+      description: 'Experience Golf at Five Iron Golf in NYC. Book your simulator today!'
     },
-
     HeroSchema: {
-      title: 'Boston',
-      subtitle: 'Seaport',
+      title: 'NYC',
+      subtitle: 'FiDi',
+      backgroundImage: 'local:nyc-fidi-hero.jpg',
       ctaButton: {
-        text: 'Coming Soon',
-        url: 'https://booking.fiveirongolf.com/select-experience',
-        type: 'secondary'
+        text: 'Book Now',
+        url: 'https://booking.fiveirongolf.com/select-experience?location=nyc-fidi',
+        type: 'primary'
       }
     }
   }

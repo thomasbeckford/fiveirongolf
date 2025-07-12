@@ -37,11 +37,9 @@ export default function Navbar() {
             {links.map((link) => (
               <Link key={link.name} href={link.href} onClick={() => setOpen(false)}>
                 <Button
-                  variant="ghost"
-                  className={`w-full justify-start text-lg uppercase font-bold transition-colors px-4 py-6 ${
-                    pathname.includes(link.href)
-                      ? 'text-fiveiron-lime bg-fiveiron-lime/10 border-l-4 border-fiveiron-lime'
-                      : 'text-white hover:text-fiveiron-lime hover:bg-fiveiron-lime/10'
+                  variant="link"
+                  className={`w-full justify-start text-lg uppercase font-bold transition-colors px-4 py-6 hover:no-underline ${
+                    pathname.includes(link.href) ? 'text-fiveiron-lime' : 'text-white hover:text-fiveiron-lime'
                   }`}
                 >
                   {link.name}
@@ -69,11 +67,11 @@ export default function Navbar() {
                 {links.map((link) => (
                   <Link key={link.name} href={link.href} onClick={() => setOpen(false)}>
                     <Button
-                      variant="ghost"
+                      variant="link"
                       className={`w-full justify-start text-lg uppercase font-bold transition-colors px-4 py-6 ${
                         pathname.includes(link.href)
-                          ? 'text-fiveiron-lime bg-fiveiron-lime/10 border-l-4 border-fiveiron-lime'
-                          : 'text-white hover:text-fiveiron-lime hover:bg-fiveiron-lime/5'
+                          ? 'text-fiveiron-lime border-l-4 border-fiveiron-lime'
+                          : 'text-white hover:text-fiveiron-lime'
                       }`}
                     >
                       {link.name}

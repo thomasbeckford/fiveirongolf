@@ -4,52 +4,130 @@ import { getPayload } from 'payload';
 import config from '../../payload.config';
 import { LOCATIONS_DEFAULT } from './defaults';
 import { LOCATIONS_SPECIFIC_DATA } from './locations';
+import * as path from 'path'; // Changed this line
+import fs from 'fs';
 
-// Function to safely merge data while avoiding relationship field issues
-function smartMerge(defaultData: any, specificData: any): any {
-  const result = _.cloneDeep(defaultData);
+// Function to fill missing fields with defaults without overwriting existing values
+function fillMissingFields(specificData: any, defaultData: any): any {
+  const result = _.cloneDeep(specificData);
 
-  for (const key in specificData) {
-    if (specificData[key] !== undefined) {
-      if (_.isArray(specificData[key])) {
-        // For arrays: if empty, keep default; otherwise use specific
-        if (specificData[key].length === 0) {
-          continue;
-        } else {
-          result[key] = _.cloneDeep(specificData[key]);
+  function recursiveFill(target: any, source: any) {
+    if (!_.isPlainObject(source)) return;
+
+    for (const key in source) {
+      // Si el campo no existe en target, lo copiamos del source
+      if (!(key in target)) {
+        target[key] = _.cloneDeep(source[key]);
+      }
+      // Si ambos son objetos planos, aplicamos recursión
+      else if (_.isPlainObject(target[key]) && _.isPlainObject(source[key])) {
+        recursiveFill(target[key], source[key]);
+      }
+      // Si el campo existe en target pero es null/undefined/string vacío, lo llenamos con el default
+      else if (target[key] === null || target[key] === undefined || target[key] === '') {
+        target[key] = _.cloneDeep(source[key]);
+      }
+      // En todos los otros casos, mantenemos el valor de target (no sobrescribimos)
+    }
+  }
+
+  recursiveFill(result, defaultData);
+  return result;
+}
+
+// Upload images and return ObjectIds
+async function uploadImages(payload: any, data: any): Promise<any> {
+  const cloned = _.cloneDeep(data);
+
+  async function recurse(obj: any, currentPath: string = '') {
+    for (const key in obj) {
+      const val = obj[key];
+      const fieldPath = currentPath ? `${currentPath}.${key}` : key;
+
+      if (_.isPlainObject(val)) {
+        await recurse(val, fieldPath);
+      } else if (key.toLowerCase().includes('image') && typeof val === 'string' && val.startsWith('local:')) {
+        try {
+          // Extraer el nombre del archivo
+          const filename = val.replace('local:', '');
+          const imagePath = path.join(process.cwd(), 'app/(frontend)/api/media', filename);
+
+          console.log(`📷 Processing image field: ${fieldPath}`);
+          console.log(`   📁 Looking for file: ${imagePath}`);
+
+          // Verificar que el archivo existe
+          if (fs.existsSync(imagePath)) {
+            console.log(`   ✅ File found, uploading: ${filename}`);
+
+            // Leer el archivo como Buffer
+            const fileBuffer = fs.readFileSync(imagePath);
+            const fileStats = fs.statSync(imagePath);
+
+            // Determinar el tipo MIME
+            const ext = path.extname(filename).toLowerCase();
+            let mimeType = 'image/jpeg';
+            if (ext === '.png') mimeType = 'image/png';
+            else if (ext === '.gif') mimeType = 'image/gif';
+            else if (ext === '.webp') mimeType = 'image/webp';
+
+            // Subir la imagen a Payload usando el buffer
+            const uploadResult = await payload.create({
+              collection: 'media',
+              data: {
+                alt: filename.split('.')[0].replace(/[-_]/g, ' '), // Usar el nombre como alt text
+                filename: filename,
+                mimeType: mimeType,
+                filesize: fileStats.size
+              },
+              file: {
+                data: fileBuffer,
+                name: filename,
+                size: fileStats.size,
+                type: mimeType
+              }
+            });
+
+            // Reemplazar la referencia local con el ObjectId
+            obj[key] = uploadResult.id;
+            console.log(`   ✅ Image uploaded successfully: ${filename} -> ${uploadResult.id}`);
+          } else {
+            console.warn(`   ⚠️ Image file not found: ${imagePath}`);
+            console.warn(`   🔍 Available files in uploads directory:`);
+
+            // Listar archivos disponibles para debug
+            const uploadsDir = path.join(process.cwd(), 'app/(frontend)/api/media');
+            if (fs.existsSync(uploadsDir)) {
+              const files = fs.readdirSync(uploadsDir);
+              files.forEach((file) => console.warn(`      - ${file}`));
+            } else {
+              console.warn(`      Directory does not exist: ${uploadsDir}`);
+            }
+
+            // Remover la referencia inválida
+            delete obj[key];
+          }
+        } catch (error) {
+          console.error(`❌ Failed to upload image ${val}:`, error);
+          console.error(`   Error details:`, error instanceof Error ? error.message : String(error));
+          delete obj[key];
         }
-      } else if (_.isObject(specificData[key]) && !_.isArray(specificData[key])) {
-        // For objects: recursive merge
-        result[key] = smartMerge(result[key] || {}, specificData[key]);
-      } else {
-        // For primitives: replace
-        result[key] = specificData[key];
+      } else if (_.isArray(val)) {
+        // Handle arrays that might contain image references
+        for (let i = 0; i < val.length; i++) {
+          if (_.isPlainObject(val[i])) {
+            await recurse(val[i], `${fieldPath}[${i}]`);
+          }
+        }
       }
     }
   }
 
-  return result;
+  await recurse(cloned);
+  return cloned;
 }
 
-// Function to remove problematic fields that cause ObjectId errors
 function sanitizeForPayload(data: any): any {
   const sanitized = _.cloneDeep(data);
-
-  // Remove any upload/media fields that might cause ObjectId issues
-  const fieldsToCheck = [
-    'HeroSchema.backgroundImage',
-    'HoursSchema.backgroundImage',
-    'MembershipSchema.backgroundImage',
-    'DuckpinSchema.backgroundImage',
-    'GallerySchema.images' // This might have upload references
-  ];
-
-  fieldsToCheck.forEach((fieldPath) => {
-    if (_.get(sanitized, fieldPath)) {
-      console.log(`🔧 Removing potentially problematic field: ${fieldPath}`);
-      _.unset(sanitized, fieldPath);
-    }
-  });
 
   // Ensure ActivitySchema has consistent structure
   if (sanitized.ActivitySchema) {
@@ -88,7 +166,7 @@ function removeNullUndefined(obj: any): any {
 
 // Validate required fields
 function validateLocationData(data: any): boolean {
-  const required = ['name', 'GeneralSchema.address', 'GeneralSchema.phone', 'GeneralSchema.email'];
+  const required = ['name', 'address'];
 
   for (const field of required) {
     if (!_.get(data, field)) {
@@ -102,10 +180,10 @@ function validateLocationData(data: any): boolean {
 
 // Create a unique identifier for each location
 function createLocationKey(data: any): string {
-  // Use name + email as unique identifier
+  const slug = data.slug?.toLowerCase().trim();
   const name = data.name?.toLowerCase().trim();
-  const email = data.GeneralSchema?.email?.toLowerCase().trim();
-  return `${name}|${email}`;
+  const email = data.email?.toLowerCase().trim();
+  return slug || `${name}|${email}`;
 }
 
 // Get existing locations and create a Set of processed keys
@@ -114,7 +192,8 @@ async function getExistingLocations(payload: any): Promise<Set<string>> {
     collection: 'locations',
     select: {
       name: true,
-      'GeneralSchema.email': true
+      email: true,
+      slug: true
     },
     limit: 1000 // Adjust if you have more locations
   });
@@ -129,10 +208,67 @@ async function getExistingLocations(payload: any): Promise<Set<string>> {
   return processedKeys;
 }
 
+// Clean invalid ObjectIds
+function cleanInvalidObjectIds(data: any): any {
+  const cloned = _.cloneDeep(data);
+
+  function recurse(obj: any) {
+    for (const key in obj) {
+      const val = obj[key];
+
+      if (_.isPlainObject(val)) {
+        recurse(val);
+      } else if (_.isArray(val)) {
+        val.forEach((item, index) => {
+          if (_.isPlainObject(item)) {
+            recurse(item);
+          }
+        });
+      } else if (key.toLowerCase().includes('image') && typeof val === 'string') {
+        // Verificar si es un ObjectId válido (24 caracteres hexadecimales)
+        const isValidObjectId = /^[a-f\d]{24}$/i.test(val);
+
+        if (!isValidObjectId) {
+          console.warn(`⚠️ Removing invalid image reference "${key}": ${val}`);
+          delete obj[key];
+        }
+      }
+    }
+  }
+
+  recurse(cloned);
+  return cloned;
+}
+
+// Check images directory and setup
+function checkImagesDirectory(): void {
+  const uploadsDir = path.join(process.cwd(), 'public/uploads');
+
+  console.log(`🔍 Checking uploads directory: ${uploadsDir}`);
+
+  if (!fs.existsSync(uploadsDir)) {
+    console.error(`❌ Uploads directory does not exist: ${uploadsDir}`);
+    console.log(`💡 Please create the directory and add your image files:`);
+    console.log(`   mkdir -p ${uploadsDir}`);
+    return;
+  }
+
+  const files = fs.readdirSync(uploadsDir);
+  console.log(`📁 Found ${files.length} files in uploads directory:`);
+  files.forEach((file) => {
+    const filePath = path.join(uploadsDir, file);
+    const stats = fs.statSync(filePath);
+    console.log(`   - ${file} (${Math.round(stats.size / 1024)}KB)`);
+  });
+}
+
 const seed = async () => {
   const payload = await getPayload({ config });
 
   console.log('🌱 Starting incremental seed process...');
+
+  // Check images directory first
+  checkImagesDirectory();
 
   // Get existing locations to avoid duplicates
   console.log('🔍 Checking existing locations...');
@@ -146,7 +282,8 @@ const seed = async () => {
   for (const specificData of LOCATIONS_SPECIFIC_DATA) {
     try {
       console.log(`\n📍 Processing: ${specificData.name}`);
-      console.log(`   📧 Email: ${specificData.GeneralSchema?.email || 'N/A'}`);
+      console.log(`   📧 Email: ${specificData.email || 'N/A'}`);
+      console.log(`   🏷️ Slug: ${specificData.slug || 'N/A'}`);
 
       // Create unique key for this location
       const locationKey = createLocationKey(specificData);
@@ -158,8 +295,8 @@ const seed = async () => {
         continue;
       }
 
-      // Smart merge with defaults
-      let mergedData = smartMerge(LOCATIONS_DEFAULT, specificData);
+      // Fill missing fields with defaults (sin sobrescribir valores existentes)
+      let mergedData = fillMissingFields(specificData, LOCATIONS_DEFAULT);
 
       // Validate data
       if (!validateLocationData(mergedData)) {
@@ -168,11 +305,15 @@ const seed = async () => {
         continue;
       }
 
-      // Show debug info before sanitization
-      console.log('🔍 Processing new location...');
+      // Upload images first
+      console.log('📷 Processing images...');
+      mergedData = await uploadImages(payload, mergedData);
 
       // Sanitize data to remove problematic fields
       mergedData = sanitizeForPayload(mergedData);
+
+      // Clean invalid ObjectIds
+      mergedData = cleanInvalidObjectIds(mergedData);
 
       console.log(`   🏃 Activities: ${mergedData.ActivitySchema?.services?.length || 0} items`);
       console.log(
@@ -196,10 +337,12 @@ const seed = async () => {
       // Add to existing keys to avoid duplicates in same run
       existingKeys.add(locationKey);
       created++;
-    } catch (error) {
+    } catch (error: any) {
       console.log(`❌ Failed to create ${specificData.name}:`);
-      console.log(`📄 Full error object:`);
-      console.log(error);
+      console.log(`📄 Error details:`, error.message);
+      if (error.data) {
+        console.log(`📄 Error data:`, JSON.stringify(error.data, null, 2));
+      }
       failed++;
     }
   }
@@ -218,4 +361,4 @@ seed().catch((error) => {
   process.exit(1);
 });
 
-export { smartMerge };
+export { fillMissingFields };

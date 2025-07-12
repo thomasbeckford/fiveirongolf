@@ -4,8 +4,8 @@ import { getImageUrl } from '@/lib/getImageUrl';
 import Link from 'next/link';
 
 export function HoursSection({ location }: { location: Location }) {
-  const { GeneralSchema, HoursSchema } = location;
-  const address = GeneralSchema?.address;
+  const { HoursSchema } = location;
+  const address = location.address;
 
   return (
     <section

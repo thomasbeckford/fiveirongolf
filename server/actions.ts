@@ -4,12 +4,18 @@ import { Location } from '@/payload/generated-types';
 import { getPayload } from 'payload';
 import config from '@/payload.config';
 
-export async function getLocations(): Promise<Location[]> {
+export async function getLocations(
+  page: number = 1,
+  limit: number = 9
+): Promise<{ docs: Location[]; hasNextPage: boolean; hasPrevPage: boolean; totalPages: number; totalDocs: number }> {
   try {
     const payload = await getPayload({ config });
 
     const result = await payload.find({
       collection: 'locations',
+      pagination: true,
+      page,
+      limit,
       depth: 2
     });
 
@@ -17,10 +23,22 @@ export async function getLocations(): Promise<Location[]> {
       throw new Error('Failed to fetch locations');
     }
 
-    return result.docs;
+    return {
+      docs: result.docs as Location[],
+      hasNextPage: result.hasNextPage,
+      hasPrevPage: result.hasPrevPage,
+      totalPages: result.totalPages,
+      totalDocs: result.totalDocs
+    };
   } catch (error) {
     console.error('Error fetching locations:', error);
-    return [];
+    return {
+      docs: [],
+      hasNextPage: false,
+      hasPrevPage: false,
+      totalPages: 0,
+      totalDocs: 0
+    };
   }
 }
 

@@ -5,7 +5,6 @@ import { HoursSchema } from './schemas/HoursSchema';
 import { MembershipSchema } from './schemas/MembershipSchema';
 import { SeoSchema } from './schemas/SeoSchema';
 import { HeroSchema } from './schemas/HeroSchema';
-import { GeneralSchema } from './schemas/GeneralSchema';
 import { GallerySchema } from './schemas/GallerySchema';
 import { FeaturesSchema } from './schemas/FeaturesSchema';
 import { ReviewSchema } from './schemas/ReviewSchema';
@@ -13,6 +12,7 @@ import { MultisportSchema } from './schemas/MultisportSchema';
 import { DuckpinSchema } from './schemas/DuckpinSchema';
 import { InstructorSchema } from './schemas/InstructorSchema';
 import { FooterSchema } from './schemas/FooterSchema';
+import { GeneralSchema } from './schemas/GeneralSchema';
 
 const Locations: CollectionConfig = {
   slug: 'locations',
@@ -20,11 +20,11 @@ const Locations: CollectionConfig = {
     singular: 'Location',
     plural: 'Locations'
   },
-  admin: {
-    defaultColumns: ['name', 'status', 'address', 'updatedAt'],
-    useAsTitle: 'name',
-    group: 'Content'
-  },
+  // admin: {
+  //   defaultColumns: ['name', 'status', 'address', 'updatedAt'],
+  //   useAsTitle: 'name',
+  //   group: 'Content'
+  // },
   access: {
     read: () => true,
     create: ({ req: { user } }) => Boolean(user),

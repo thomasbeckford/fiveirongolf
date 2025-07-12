@@ -1,0 +1,18 @@
+- How to migrate locations ?
+
+El script migra dependiendo de el environment.
+
+- Si es local, mete las imagenes en api/media y sube todo a payload (mongodb local)
+- Si es prod, sube a vercel-blob y a payload prod (mongodb prod)
+
+Antes de ejecutarlo (si es que quiero traer todo nuevo)
+
+1. Borrar todo de payload (Media y Locations)
+2. Borrar todo de media/api (checkear si borrando de payload se borra solo, lo mas probable)
+
+Despues ejecutar:
+
+1. Para local: npx ts-node scripts/completeLocationPipeline.ts
+2. Para prod: 
+
+NODE_ENV=production npx ts-node scripts/completeLocationPipeline.ts
