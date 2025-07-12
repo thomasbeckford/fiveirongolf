@@ -1,20 +1,20 @@
 'use client';
 
-import * as React from 'react';
 import {
-  motion,
-  type Variants,
-  type TargetAndTransition,
   type HTMLMotionProps,
+  motion,
+  type TargetAndTransition,
   useInView,
   type UseInViewOptions,
+  type Variants
 } from 'motion/react';
+import * as React from 'react';
 
 type DefaultSplittingTextProps = {
   motionVariants?: {
-    initial?: Record<string, any>;
-    animate?: Record<string, any>;
-    transition?: Record<string, any>;
+    initial?: Record<string, unknown>;
+    animate?: Record<string, unknown>;
+    transition?: Record<string, unknown>;
     stagger?: number;
   };
   inView?: boolean;
@@ -33,17 +33,15 @@ type LinesSplittingTextProps = DefaultSplittingTextProps & {
   text: string[];
 };
 
-type SplittingTextProps =
-  | CharsOrWordsSplittingTextProps
-  | LinesSplittingTextProps;
+type SplittingTextProps = CharsOrWordsSplittingTextProps | LinesSplittingTextProps;
 
 const defaultItemVariant: Variants = {
   hidden: { x: 150, opacity: 0 },
   visible: {
     x: 0,
     opacity: 1,
-    transition: { duration: 0.7, ease: 'easeOut' },
-  },
+    transition: { duration: 0.7, ease: 'easeOut' }
+  }
 };
 
 export const SplittingText: React.FC<SplittingTextProps> = ({
@@ -61,20 +59,16 @@ export const SplittingText: React.FC<SplittingTextProps> = ({
     if (Array.isArray(text)) {
       return text.flatMap((line, i) => [
         <React.Fragment key={`line-${i}`}>{line}</React.Fragment>,
-        i < text.length - 1 ? <br key={`br-${i}`} /> : null,
+        i < text.length - 1 ? <br key={`br-${i}`} /> : null
       ]);
     }
 
     if (type === 'words') {
       const tokens = text.match(/\S+\s*/g) || [];
-      return tokens.map((token, i) => (
-        <React.Fragment key={i}>{token}</React.Fragment>
-      ));
+      return tokens.map((token, i) => <React.Fragment key={i}>{token}</React.Fragment>);
     }
 
-    return text
-      .split('')
-      .map((char, i) => <React.Fragment key={i}>{char}</React.Fragment>);
+    return text.split('').map((char, i) => <React.Fragment key={i}>{char}</React.Fragment>);
   }, [text, type]);
 
   const containerVariants: Variants = {
@@ -82,27 +76,24 @@ export const SplittingText: React.FC<SplittingTextProps> = ({
     visible: {
       transition: {
         delayChildren: delay / 1000,
-        staggerChildren:
-          motionVariants.stagger ??
-          (type === 'chars' ? 0.05 : type === 'words' ? 0.2 : 0.3),
-      },
-    },
+        staggerChildren: motionVariants.stagger ?? (type === 'chars' ? 0.05 : type === 'words' ? 0.2 : 0.3)
+      }
+    }
   };
 
   const itemVariants: Variants = {
     hidden: {
       ...defaultItemVariant.hidden,
-      ...(motionVariants.initial || {}),
+      ...(motionVariants.initial || {})
     },
     visible: {
       ...defaultItemVariant.visible,
       ...(motionVariants.animate || {}),
       transition: {
-        ...((defaultItemVariant.visible as TargetAndTransition).transition ||
-          {}),
-        ...(motionVariants.transition || {}),
-      },
-    },
+        ...((defaultItemVariant.visible as TargetAndTransition).transition || {}),
+        ...(motionVariants.transition || {})
+      }
+    }
   };
 
   const localRef = React.useRef<HTMLDivElement>(null);
@@ -110,7 +101,7 @@ export const SplittingText: React.FC<SplittingTextProps> = ({
 
   const inViewResult = useInView(localRef, {
     once: inViewOnce,
-    margin: inViewMargin,
+    margin: inViewMargin
   });
   const isInView = !inView || inViewResult;
 
@@ -131,19 +122,14 @@ export const SplittingText: React.FC<SplittingTextProps> = ({
                 variants={itemVariants}
                 style={{
                   display: 'inline-block',
-                  whiteSpace:
-                    type === 'chars'
-                      ? 'pre'
-                      : Array.isArray(text)
-                        ? 'normal'
-                        : 'normal',
+                  whiteSpace: type === 'chars' ? 'pre' : Array.isArray(text) ? 'normal' : 'normal'
                 }}
               >
                 {item}
               </motion.span>
               {type === 'words' && ' '}
             </React.Fragment>
-          ),
+          )
       )}
     </motion.span>
   );

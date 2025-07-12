@@ -1,7 +1,7 @@
 'use client';
 
-import * as React from 'react';
 import { motion, useInView, type UseInViewOptions } from 'motion/react';
+import * as React from 'react';
 
 import { cn } from '@/lib/utils';
 
@@ -86,6 +86,7 @@ function TypingText({
       }, delay);
       return () => clearTimeout(timeoutId);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isInView, delay, ...(animateOnChange ? [text] : [])]);
 
   React.useEffect(() => {

@@ -2,9 +2,33 @@ import fs from 'fs';
 import fetch from 'node-fetch';
 import axios from 'axios';
 import FormData from 'form-data';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 import dotenv from 'dotenv';
+
+type Location = {
+  title: {
+    rendered: string;
+  };
+  slug: string;
+  acf: {
+    city_name: string;
+    location_address: string;
+    location_phone: string;
+    location_email: string;
+    location_coordinates: {
+      lat: number;
+      lng: number;
+    };
+    active_module_duckpin_book: boolean;
+    active_module_multisport: boolean;
+    enable_coming_soon: boolean;
+  };
+  _embedded: {
+    'wp:featuredmedia': {
+      source_url: string;
+    }[];
+  };
+};
+
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 // Config
@@ -80,7 +104,7 @@ async function main() {
 
     // 1. Fetch data
     const response = await fetch(API_URL);
-    const rawData = (await response.json()) as any[];
+    const rawData = (await response.json()) as Location[];
     log.success(`Fetched ${rawData.length} locations`);
 
     // 2. Process locations
@@ -166,14 +190,6 @@ async function main() {
     log.error(`Pipeline failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
     process.exit(1);
   }
-}
-
-// Run if called directly
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-if (import.meta.url === `file://${process.argv[1]}`) {
-  main().catch(console.error);
 }
 
 export default main;

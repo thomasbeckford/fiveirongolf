@@ -1,8 +1,9 @@
-import { useMemo } from 'react';
-import { useGeolocation } from './useGeolocation';
 import { calculateDistance } from '@/lib/distance';
-import { useLocations } from './useLocations';
 import { Location } from '@/payload/generated-types';
+import { getLocations } from '@/server/actions';
+import { useMemo } from 'react';
+import useSWR from 'swr';
+import { useGeolocation } from './useGeolocation';
 
 // Formatear distancia para mostrar
 function formatDistance(distance: number): string {
@@ -22,7 +23,7 @@ export interface LocationWithDistance extends Location {
 
 export function useNearestLocations(limit: number = 5) {
   const { location: userLocation, loading: locationLoading, error: locationError } = useGeolocation();
-  const { locations, loading: locationsLoading, error: locationsError } = useLocations();
+  const { data: locations, error: locationsError, isLoading: locationsLoading } = useSWR('locations', getLocations);
 
   // Esta funcion se recalcula unicamente cuando cambien los datos, sino no se vuelve a calcular
   const nearestLocations = useMemo(() => {
@@ -39,7 +40,7 @@ export function useNearestLocations(limit: number = 5) {
       flatLocations = locations;
     } else {
       // Si locations es un objeto agrupado, convertir a array plano
-      flatLocations = Object.values(locations as Location[]).flat();
+      flatLocations = Object.values(locations as unknown as Location[]).flat();
     }
 
     // Validar que tenemos ubicaciones válidas

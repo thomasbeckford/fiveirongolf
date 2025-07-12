@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { LocationSelect } from './location-select';
-import Image from 'next/image';
 import { Button } from './ui/button';
 import Link from 'next/link';
 import { getLocations } from '@/server/actions';

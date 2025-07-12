@@ -1,16 +1,16 @@
 'use client';
 
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import useSWR from 'swr';
 import { getLocations } from '@/server/actions';
+import useSWR from 'swr';
 
 const formSchema = z.object({
   firstName: z.string().min(2, 'First name must be at least 2 characters'),
@@ -23,7 +23,7 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 export function SubscribeForm() {
-  const { data: locations, error, isLoading } = useSWR('locations', getLocations);
+  const { data: locations } = useSWR('locations', getLocations);
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -36,7 +36,7 @@ export function SubscribeForm() {
     }
   });
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = () => {
     // Handle form submission here
     alert('Thanks for subscribing! 🏌️‍♂️');
     form.reset();

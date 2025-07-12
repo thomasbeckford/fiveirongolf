@@ -1,21 +1,21 @@
 'use client';
 
-import { JSX, useState, useTransition } from 'react';
-import { useRouter } from 'next/navigation';
-import { ChevronDown } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
-import { Button } from './ui/button';
-import Link from 'next/link';
-import useSWR from 'swr';
-import { getLocations } from '@/server/actions';
 import { cn } from '@/lib/utils';
+import { getLocations } from '@/server/actions';
+import { ChevronDown } from 'lucide-react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { JSX, useState, useTransition } from 'react';
+import useSWR from 'swr';
+import { Button } from './ui/button';
 import { Input } from './ui/input';
 
 export function LocationSelect({ experience }: { experience?: string }): JSX.Element {
   const router = useRouter();
 
-  const { data: locations, error, isLoading } = useSWR('locations', () => getLocations());
+  const { data: locations, isLoading } = useSWR('locations', () => getLocations());
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -168,7 +168,7 @@ export function LocationSelect({ experience }: { experience?: string }): JSX.Ele
                   ))
                 ) : (
                   <div className="px-4 py-6 sm:px-6 sm:py-8 text-center text-gray-400 text-sm sm:text-base">
-                    <div className="truncate">No locations found matching "{searchTerm}"</div>
+                    <div className="truncate">No locations found matching &quot;{searchTerm}&quot;</div>
                   </div>
                 )}
               </div>

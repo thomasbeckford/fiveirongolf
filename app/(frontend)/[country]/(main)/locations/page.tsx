@@ -1,13 +1,12 @@
-import Link from 'next/link';
-import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { MapPin, Phone } from 'lucide-react';
-import { HighImpactHero } from '@/components/heros/HighImpact';
-import { getLocations } from '@/server/actions';
-import LocationBadge from '@/components/location-badge';
-import { getImageUrl } from '@/lib/getImageUrl';
-import { Pagination, PaginationContent, PaginationItem, PaginationLink } from '@/components/ui/pagination';
 import { MediumImpactHero } from '@/components/heros/MediumImpact';
+import LocationBadge from '@/components/location-badge';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Pagination, PaginationContent, PaginationItem, PaginationLink } from '@/components/ui/pagination';
+import { getImageUrl } from '@/lib/getImageUrl';
+import { getLocations } from '@/server/actions';
+import { MapPin, Phone } from 'lucide-react';
+import Link from 'next/link';
 
 export const metadata = {
   title: 'Five Iron Golf - Locations',
