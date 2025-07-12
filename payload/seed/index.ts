@@ -1,11 +1,11 @@
 // payload/seed/index.ts
+import fs from 'fs';
 import _ from 'lodash';
+import * as path from 'path'; // Changed this line
 import { getPayload } from 'payload';
 import config from '../../payload.config';
 import { LOCATIONS_DEFAULT } from './defaults';
 import { LOCATIONS_SPECIFIC_DATA } from './locations';
-import * as path from 'path'; // Changed this line
-import fs from 'fs';
 
 // Function to fill missing fields with defaults without overwriting existing values
 function fillMissingFields(specificData: any, defaultData: any): any {

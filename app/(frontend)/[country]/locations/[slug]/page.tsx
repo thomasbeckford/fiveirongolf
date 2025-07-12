@@ -1,16 +1,16 @@
 import { ActivitySection } from '@/screens/locations/ActivitySection';
-import { GallerySection } from '@/screens/locations/GallerySection';
-import { HoursSection } from '@/screens/locations/HoursSection';
-import { MembershipSection } from '@/screens/locations/MembershipSection';
-import { ReviewSection } from '@/screens/locations/ReviewSection';
-import { HeroSection } from '@/screens/locations/HeroSection';
-import { InstructorSection } from '@/screens/locations/InstructorSection';
-import { MultisportSection } from '@/screens/locations/MultisportSection';
 import { DuckpinSection } from '@/screens/locations/DuckpinSection';
 import { FeaturesSection } from '@/screens/locations/FeaturesSection';
 import { FooterSection } from '@/screens/locations/FooterSection';
-import { notFound } from 'next/navigation';
+import { GallerySection } from '@/screens/locations/GallerySection';
+import { HeroSection } from '@/screens/locations/HeroSection';
+import { HoursSection } from '@/screens/locations/HoursSection';
+import { InstructorSection } from '@/screens/locations/InstructorSection';
+import { MembershipSection } from '@/screens/locations/MembershipSection';
+import { MultisportSection } from '@/screens/locations/MultisportSection';
+import { ReviewSection } from '@/screens/locations/ReviewSection';
 import { getLocationBySlug } from '@/server/actions';
+import { notFound } from 'next/navigation';
 
 export default async function LocationsPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -20,7 +20,7 @@ export default async function LocationsPage({ params }: { params: Promise<{ slug
   console.log('Location', location);
 
   return (
-    <div className="animate-in fade-in duration-300">
+    <div className="animate-in fade-in duration-1200">
       {location.HeroSchema && <HeroSection location={location} />}
       {location.ActivitySchema && <ActivitySection location={location} />}
       {location.GallerySchema && <GallerySection location={location} />}

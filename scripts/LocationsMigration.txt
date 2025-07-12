@@ -12,7 +12,11 @@ Antes de ejecutarlo (si es que quiero traer todo nuevo)
 
 Despues ejecutar:
 
-1. Para local: npx ts-node scripts/completeLocationPipeline.ts
-2. Para prod: 
+1. Para local: NODE_ENV=development npx ts-node scripts/completeLocationPipeline.ts
+2. Para prod: NODE_ENV=production npx ts-node scripts/completeLocationPipeline.ts
 
-NODE_ENV=production npx ts-node scripts/completeLocationPipeline.ts
+
+despues correr el seed pnpm run seed (para prod fijarse que el .env tenga los params de prod)
+
+
+

@@ -19,7 +19,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Port Chester',
       subtitle: 'Main Street',
-      backgroundImage: 'local:port-chester-main-street-hero.jpg',
+      backgroundImage: '6871c72307a9cbcba23453aa',
       ctaButton: {
         text: 'Join Waitlist',
         url: 'https://fiveirongolf.com/locations/port-chester-main-street#waitlist',
@@ -46,7 +46,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Syracuse',
       subtitle: 'Downtown',
-      backgroundImage: 'local:syracuse-downtown-hero.jpg',
+      backgroundImage: '6871c72507a9cbcba23453ad',
       ctaButton: {
         text: 'Join Waitlist',
         url: 'https://fiveirongolf.com/locations/syracuse-downtown#waitlist',
@@ -73,7 +73,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Cleveland',
       subtitle: 'Shaker Heights',
-      backgroundImage: 'local:cleveland-shaker-heights-hero.jpg',
+      backgroundImage: '6871c72707a9cbcba23453b0',
       ctaButton: {
         text: 'Join Waitlist',
         url: 'https://fiveirongolf.com/locations/cleveland-shaker-heights#waitlist',
@@ -100,7 +100,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'NYC',
       subtitle: 'Rockefeller Center',
-      backgroundImage: 'local:nyc-rockefeller-center-hero.jpg',
+      backgroundImage: '6871c72a07a9cbcba23453b3',
       ctaButton: {
         text: 'Join Waitlist',
         url: 'https://fiveirongolf.com/locations/nyc-rockefeller-center#waitlist',
@@ -127,7 +127,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Boston',
       subtitle: 'Seaport',
-      backgroundImage: 'local:boston-seaport-hero.jpg',
+      backgroundImage: '6871c72c07a9cbcba23453b6',
       ctaButton: {
         text: 'Join Waitlist',
         url: 'https://fiveirongolf.com/locations/boston-seaport#waitlist',
@@ -154,7 +154,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Nashville',
       subtitle: 'Midtown',
-      backgroundImage: 'local:nashville-midtown-hero.jpg',
+      backgroundImage: '6871c72d07a9cbcba23453b9',
       ctaButton: {
         text: 'Join Waitlist',
         url: 'https://fiveirongolf.com/locations/nashville-midtown#waitlist',
@@ -181,7 +181,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'St. Louis',
       subtitle: 'Clayton',
-      backgroundImage: 'local:st-louis-clayton-hero.jpg',
+      backgroundImage: '6871c72f07a9cbcba23453bc',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=st-louis-clayton',
@@ -208,7 +208,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Philadelphia',
       subtitle: 'Logan Square',
-      backgroundImage: 'local:philadelphia-logan-square-hero.jpg',
+      backgroundImage: '6871c73107a9cbcba23453bf',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=philadelphia-logan-square',
@@ -235,7 +235,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Minneapolis',
       subtitle: 'North Loop',
-      backgroundImage: 'local:minneapolis-north-loop-hero.jpg',
+      backgroundImage: '6871c73307a9cbcba23453c2',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=minneapolis-north-loop',
@@ -262,7 +262,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Oklahoma City',
       subtitle: 'Yukon',
-      backgroundImage: 'local:oklahoma-city-yukon-hero.jpg',
+      backgroundImage: '6871c73507a9cbcba23453c5',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=oklahoma-city-yukon',
@@ -289,7 +289,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Seattle',
       subtitle: 'Kirkland',
-      backgroundImage: 'local:seattle-kirkland-hero.jpg',
+      backgroundImage: '6871c73707a9cbcba23453c8',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=seattle-kirkland',
@@ -316,7 +316,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Louisville',
       subtitle: 'NULU',
-      backgroundImage: 'local:louisville-nulu-hero.jpg',
+      backgroundImage: '6871c73907a9cbcba23453cb',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=louisville-nulu',
@@ -343,7 +343,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Erie',
       subtitle: 'Downtown',
-      backgroundImage: 'local:erie-downtown-hero.jpg',
+      backgroundImage: '6871c73b07a9cbcba23453ce',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=erie-downtown',
@@ -370,7 +370,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Atlanta',
       subtitle: 'Midtown',
-      backgroundImage: 'local:atlanta-midtown-hero.jpg',
+      backgroundImage: '6871c73d07a9cbcba23453d1',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=atlanta-midtown',
@@ -397,7 +397,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Indianapolis',
       subtitle: 'Downtown',
-      backgroundImage: 'local:indianapolis-downtown-hero.jpg',
+      backgroundImage: '6871c73f07a9cbcba23453d4',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=indianapolis-downtown',
@@ -424,7 +424,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'NYC',
       subtitle: 'Grand Central',
-      backgroundImage: 'local:nyc-grand-central-hero.jpg',
+      backgroundImage: '6871c74107a9cbcba23453d7',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=nyc-grand-central',
@@ -451,7 +451,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Detroit',
       subtitle: 'Downtown',
-      backgroundImage: 'local:detroit-downtown-hero.jpg',
+      backgroundImage: '6871c74307a9cbcba23453da',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=detroit-downtown',
@@ -478,7 +478,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Cleveland',
       subtitle: 'Downtown',
-      backgroundImage: 'local:cleveland-downtown-hero.jpg',
+      backgroundImage: '6871c74507a9cbcba23453dd',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=cleveland-downtown',
@@ -505,7 +505,6 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Cincinnati',
       subtitle: 'Downtown',
-      backgroundImage: 'local:cincinnati-downtown-hero.jpg',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=cincinnati-downtown',
@@ -532,7 +531,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'NYC',
       subtitle: 'Upper East Side',
-      backgroundImage: 'local:nyc-upper-east-side-hero.jpg',
+      backgroundImage: '6871c74b07a9cbcba23453e0',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=nyc-upper-east-side',
@@ -559,7 +558,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'NYC',
       subtitle: 'Long Island City',
-      backgroundImage: 'local:nyc-long-island-city-hero.jpg',
+      backgroundImage: '6871c74c07a9cbcba23453e3',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=nyc-long-island-city',
@@ -586,7 +585,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Boston',
       subtitle: 'Government Center',
-      backgroundImage: 'local:boston-government-center-hero.jpg',
+      backgroundImage: '6871c74f07a9cbcba23453e6',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=boston-government-center',
@@ -613,7 +612,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Detroit',
       subtitle: 'Shelby Township',
-      backgroundImage: 'local:detroit-shelby-township-hero.jpg',
+      backgroundImage: '6871c75007a9cbcba23453e9',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=detroit-shelby-township',
@@ -640,7 +639,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Philadelphia',
       subtitle: 'Fishtown',
-      backgroundImage: 'local:philadelphia-fishtown-hero.jpg',
+      backgroundImage: '6871c75207a9cbcba23453ec',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=philadelphia-fishtown',
@@ -667,7 +666,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Chicago',
       subtitle: 'Lincoln Park',
-      backgroundImage: 'local:chicago-lincoln-park-hero.jpg',
+      backgroundImage: '6871c75407a9cbcba23453ef',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=chicago-lincoln-park',
@@ -694,7 +693,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Seattle',
       subtitle: 'Capitol Hill',
-      backgroundImage: 'local:seattle-capitol-hill-hero.jpg',
+      backgroundImage: '6871c75607a9cbcba23453f2',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=seattle-capitol-hill',
@@ -721,7 +720,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Chicago',
       subtitle: 'The Loop',
-      backgroundImage: 'local:chicago-the-loop-hero.jpg',
+      backgroundImage: '6871c75807a9cbcba23453f5',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=chicago-the-loop',
@@ -748,7 +747,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Pittsburgh',
       subtitle: 'Market Square',
-      backgroundImage: 'local:pittsburgh-market-square-hero.jpg',
+      backgroundImage: '6871c75a07a9cbcba23453f8',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=pittsburgh-market-square',
@@ -775,7 +774,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'DC',
       subtitle: 'Penn Quarter',
-      backgroundImage: 'local:dc-penn-quarter-hero.jpg',
+      backgroundImage: '6871c75c07a9cbcba23453fb',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=dc-penn-quarter',
@@ -802,7 +801,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Las Vegas',
       subtitle: 'AREA15',
-      backgroundImage: 'local:las-vegas-area15-hero.jpg',
+      backgroundImage: '6871c75f07a9cbcba23453fe',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=las-vegas-area15',
@@ -829,7 +828,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'NYC',
       subtitle: 'Herald Square',
-      backgroundImage: 'local:nyc-herald-square-hero.jpg',
+      backgroundImage: '6871c76107a9cbcba2345401',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=nyc-herald-square',
@@ -856,7 +855,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Philadelphia',
       subtitle: 'Rittenhouse',
-      backgroundImage: 'local:philadelphia-rittenhouse-hero.jpg',
+      backgroundImage: '6871c76307a9cbcba2345404',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=philadelphia-rittenhouse',
@@ -883,7 +882,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Chicago',
       subtitle: 'River North',
-      backgroundImage: 'local:chicago-river-north-hero.jpg',
+      backgroundImage: '6871c76507a9cbcba2345407',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=chicago-river-north',
@@ -910,7 +909,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'Baltimore',
       subtitle: 'Harbor East',
-      backgroundImage: 'local:baltimore-harbor-east-hero.jpg',
+      backgroundImage: '6871c76707a9cbcba234540a',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=baltimore-harbor-east',
@@ -937,7 +936,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'NYC',
       subtitle: 'Flatiron',
-      backgroundImage: 'local:nyc-flatiron-hero.jpg',
+      backgroundImage: '6871c76907a9cbcba234540d',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=nyc-flatiron',
@@ -964,7 +963,7 @@ export const LOCATIONS_SPECIFIC_DATA = [
     HeroSchema: {
       title: 'NYC',
       subtitle: 'FiDi',
-      backgroundImage: 'local:nyc-fidi-hero.jpg',
+      backgroundImage: '6871c76b07a9cbcba2345410',
       ctaButton: {
         text: 'Book Now',
         url: 'https://booking.fiveirongolf.com/select-experience?location=nyc-fidi',

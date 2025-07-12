@@ -48,4 +48,4 @@ build/
 app/(frontend)/\[country\]/booking/
 server/classes.ts
 
-public/uploads
+api/media

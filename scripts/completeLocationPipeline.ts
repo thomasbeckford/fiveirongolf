@@ -1,8 +1,8 @@
+import axios from 'axios';
+import dotenv from 'dotenv';
+import FormData from 'form-data';
 import fs from 'fs';
 import fetch from 'node-fetch';
-import axios from 'axios';
-import FormData from 'form-data';
-import dotenv from 'dotenv';
 
 type Location = {
   title: {
@@ -190,6 +190,10 @@ async function main() {
     log.error(`Pipeline failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
     process.exit(1);
   }
+}
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch(console.error);
 }
 
 export default main;

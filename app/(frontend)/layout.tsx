@@ -1,7 +1,7 @@
 import { rawson } from '@/fonts';
-import React from 'react';
 import { cn } from '@/lib/utils';
 import { Metadata } from 'next';
+import React from 'react';
 import './globals.css';
 
 export const metadata: Metadata = {

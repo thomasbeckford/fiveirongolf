@@ -1,9 +1,10 @@
+import { SplittingText } from '@/components/animate-ui/text/splitting';
+import LocationBadge from '@/components/location-badge';
+import { Button } from '@/components/ui/button';
+import { getImageUrl } from '@/lib/getImageUrl';
+import { Location } from '@/payload/generated-types';
 import { Calendar, FileText, MapPin, Phone } from 'lucide-react';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Location } from '@/payload/generated-types';
-import { getImageUrl } from '@/lib/getImageUrl';
-import LocationBadge from '@/components/location-badge';
 
 export async function HeroSection({ location }: { location: Location }) {
   if (!location) return null;
@@ -31,10 +32,10 @@ export async function HeroSection({ location }: { location: Location }) {
             <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-8">
               <div className="flex flex-col">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase font-bold leading-tight">
-                  {HeroSchema.title}
+                  <SplittingText type="chars" text={HeroSchema.title || ''} />
                 </h1>
                 <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl uppercase font-bold leading-tight">
-                  {HeroSchema.subtitle}
+                  <SplittingText type="chars" text={HeroSchema.subtitle || ''} />
                 </h2>
               </div>
 
