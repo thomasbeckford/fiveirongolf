@@ -16,8 +16,6 @@ console.log('API_URL:', API_URL);
 console.log('PAYLOAD_URL:', PAYLOAD_URL);
 console.log('PAYLOAD_SECRET:', PAYLOAD_SECRET);
 
-process.exit(0);
-
 // Simple logger
 const log = {
   info: (msg: string) => console.log(`ℹ️ ${msg}`),
@@ -64,7 +62,7 @@ const processImage = async (url: string, filename: string): Promise<string | nul
     form.append('file', Buffer.from(response.data), filename);
 
     const upload = await axios.post(`${PAYLOAD_URL}/api/media`, form, {
-      headers: { ...form.getHeaders(), Authorization: `Bearer ${API_TOKEN}` },
+      headers: { ...form.getHeaders(), Authorization: `Bearer ${PAYLOAD_SECRET}` },
       timeout: 15000
     });
 
